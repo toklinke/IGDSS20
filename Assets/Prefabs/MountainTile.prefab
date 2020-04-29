@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &12816837929852373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7430651439065690108}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_Name
+      value: SM_Env_RockPile_01_Snow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.41826555
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8171283
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.2511415
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
 --- !u!1001 &2521110435308541180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15,7 +72,7 @@ PrefabInstance:
     - target: {fileID: 5035642893912111872, guid: 4cdd9622e6eb2a6498e3d47c96b87198,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 5035642893912111872, guid: 4cdd9622e6eb2a6498e3d47c96b87198,
         type: 3}
@@ -74,3 +131,66 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cdd9622e6eb2a6498e3d47c96b87198, type: 3}
+--- !u!4 &7430651439065690108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5035642893912111872, guid: 4cdd9622e6eb2a6498e3d47c96b87198,
+    type: 3}
+  m_PrefabInstance: {fileID: 2521110435308541180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5274287237515153049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7430651439065690108}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_Name
+      value: SM_Env_RockPile_01_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.44170183
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24004ca11fe1a66469fa97484fc0d1ad, type: 3}
