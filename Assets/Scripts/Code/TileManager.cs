@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseManager : MonoBehaviour
+public class TileManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
