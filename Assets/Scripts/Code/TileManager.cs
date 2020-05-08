@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnMouseDown()
     {
-        
+        Debug.Log("clicked on: " + gameObject.name);
+        //Debug.Log(gameObject.renderer.material.color);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MouseManager : MonoBehaviour
 {
-    int _boundary = 50;
-    float _edgeMovementSpeed = 10f;
+    //TODO Deal with terrain borders
+    //int _boundary = 50;
+    //float _edgeMovementSpeed = 10f;
     float _dragSpeed = 1.4f;
 
     float _scrollUpperLimit = 100;
@@ -13,16 +14,17 @@ public class MouseManager : MonoBehaviour
 
     float _zoomIncrement = 0.6f;
 
-    int _screenHeight;
-    int _screenWidth;
+
+    //int _screenHeight;
+    //int _screenWidth;
 
 
     private Vector3 dragOrigin;
 
     void Start()
     {
-        _screenHeight = Screen.height;
-        _screenWidth = Screen.width;
+        //_screenHeight = Screen.height;
+        //_screenWidth = Screen.width;
     }
 
     void Update()
@@ -46,7 +48,15 @@ public class MouseManager : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
         Vector3 move = new Vector3(pos.y * _dragSpeed, 0, pos.x * _dragSpeed);
 
-        GetComponent<Transform>().position = new Vector3(transform.position.x + move.x, transform.position.y + move.y, transform.position.z - move.z);
+        float newX = transform.position.x + move.x;
+        float newZ = transform.position.z - move.z;
+
+        // Basic Implementation of hardcoded limits
+        // TODO get actual pan limits
+        if (newX > 0 && newX < 200 && (newZ > 0 && newZ < 200))
+        {
+            GetComponent<Transform>().position = new Vector3(newX, transform.position.y, newZ);
+        }
 
     }
 
@@ -83,7 +93,7 @@ public class MouseManager : MonoBehaviour
 
     }
 
-
+    /*
     void edgeMovement()
     {
 
@@ -113,7 +123,14 @@ public class MouseManager : MonoBehaviour
 
         }
 
-
     }
+    */
+
+
+
+
+
+
+
 
 }
