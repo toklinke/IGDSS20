@@ -1039,6 +1039,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd580981bf7ab5845976a690fd1035a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeightMap: {fileID: 2800000, guid: 6c8b8b5dee9104b429f737ec1d927ec9, type: 3}
+  PrefabWaterTile: {fileID: 1222977321}
+  PrefabSandTile: {fileID: 1094133580}
+  PrefabGrassTile: {fileID: 324786509}
+  PrefabForestTile: {fileID: 652369168}
+  PrefabStoneTile: {fileID: 785106204}
+  PrefabMountainTile: {fileID: 1141686582}
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0
