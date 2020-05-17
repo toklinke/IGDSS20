@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class MapToWorldMapper
         MinWorldY = minWorldY;
         MaxWorldY = maxWorldY;
         TileRadius = tileRadius;
+        TileOuterRadius = (float)(tileRadius * 2.0 / Math.Sqrt(3));
     }
 
     // minimum Y world space coordinate for placing tiles
@@ -24,17 +26,21 @@ public class MapToWorldMapper
     // Radius of the hexagonal grid tiles
     public float TileRadius { get; }
 
+    private float TileOuterRadius;
+
     // Get world position of a tile
     // that is located at map position (mapX, mapY).
     public Vector3 GetWorldPosition(uint mapX, uint mapY, MapTile tile)
     {
-        float worldX = TileRadius + mapX * TileRadius * 2.0f;
+        bool isEvenRow = ((mapY % 2) == 0);
+        float xOffset = isEvenRow ? TileRadius : 2.0f * TileRadius;
+        float worldX = xOffset + mapX * TileRadius * 2.0f;
         float worldY = mapNumberRange(
             number: tile.Height,
             fromLow: 0.0f, fromHigh: 1.0f,
             toLow: MinWorldY, toHigh: MaxWorldY
         );
-        float worldZ = TileRadius + mapY * TileRadius * 2.0f;
+        float worldZ = TileRadius + mapY * TileOuterRadius * 1.5f;
         var worldPos = new Vector3(worldX, worldY, worldZ);
         return worldPos;
     }
