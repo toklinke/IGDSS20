@@ -32,15 +32,20 @@ public class MapToWorldMapper
     // that is located at map position (mapX, mapY).
     public Vector3 GetWorldPosition(uint mapX, uint mapY, MapTile tile)
     {
-        bool isEvenRow = ((mapY % 2) == 0);
-        float xOffset = isEvenRow ? TileRadius : 2.0f * TileRadius;
-        float worldX = xOffset + mapX * TileRadius * 2.0f;
+        // map Y axis -> world X axis
+        float worldX = TileRadius + mapY * TileOuterRadius * 1.5f;
+
         float worldY = mapNumberRange(
             number: tile.Height,
             fromLow: 0.0f, fromHigh: 1.0f,
             toLow: MinWorldY, toHigh: MaxWorldY
         );
-        float worldZ = TileRadius + mapY * TileOuterRadius * 1.5f;
+
+        // map X axis -> world Z axis
+        bool isEvenRow = ((mapY % 2) == 0);
+        float zOffset = isEvenRow ? TileRadius : 2.0f * TileRadius;
+        float worldZ = zOffset + mapX * TileRadius * 2.0f;
+
         var worldPos = new Vector3(worldX, worldY, worldZ);
         return worldPos;
     }

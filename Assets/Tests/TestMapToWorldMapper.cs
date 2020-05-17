@@ -70,9 +70,9 @@ namespace Tests
                 mapY: 1,
                 tile: new MapTile(height: 0.42f, type: MapTileType.Grass),
                 expectedWorldPosition: new Vector3(
-                    x: 2.0f,
+                    x: 1.0f + 2.0f / (float)Math.Sqrt(3) * 1.5f,
                     y: 0.42f,
-                    z: 1.0f + 2.0f / (float)Math.Sqrt(3) * 1.5f
+                    z: 2.0f
                 )
             ),
             // Test arbitrary tile position
@@ -84,9 +84,9 @@ namespace Tests
                 mapY: 2,
                 tile: new MapTile(height: 0.5f, type: MapTileType.Grass),
                 expectedWorldPosition: new Vector3(
-                    x: 15.0f,
+                    x: 5.0f + 2.0f * (5.0f * 2.0f / (float)Math.Sqrt(3) * 1.5f),
                     y: 0.5f,
-                    z: 5.0f + 2.0f * (5.0f * 2.0f / (float)Math.Sqrt(3) * 1.5f)
+                    z: 15.0f
                 )
             ),
         };
