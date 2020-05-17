@@ -111,5 +111,121 @@ namespace Tests
                 Is.EqualTo(testCase.ExpectedWorldPosition)
             );
         }
+
+
+        public readonly struct GetWorldSizeTestCase
+        {
+            public GetWorldSizeTestCase(
+                float minWorldY, float maxWorldY,
+                float tileRadius,
+                uint mapWidth, uint mapHeight,
+                Vector3 expectedWorldSize
+            )
+            {
+                MinWorldY = minWorldY;
+                MaxWorldY = maxWorldY;
+                TileRadius = tileRadius;
+                MapWidth = mapWidth;
+                MapHeight = mapHeight;
+                ExpectedWorldSize = expectedWorldSize;
+            }
+
+            public float MinWorldY { get; }
+            public float MaxWorldY { get; }
+            public float TileRadius { get; }
+
+            public uint MapWidth { get; }
+            public uint MapHeight { get; }
+
+            public Vector3 ExpectedWorldSize { get; }
+        };
+
+        private static GetWorldSizeTestCase[] GetWorldSizeTestCases
+            = new GetWorldSizeTestCase[] {
+            // just one tile
+            new GetWorldSizeTestCase(
+                minWorldY: 0.0f,
+                maxWorldY: 1.0f,
+                tileRadius: 1.0f,
+                mapWidth: 1,
+                mapHeight: 1,
+                expectedWorldSize: new Vector3(
+                    x: 2.0f / (float)Math.Sqrt(3) * 2.0f,
+                    y: 1.0f,
+                    z: 2.0f
+                )
+            ),
+            // Test Y world size
+            new GetWorldSizeTestCase(
+                minWorldY: 5.0f,
+                maxWorldY: 55.0f,
+                tileRadius: 1.0f,
+                mapWidth: 1,
+                mapHeight: 1,
+                expectedWorldSize: new Vector3(
+                    x: 2.0f / (float)Math.Sqrt(3) * 2.0f,
+                    y: 50.0f,
+                    z: 2.0f
+                )
+            ),
+            // Test world width single row
+            new GetWorldSizeTestCase(
+                minWorldY: 0.0f,
+                maxWorldY: 1.0f,
+                tileRadius: 5.0f,
+                mapWidth: 2,
+                mapHeight: 1,
+                expectedWorldSize: new Vector3(
+                    x: 5.0f * 2.0f / (float)Math.Sqrt(3) * 2.0f,
+                    y: 1.0f,
+                    z: 20.0f
+                )
+            ),
+            // Test world size with more than one row
+            new GetWorldSizeTestCase(
+                minWorldY: 0.0f,
+                maxWorldY: 1.0f,
+                tileRadius: 5.0f,
+                mapWidth: 2,
+                mapHeight: 2,
+                expectedWorldSize: new Vector3(
+                    x: 5.0f * 2.0f / (float)Math.Sqrt(3) * 3.5f,
+                    y: 1.0f,
+                    z: 25.0f
+                )
+            ),
+            // Test world size with more than two rows
+            new GetWorldSizeTestCase(
+                minWorldY: 0.0f,
+                maxWorldY: 1.0f,
+                tileRadius: 5.0f,
+                mapWidth: 1,
+                mapHeight: 4,
+                expectedWorldSize: new Vector3(
+                    x: 5.0f * 2.0f / (float)Math.Sqrt(3) * 7.0f,
+                    y: 1.0f,
+                    z: 15.0f
+                )
+            ),
+        };
+        [Test, TestCaseSource("GetWorldSizeTestCases")]
+        public void TestGetWorldSize(GetWorldSizeTestCase testCase)
+        {
+            var mapper = new MapToWorldMapper(
+                minWorldY: testCase.MinWorldY,
+                maxWorldY: testCase.MaxWorldY,
+                tileRadius: testCase.TileRadius
+            );
+
+            var worldSize = mapper.GetWorldSize(
+                mapWidth: testCase.MapWidth,
+                mapHeight: testCase.MapHeight
+            );
+
+            Assert.That(
+                worldSize,
+                Is.EqualTo(testCase.ExpectedWorldSize)
+            );
+        }
     }
 }

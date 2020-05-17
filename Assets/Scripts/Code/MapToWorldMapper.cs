@@ -51,6 +51,35 @@ public class MapToWorldMapper
         return worldPos;
     }
 
+    // Get world size of a map with size (mapWidth, mapHeight).
+    public Vector3 GetWorldSize(uint mapWidth, uint mapHeight)
+    {
+        float evenRowHeight = TileOuterRadius * 2.0f;
+        float oddRowHeight = TileOuterRadius * 1.5f;
+        uint evenRowsCount = (mapHeight + 1) / 2;
+        uint oddRowsCount = mapHeight / 2;
+        float worldXSize = (
+            evenRowsCount * evenRowHeight +
+            (oddRowsCount * oddRowHeight)
+        );
+
+        float columnWidth = 2.0f * TileRadius;
+        float worldZSize;
+        if (mapHeight == 1)
+        {
+            worldZSize = mapWidth * columnWidth;
+        }
+        else
+        {
+            worldZSize = mapWidth * columnWidth + 0.5f * columnWidth;
+        }
+
+        float worldYSize = MaxWorldY - MinWorldY;
+
+        var worldSize = new Vector3(worldXSize, worldYSize, worldZSize);
+        return worldSize;
+    }
+
     private float mapNumberRange(
         float number,
         float fromLow, float fromHigh, float toLow, float toHigh
