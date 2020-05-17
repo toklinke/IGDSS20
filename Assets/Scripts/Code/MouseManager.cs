@@ -64,34 +64,28 @@ public class MouseManager : MonoBehaviour
 
     void zoomScroll()
     {
+        // scrollAxis > 0: zoom in
+        // scrollAxis < 0: zoom out
+        float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollAxis == 0.0f)
+            return;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0) // Zoom in
-        {
-            float newYPos = transform.position.y - _zoomIncrement;
+        float zoomIncrement = (
+            scrollAxis > 0.0f ? -_zoomIncrement : _zoomIncrement
+        );
+        float newYPos = transform.position.y + zoomIncrement;
+        float newYPosClamped = Mathf.Clamp(
+            newYPos, _scrollLowerLimit, _scrollUpperLimit
+        );
+        var newTransformPos = new Vector3(
+            transform.position.x, newYPosClamped, transform.position.z
+        );
+        GetComponent<Transform>().position = newTransformPos;
 
-            if (newYPos < _scrollLowerLimit)
-            {
-                return;
-            }
-
-            GetComponent<Transform>().position = new Vector3(transform.position.x, newYPos, transform.position.z);
-            transform.Rotate(-0.1f, 0, 0);
-        }
-
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0) // Zoom out
-        {
-
-            float newYPos = transform.position.y + _zoomIncrement;
-            if (newYPos > _scrollUpperLimit)
-            {
-                return;
-            }
-
-            GetComponent<Transform>().position = new Vector3(transform.position.x, newYPos, transform.position.z);
-            transform.Rotate(0.1f, 0, 0);
-
-        }
-
+        float rotateX = (
+            scrollAxis > 0.0f ? -0.1f : 0.1f
+        );
+        transform.Rotate(rotateX, 0, 0);
     }
 
     /*
