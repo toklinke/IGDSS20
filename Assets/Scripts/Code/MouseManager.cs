@@ -12,7 +12,7 @@ public class MouseManager : MonoBehaviour
     float _scrollUpperLimit = 100;
     float _scrollLowerLimit = 20;
 
-    float _zoomIncrement = 0.6f;
+    float _zoomIncrement = 10.0f;
 
     public float CameraMinX { get; set; }
     public float CameraMaxX { get; set; }
@@ -72,9 +72,7 @@ public class MouseManager : MonoBehaviour
         if (scrollAxis == 0.0f)
             return;
 
-        float zoomIncrement = (
-            scrollAxis > 0.0f ? -_zoomIncrement : _zoomIncrement
-        );
+        float zoomIncrement = -(_zoomIncrement * scrollAxis);
         float newYPos = transform.position.y + zoomIncrement;
         float newYPosClamped = Mathf.Clamp(
             newYPos, _scrollLowerLimit, _scrollUpperLimit
@@ -84,9 +82,7 @@ public class MouseManager : MonoBehaviour
         );
         GetComponent<Transform>().position = newTransformPos;
 
-        float rotateX = (
-            scrollAxis > 0.0f ? -0.1f : 0.1f
-        );
+        float rotateX = -(3.0f * scrollAxis);
         transform.Rotate(rotateX, 0, 0);
     }
 
