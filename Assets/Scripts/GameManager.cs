@@ -55,6 +55,20 @@ public class GameManager : MonoBehaviour
             var prefab = GetTilePrefab(tile.Type);
             Instantiate(prefab, pos, Quaternion.identity);
         });
+
+        var worldSize = mapToWorldMapper.GetWorldSize(
+            mapWidth: map.Width,
+            mapHeight: map.Height
+        );
+
+        // TODO: is there a better method for communication between scripts?
+        var mouseManagerObj = GameObject.Find("/Rendering/Main Camera");
+        var mouseManager = mouseManagerObj.GetComponent<MouseManager>();
+        mouseManager.CameraMinX = 0.0f;
+        mouseManager.CameraMaxX = worldSize.x;
+        mouseManager.CameraMinZ = 0.0f;
+        mouseManager.CameraMaxZ = worldSize.z;
+
         return map;
     }
 

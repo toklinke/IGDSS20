@@ -14,6 +14,10 @@ public class MouseManager : MonoBehaviour
 
     float _zoomIncrement = 0.6f;
 
+    public float CameraMinX { get; set; }
+    public float CameraMaxX { get; set; }
+    public float CameraMinZ { get; set; }
+    public float CameraMaxZ { get; set; }
 
     //int _screenHeight;
     //int _screenWidth;
@@ -49,16 +53,14 @@ public class MouseManager : MonoBehaviour
         float dragSpeed = _dragSpeed * Time.deltaTime;
         Vector3 move = new Vector3(pos.y, 0, pos.x) * dragSpeed;
 
-        float newX = transform.position.x + move.x;
-        float newZ = transform.position.z - move.z;
+        float newX = Mathf.Clamp(
+            transform.position.x + move.x, CameraMinX, CameraMaxX
+        );
+        float newZ = Mathf.Clamp(
+            transform.position.z - move.z, CameraMinZ, CameraMaxZ
+        );
 
-        // Basic Implementation of hardcoded limits
-        // TODO get actual pan limits
-        if (newX > 0 && newX < 200 && (newZ > 0 && newZ < 200))
-        {
-            GetComponent<Transform>().position = new Vector3(newX, transform.position.y, newZ);
-        }
-
+        GetComponent<Transform>().position = new Vector3(newX, transform.position.y, newZ);
     }
 
 
