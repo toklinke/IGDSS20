@@ -7,7 +7,7 @@ public class MouseManager : MonoBehaviour
     //TODO Deal with terrain borders
     //int _boundary = 50;
     //float _edgeMovementSpeed = 10f;
-    float _dragSpeed = 1.4f;
+    float _dragSpeed = 100.0f;
 
     float _scrollUpperLimit = 100;
     float _scrollLowerLimit = 20;
@@ -46,7 +46,8 @@ public class MouseManager : MonoBehaviour
         if (!Input.GetMouseButton(1)) return;
 
         Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
-        Vector3 move = new Vector3(pos.y * _dragSpeed, 0, pos.x * _dragSpeed);
+        float dragSpeed = _dragSpeed * Time.deltaTime;
+        Vector3 move = new Vector3(pos.y, 0, pos.x) * dragSpeed;
 
         float newX = transform.position.x + move.x;
         float newZ = transform.position.z - move.z;
