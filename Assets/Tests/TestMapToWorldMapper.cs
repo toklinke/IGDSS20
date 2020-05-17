@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -60,6 +61,20 @@ namespace Tests
                 tile: new MapTile(height: 0.5f, type: MapTileType.Grass),
                 expectedWorldPosition: new Vector3(1.0f, 55.0f, 1.0f)
             ),
+            // Test odd row number
+            new GetWorldPositionTestCase(
+                minWorldY: 0.0f,
+                maxWorldY: 1.0f,
+                tileRadius: 1.0f,
+                mapX: 0,
+                mapY: 1,
+                tile: new MapTile(height: 0.42f, type: MapTileType.Grass),
+                expectedWorldPosition: new Vector3(
+                    x: 1.0f + 2.0f / (float)Math.Sqrt(3) * 1.5f,
+                    y: 0.42f,
+                    z: 2.0f
+                )
+            ),
             // Test arbitrary tile position
             new GetWorldPositionTestCase(
                 minWorldY: 0.0f,
@@ -68,7 +83,11 @@ namespace Tests
                 mapX: 1,
                 mapY: 2,
                 tile: new MapTile(height: 0.5f, type: MapTileType.Grass),
-                expectedWorldPosition: new Vector3(15.0f, 0.5f, 25.0f)
+                expectedWorldPosition: new Vector3(
+                    x: 5.0f + 2.0f * (5.0f * 2.0f / (float)Math.Sqrt(3) * 1.5f),
+                    y: 0.5f,
+                    z: 15.0f
+                )
             ),
         };
 
