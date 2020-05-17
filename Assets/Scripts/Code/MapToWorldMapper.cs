@@ -16,6 +16,7 @@ public class MapToWorldMapper
         MinWorldY = minWorldY;
         MaxWorldY = maxWorldY;
         TileRadius = tileRadius;
+        // assume regular hexagon
         TileOuterRadius = (float)(tileRadius * 2.0 / Math.Sqrt(3));
     }
 
