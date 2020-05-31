@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
                 tile: tile
             );
             var prefab = GetTilePrefab(tile.Type);
-            Instantiate(prefab, pos, Quaternion.identity);
+            var tileObject = Instantiate(prefab, pos, Quaternion.identity);
+
+            var tileManager = tileObject.GetComponent<TileManager>();
+            tileManager.Tile = tile;
+            tileManager.MapX = x;
+            tileManager.MapY = y;
         });
 
         var worldSize = mapToWorldMapper.GetWorldSize(
