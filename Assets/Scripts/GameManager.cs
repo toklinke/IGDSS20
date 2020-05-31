@@ -59,6 +59,14 @@ public class GameManager : MonoBehaviour
             tileManager.Tile = tile;
             tileManager.MapX = x;
             tileManager.MapY = y;
+            tileManager.TileClicked += (sender, args) => {
+                var tileManagerSender = (TileManager)sender;
+                Debug.Log(
+                    $"Clicked on tile: {tileManagerSender.Tile.Type} " +
+                    $"at map pos {tileManagerSender.MapX}, " +
+                    $"{tileManagerSender.MapY}"
+                );
+            };
         });
 
         var worldSize = mapToWorldMapper.GetWorldSize(
