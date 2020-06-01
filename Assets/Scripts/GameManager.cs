@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     // must match actual tile prefab size
     private const float MapTileRadius = 5.0f;
 
+    private MapToWorldMapper MapToWorldMapper = new MapToWorldMapper(
+        minWorldY: MapMinY,
+        maxWorldY: MapMaxY,
+        tileRadius: MapTileRadius
+    );
+
     private Map Map;
 
     // Start is called before the first frame update
@@ -42,13 +48,8 @@ public class GameManager : MonoBehaviour
             heightMapWidth: (uint)HeightMap.width,
             heightMapHeight: (uint)HeightMap.height
         );
-        var mapToWorldMapper = new MapToWorldMapper(
-            minWorldY: MapMinY,
-            maxWorldY: MapMaxY,
-            tileRadius: MapTileRadius
-        );
         map.ForEachTile((x, y, tile) => {
-            var pos = mapToWorldMapper.GetWorldPosition(
+            var pos = this.MapToWorldMapper.GetWorldPosition(
                 mapX: x,
                 mapY: y,
                 tile: tile
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
             };
         });
 
-        var worldSize = mapToWorldMapper.GetWorldSize(
+        var worldSize = this.MapToWorldMapper.GetWorldSize(
             mapWidth: map.Width,
             mapHeight: map.Height
         );
