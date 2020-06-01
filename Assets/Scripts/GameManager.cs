@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject PrefabForestTile;
     public GameObject PrefabStoneTile;
     public GameObject PrefabMountainTile;
+    public GameObject LumberjackBuilding;
 
     private const float MapMinY = 0.0f;
     private const float MapMaxY = 25.0f;
