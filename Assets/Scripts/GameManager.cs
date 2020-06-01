@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
                     $"at map pos {tileManagerSender.MapX}, " +
                     $"{tileManagerSender.MapY}"
                 );
+                PlaceBuildingOnTile(
+                    tile: tileManagerSender.Tile,
+                    mapX: tileManagerSender.MapX,
+                    mapY: tileManagerSender.MapY
+                );
             };
         });
 
@@ -116,5 +121,20 @@ public class GameManager : MonoBehaviour
                 );
         }
         return prefab;
+    }
+
+    // try to place a building at a certain map position.
+    private void PlaceBuildingOnTile(MapTile tile, uint mapX, uint mapY)
+    {
+        // TODO: check whether tile is free and compatible
+
+        var pos = this.MapToWorldMapper.GetWorldPosition(
+            mapX: mapX,
+            mapY: mapY,
+            tile: tile
+        );
+        // TODO: Use selected building type prefab
+        var prefab = LumberjackBuilding;
+        Instantiate(prefab, pos, Quaternion.identity);
     }
 }
