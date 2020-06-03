@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,4 +41,13 @@ public class BuildingCategory : MonoBehaviour
     public List<ResourceType> InputResources;
     // Type of resource that is produced by a building of the category.
     public ResourceType OutputResource;
+
+    // Return whether a building of this category can be placed
+    // on the given tile type.
+    public bool IsCompatibleTileType(MapTileType tileType)
+    {
+        var index = Array.IndexOf(CompatibleTileTypes, tileType);
+        var isCompatible = index > -1 ? true : false;
+        return isCompatible;
+    }
 }

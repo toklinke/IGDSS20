@@ -126,15 +126,20 @@ public class GameManager : MonoBehaviour
     // try to place a building at a certain map position.
     private void PlaceBuildingOnTile(MapTile tile, uint mapX, uint mapY)
     {
-        // TODO: check whether tile is free and compatible
+        // TODO: Use selected building type prefab
+        var prefab = LumberjackBuilding;
+
+        var buildingCategory = prefab.GetComponent<BuildingCategory>();
+
+        // TODO: check whether tile is free
+        if(!buildingCategory.IsCompatibleTileType(tile.Type))
+            return;
 
         var pos = this.MapToWorldMapper.GetWorldPosition(
             mapX: mapX,
             mapY: mapY,
             tile: tile
         );
-        // TODO: Use selected building type prefab
-        var prefab = LumberjackBuilding;
         Instantiate(prefab, pos, Quaternion.identity);
     }
 }
