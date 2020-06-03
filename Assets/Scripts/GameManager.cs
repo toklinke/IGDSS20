@@ -126,12 +126,14 @@ public class GameManager : MonoBehaviour
     // try to place a building at a certain map position.
     private void PlaceBuildingOnTile(MapTile tile, uint mapX, uint mapY)
     {
+        if (tile.Building != null)
+            return;
+
         // TODO: Use selected building type prefab
         var prefab = LumberjackBuilding;
 
         var buildingCategory = prefab.GetComponent<BuildingCategory>();
 
-        // TODO: check whether tile is free
         if(!buildingCategory.IsCompatibleTileType(tile.Type))
             return;
 
@@ -141,5 +143,8 @@ public class GameManager : MonoBehaviour
             tile: tile
         );
         Instantiate(prefab, pos, Quaternion.identity);
+
+        var building = new Building(); // TODO: params
+        tile.Building = building;
     }
 }

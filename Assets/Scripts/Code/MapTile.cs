@@ -1,19 +1,26 @@
 // A single tile in a map.
 public class MapTile
 {
-    public MapTile(float height, MapTileType type)
+    public MapTile(
+        float height, MapTileType type, Building building = null
+    )
     {
         Height = height;
         Type = type;
+        Building = building;
     }
 
     public float Height { get; }
     public MapTileType Type { get; }
 
+    // The building that is placed on this tile.
+    public Building Building { get; set; }
+
     public override string ToString()
     {
         string result = string.Format(
-            "MapTile(height: {0}, type: {1})", Height, Type
+            "MapTile(height: {0}, type: {1}, building: {2})",
+            Height, Type, Building
         );
         return result;
     }
@@ -26,14 +33,15 @@ public class MapTile
 
         var equals = (
             Height == otherTile.Height &&
-            Type == otherTile.Type
+            Type == otherTile.Type &&
+            Building == otherTile.Building
         );
         return equals;
     }
 
     public override int GetHashCode()
     {
-        var properties = (Height, Type);
+        var properties = (Height, Type, Building);
         var hashCode = properties.GetHashCode();
         return hashCode;
     }
