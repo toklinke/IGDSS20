@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     );
 
     private Map Map;
+    private int SelectedBuildingPrefabIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HandleKeyboardInput();
     }
 
     private Map SpawnMap()
@@ -129,9 +130,7 @@ public class GameManager : MonoBehaviour
         if (tile.Building != null)
             return;
 
-        // TODO: Use selected building type prefab
-        var prefab = BuildingPrefabs[0];
-
+        var prefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
         var buildingCategory = prefab.GetComponent<BuildingCategory>();
 
         if(!buildingCategory.IsCompatibleTileType(tile.Type))
@@ -146,5 +145,48 @@ public class GameManager : MonoBehaviour
 
         var building = new Building(); // TODO: params
         tile.Building = building;
+    }
+
+    // Sets the index for the currently selected building prefab
+    // by checking key presses on the numbers 1 to 0
+    void HandleKeyboardInput()
+    {
+        var keycodes = new KeyCode[] {
+            KeyCode.Alpha1,
+            KeyCode.Alpha2,
+            KeyCode.Alpha3,
+            KeyCode.Alpha4,
+            KeyCode.Alpha5,
+            KeyCode.Alpha6,
+            KeyCode.Alpha7,
+            KeyCode.Alpha8,
+            KeyCode.Alpha9,
+            KeyCode.Alpha0,
+        };
+
+        for (int i = 0; i < keycodes.Length; ++i)
+        {
+            var keycode = keycodes[i];
+            if (Input.GetKeyDown(keycode))
+            {
+                if (i < BuildingPrefabs.Length)
+                {
+                    SelectedBuildingPrefabIndex = i;
+                    Debug.Log(
+                        string.Format(
+                            "Selected building index {0}",
+                            SelectedBuildingPrefabIndex
+                        )
+                    );
+                }
+                else
+                {
+                    Debug.Log(
+                        string.Format("There is no building for index {0}", i)
+                    );
+                }
+                break;
+            }
+        }
     }
 }
