@@ -48,4 +48,14 @@ public class MapTile
         var hashCode = properties.GetHashCode();
         return hashCode;
     }
+
+    public MapTile Clone()
+    {
+        var clone = new MapTile(
+            height: Height,
+            type: Type,
+            building: Building
+        );
+        return clone;
+    }
 }

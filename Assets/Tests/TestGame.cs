@@ -172,10 +172,10 @@ namespace Tests
             );
 
             var spawnPositions = new List<Vector3>();
-            var tile = testCase.Tile;
+            var tile = testCase.Tile.Clone();
 
             game.PlaceBuildingOnTile(
-                tile: testCase.Tile,
+                tile: tile,
                 mapX: testCase.MapX,
                 mapY: testCase.MapY,
                 buildingCategoryParams: testCase.BuildingCategoryParams,
