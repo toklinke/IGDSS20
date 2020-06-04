@@ -140,11 +140,12 @@ namespace Tests
             MapGenerator mapGenerator = new MapGenerator();
             Color[] colors = new Color[6];
 
-            Map map = mapGenerator.GenerateMapFromHeightMap(
-                heightMapColors: testCase.HeightMapColors,
-                heightMapWidth: testCase.HeightMapWidth,
-                heightMapHeight: testCase.HeightMapHeight
+            var heightMap = new HeightMap(
+                colors: testCase.HeightMapColors,
+                width: testCase.HeightMapWidth,
+                height: testCase.HeightMapHeight
             );
+            Map map = mapGenerator.GenerateMapFromHeightMap(heightMap);
 
             if (testCase.ExpectedWidth.HasValue)
                 Assert.That(map.Width, Is.EqualTo(testCase.ExpectedWidth));

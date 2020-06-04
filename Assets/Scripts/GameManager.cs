@@ -47,11 +47,12 @@ public class GameManager : MonoBehaviour
     private Map SpawnMap()
     {
         var mapGenerator = new MapGenerator();
-        var map = mapGenerator.GenerateMapFromHeightMap(
-            heightMapColors: HeightMap.GetPixels(),
-            heightMapWidth: (uint)HeightMap.width,
-            heightMapHeight: (uint)HeightMap.height
+        var heightMap = new HeightMap(
+            colors: HeightMap.GetPixels(),
+            width: (uint)HeightMap.width,
+            height: (uint)HeightMap.height
         );
+        var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
         map.ForEachTile((x, y, tile) => {
             var pos = this.MapToWorldMapper.GetWorldPosition(
                 mapX: x,
