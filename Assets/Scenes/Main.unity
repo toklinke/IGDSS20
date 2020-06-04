@@ -490,6 +490,7 @@ MonoBehaviour:
     type: 3}
   BuildingPrefabs:
   - {fileID: 5657576265433554849, guid: 31a446b130bd9a2b8aadde04df9e069c, type: 3}
+  - {fileID: 4203752218570917651, guid: d61b712e1c86828c3aafc1bc554e4e1a, type: 3}
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0
