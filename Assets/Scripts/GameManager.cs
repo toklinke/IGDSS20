@@ -143,8 +143,9 @@ public class GameManager : MonoBehaviour
 
         var prefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
         var buildingCategory = prefab.GetComponent<BuildingCategory>();
+        var buildingCategoryParams = buildingCategory.GetParams();
 
-        if(!buildingCategory.IsCompatibleTileType(tile.Type))
+        if(!buildingCategoryParams.IsCompatibleTileType(tile.Type))
             return;
 
         var pos = this.MapToWorldMapper.GetWorldPosition(
