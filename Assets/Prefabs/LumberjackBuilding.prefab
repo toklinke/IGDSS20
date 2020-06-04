@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6476146312099839462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657576265433554849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ddeb8ef2bef6d387c985802804467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Lumberjack
+  UpkeepCost: 10
+  BuildCostMoney: 100
+  BuildCostPlanks: 0
+  CompatibleTileTypes: 03000000
+  ResourceGenerationInterval: 15
+  OutputCount: 1
+  EfficiencyScaleMinNeighbors: 1
+  EfficiencyScaleMaxNeighbors: 6
+  InputResources: 
+  OutputResource: 1
+--- !u!1001 &5657576265433739743
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_Name
+      value: LumberjackBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+--- !u!1 &5657576265433554849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04,
+    type: 3}
+  m_PrefabInstance: {fileID: 5657576265433739743}
+  m_PrefabAsset: {fileID: 0}

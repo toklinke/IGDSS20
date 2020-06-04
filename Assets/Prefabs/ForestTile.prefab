@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4095088029480073678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3331960066271536643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24fc42e84d6135f42a1fc8a1c8ca83d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &304160004410889894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,7 +75,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 55bf19dbf31e8c74bb0ee0bd860cf343, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.15
+      value: 1.49
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 55bf19dbf31e8c74bb0ee0bd860cf343, type: 3}
       propertyPath: m_LocalPosition.y
@@ -95,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 55bf19dbf31e8c74bb0ee0bd860cf343, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.33
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 55bf19dbf31e8c74bb0ee0bd860cf343, type: 3}
       propertyPath: m_LocalRotation.x
@@ -463,12 +451,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cdd9622e6eb2a6498e3d47c96b87198, type: 3}
---- !u!1 &3331960066271536643 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6769432150190558292, guid: 4cdd9622e6eb2a6498e3d47c96b87198,
-    type: 3}
-  m_PrefabInstance: {fileID: 8344143897560181335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3904172423750652247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5035642893912111872, guid: 4cdd9622e6eb2a6498e3d47c96b87198,
