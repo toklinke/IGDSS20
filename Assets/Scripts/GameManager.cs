@@ -99,7 +99,13 @@ public class GameManager : MonoBehaviour
             PlaceBuildingOnTile(
                 tile: tileManagerSender.Tile,
                 mapX: tileManagerSender.MapX,
-                mapY: tileManagerSender.MapY
+                mapY: tileManagerSender.MapY,
+                spawnBuilding: buildingWorldPos => {
+                    SpawnBuilding(
+                        buildingPrefabIndex: SelectedBuildingPrefabIndex,
+                        worldPos: buildingWorldPos
+                    );
+                }
             );
         };
     }
@@ -135,8 +141,13 @@ public class GameManager : MonoBehaviour
         return prefab;
     }
 
+    // A function that spawns a building at a certain position.
+    private delegate void BuildingSpawner(Vector3 worldPos);
+
     // try to place a building at a certain map position.
-    private void PlaceBuildingOnTile(MapTile tile, uint mapX, uint mapY)
+    private void PlaceBuildingOnTile(
+        MapTile tile, uint mapX, uint mapY, BuildingSpawner spawnBuilding
+    )
     {
         if (tile.Building != null)
             return;
@@ -153,10 +164,17 @@ public class GameManager : MonoBehaviour
             mapY: mapY,
             tile: tile
         );
-        Instantiate(prefab, pos, Quaternion.identity);
+        spawnBuilding(pos);
 
         var building = new Building(); // TODO: params
         tile.Building = building;
+    }
+
+    // Spawn a building using a certain prefab.
+    private void SpawnBuilding(int buildingPrefabIndex, Vector3 worldPos)
+    {
+        var prefab = BuildingPrefabs[buildingPrefabIndex];
+        Instantiate(prefab, worldPos, Quaternion.identity);
     }
 
     // Sets the index for the currently selected building prefab
