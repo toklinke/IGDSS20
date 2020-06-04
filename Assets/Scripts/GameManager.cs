@@ -14,25 +14,32 @@ public class GameManager : MonoBehaviour
     public GameObject PrefabStoneTile;
     public GameObject PrefabMountainTile;
     public GameObject[] BuildingPrefabs;
+    public float MapMinY;
+    public float MapMaxY;
+    public float MapTileRadius; // must match actual tile prefab size
 
-    private const float MapMinY = 0.0f;
-    private const float MapMaxY = 25.0f;
-    // must match actual tile prefab size
-    private const float MapTileRadius = 5.0f;
-
-    private MapToWorldMapper MapToWorldMapper = new MapToWorldMapper(
-        minWorldY: MapMinY,
-        maxWorldY: MapMaxY,
-        tileRadius: MapTileRadius
-    );
-
-    private Map Map;
+    private Game Game;
     private int SelectedBuildingPrefabIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.Map = SpawnMap();
+        var mapToWorldMapper = new MapToWorldMapper(
+            minWorldY: MapMinY,
+            maxWorldY: MapMaxY,
+            tileRadius: MapTileRadius
+        );
+        var heightMap = new HeightMap(
+            colors: HeightMap.GetPixels(),
+            width: (uint)HeightMap.width,
+            height: (uint)HeightMap.height
+        );
+        this.Game = new Game(
+            heightMap: heightMap,
+            spawnMapTile: SpawnMapTile,
+            mapToWorldMapper: mapToWorldMapper
+        );
+        SetCameraLimits(this.Game.WorldSize);
     }
 
     // Update is called once per frame
@@ -41,56 +48,19 @@ public class GameManager : MonoBehaviour
         HandleKeyboardInput();
     }
 
-    private Map SpawnMap()
+    // Spawn a map tile.
+    public void SpawnMapTile(
+        MapTile tile, uint mapX, uint mapY, Vector3 worldPos
+    )
     {
-        var mapGenerator = new MapGenerator();
-        var map = mapGenerator.GenerateMapFromHeightMap(
-            heightMapColors: HeightMap.GetPixels(),
-            heightMapWidth: (uint)HeightMap.width,
-            heightMapHeight: (uint)HeightMap.height
-        );
-        map.ForEachTile((x, y, tile) => {
-            var pos = this.MapToWorldMapper.GetWorldPosition(
-                mapX: x,
-                mapY: y,
-                tile: tile
-            );
-            var prefab = GetTilePrefab(tile.Type);
-            var tileObject = Instantiate(prefab, pos, Quaternion.identity);
+        var prefab = GetTilePrefab(tile.Type);
+        var tileObject = Instantiate(prefab, worldPos, Quaternion.identity);
 
-            var tileManager = tileObject.GetComponent<TileManager>();
-            tileManager.Tile = tile;
-            tileManager.MapX = x;
-            tileManager.MapY = y;
-            tileManager.TileClicked += (sender, args) => {
-                var tileManagerSender = (TileManager)sender;
-                Debug.Log(
-                    $"Clicked on tile: {tileManagerSender.Tile.Type} " +
-                    $"at map pos {tileManagerSender.MapX}, " +
-                    $"{tileManagerSender.MapY}"
-                );
-                PlaceBuildingOnTile(
-                    tile: tileManagerSender.Tile,
-                    mapX: tileManagerSender.MapX,
-                    mapY: tileManagerSender.MapY
-                );
-            };
-        });
-
-        var worldSize = this.MapToWorldMapper.GetWorldSize(
-            mapWidth: map.Width,
-            mapHeight: map.Height
-        );
-
-        // TODO: is there a better method for communication between scripts?
-        var mouseManagerObj = GameObject.Find("/Rendering/Main Camera");
-        var mouseManager = mouseManagerObj.GetComponent<MouseManager>();
-        mouseManager.CameraMinX = 0.0f;
-        mouseManager.CameraMaxX = worldSize.x;
-        mouseManager.CameraMinZ = 0.0f;
-        mouseManager.CameraMaxZ = worldSize.z;
-
-        return map;
+        var tileManager = tileObject.GetComponent<TileManager>();
+        tileManager.Tile = tile;
+        tileManager.MapX = mapX;
+        tileManager.MapY = mapY;
+        tileManager.TileClicked += HandleTileClicked;
     }
 
     private GameObject GetTilePrefab(MapTileType type)
@@ -124,27 +94,53 @@ public class GameManager : MonoBehaviour
         return prefab;
     }
 
-    // try to place a building at a certain map position.
-    private void PlaceBuildingOnTile(MapTile tile, uint mapX, uint mapY)
+    // Set camera limits based on world size.
+    private void SetCameraLimits(Vector3 worldSize)
     {
-        if (tile.Building != null)
-            return;
+        // TODO: is there a better method for communication between scripts?
+        var mouseManagerObj = GameObject.Find("/Rendering/Main Camera");
+        var mouseManager = mouseManagerObj.GetComponent<MouseManager>();
+        mouseManager.CameraMinX = 0.0f;
+        mouseManager.CameraMaxX = worldSize.x;
+        mouseManager.CameraMinZ = 0.0f;
+        mouseManager.CameraMaxZ = worldSize.z;
+    }
 
-        var prefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
-        var buildingCategory = prefab.GetComponent<BuildingCategory>();
+    // Spawn a building using a certain prefab.
+    private void SpawnBuilding(int buildingPrefabIndex, Vector3 worldPos)
+    {
+        var prefab = BuildingPrefabs[buildingPrefabIndex];
+        Instantiate(prefab, worldPos, Quaternion.identity);
+    }
 
-        if(!buildingCategory.IsCompatibleTileType(tile.Type))
-            return;
-
-        var pos = this.MapToWorldMapper.GetWorldPosition(
-            mapX: mapX,
-            mapY: mapY,
-            tile: tile
+    // Control placement of buildings when a tile has been clicked.
+    private void HandleTileClicked(object sender, EventArgs args)
+    {
+        var tileManagerSender = (TileManager)sender;
+        Debug.Log(
+            $"Clicked on tile: {tileManagerSender.Tile.Type} " +
+            $"at map pos {tileManagerSender.MapX}, " +
+            $"{tileManagerSender.MapY}"
         );
-        Instantiate(prefab, pos, Quaternion.identity);
 
-        var building = new Building(); // TODO: params
-        tile.Building = building;
+        var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
+        var buildingCategory = (
+            buildingPrefab.GetComponent<BuildingCategory>()
+        );
+        var buildingCategoryParams = buildingCategory.GetParams();
+
+        this.Game.PlaceBuildingOnTile(
+            tile: tileManagerSender.Tile,
+            mapX: tileManagerSender.MapX,
+            mapY: tileManagerSender.MapY,
+            buildingCategoryParams: buildingCategoryParams,
+            spawnBuilding: buildingWorldPos => {
+                SpawnBuilding(
+                    buildingPrefabIndex: SelectedBuildingPrefabIndex,
+                    worldPos: buildingWorldPos
+                );
+            }
+        );
     }
 
     // Sets the index for the currently selected building prefab

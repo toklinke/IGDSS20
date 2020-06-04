@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    public class TestBuildingCategory
+    public class TestBuildingCategoryParams
     {
         public readonly struct IsCompatibleTileTypeTestCase
         {
@@ -87,12 +87,22 @@ namespace Tests
             IsCompatibleTileTypeTestCase testCase
         )
         {
-            var buildingCategory = new BuildingCategory();
-            buildingCategory.CompatibleTileTypes = (
-                testCase.CompatibleTileTypes
+            var buildingCategoryParams = new BuildingCategoryParams(
+                compatibleTileTypes: testCase.CompatibleTileTypes,
+                // don't care for rest of parameters.
+                upkeepCost: 0,
+                buildCostMoney: 0,
+                buildCostPlanks: 0,
+                resourceGenerationInterval: 0,
+                outputCount: 0,
+                efficiencyScaleTileType: MapTileType.Grass,
+                efficiencyScaleMinNeighbors: 0,
+                efficiencyScaleMaxNeighbors: 0,
+                inputResources: null,
+                outputResource: ResourceType.Wood
             );
 
-            var isCompatible = buildingCategory.IsCompatibleTileType(
+            var isCompatible = buildingCategoryParams.IsCompatibleTileType(
                 testCase.TileType
             );
 
