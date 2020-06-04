@@ -30,7 +30,12 @@ public class GameManager : MonoBehaviour
             maxWorldY: MapMaxY,
             tileRadius: MapTileRadius
         );
-        this.Map = SpawnMap();
+        var heightMap = new HeightMap(
+            colors: HeightMap.GetPixels(),
+            width: (uint)HeightMap.width,
+            height: (uint)HeightMap.height
+        );
+        this.Map = SpawnMap(heightMap);
         var worldSize = this.MapToWorldMapper.GetWorldSize(
             mapWidth: Map.Width,
             mapHeight: Map.Height
@@ -44,14 +49,9 @@ public class GameManager : MonoBehaviour
         HandleKeyboardInput();
     }
 
-    private Map SpawnMap()
+    private Map SpawnMap(HeightMap heightMap)
     {
         var mapGenerator = new MapGenerator();
-        var heightMap = new HeightMap(
-            colors: HeightMap.GetPixels(),
-            width: (uint)HeightMap.width,
-            height: (uint)HeightMap.height
-        );
         var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
         map.ForEachTile((x, y, tile) => {
             var pos = this.MapToWorldMapper.GetWorldPosition(
