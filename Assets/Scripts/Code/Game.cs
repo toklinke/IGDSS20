@@ -21,13 +21,14 @@ public class Game
         MapToWorldMapper mapToWorldMapper
     )
     {
-        MapToWorldMapper = mapToWorldMapper;
-
         this.Map = SpawnMap(
             heightMap: heightMap,
-            spawnMapTile: spawnMapTile
+            spawnMapTile: spawnMapTile,
+            mapToWorldMapper: mapToWorldMapper
         );
-        WorldSize = this.MapToWorldMapper.GetWorldSize(
+
+        this.MapToWorldMapper = mapToWorldMapper;
+        WorldSize = mapToWorldMapper.GetWorldSize(
             mapWidth: this.Map.Width,
             mapHeight: this.Map.Height
         );
@@ -59,12 +60,16 @@ public class Game
         tile.Building = building;
     }
 
-    private Map SpawnMap(HeightMap heightMap, MapTileSpawner spawnMapTile)
+    private Map SpawnMap(
+        HeightMap heightMap,
+        MapTileSpawner spawnMapTile,
+        MapToWorldMapper mapToWorldMapper
+    )
     {
         var mapGenerator = new MapGenerator();
         var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
         map.ForEachTile((x, y, tile) => {
-            var pos = this.MapToWorldMapper.GetWorldPosition(
+            var pos = mapToWorldMapper.GetWorldPosition(
                 mapX: x,
                 mapY: y,
                 tile: tile
