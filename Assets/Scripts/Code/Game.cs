@@ -13,12 +13,12 @@ public class Game
     public Map Map { get; }
     public Vector3 WorldSize { get; }
 
-    private MapToWorldMapper MapToWorldMapper;
+    private IMapToWorldMapper MapToWorldMapper;
 
     public Game(
         HeightMap heightMap,
         MapTileSpawner spawnMapTile,
-        MapToWorldMapper mapToWorldMapper
+        IMapToWorldMapper mapToWorldMapper
     )
     {
         this.Map = SpawnMap(
@@ -63,7 +63,7 @@ public class Game
     private Map SpawnMap(
         HeightMap heightMap,
         MapTileSpawner spawnMapTile,
-        MapToWorldMapper mapToWorldMapper
+        IMapToWorldMapper mapToWorldMapper
     )
     {
         var mapGenerator = new MapGenerator();
