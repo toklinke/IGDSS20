@@ -6,7 +6,18 @@ using UnityEngine;
 // Maps map tile (x, y) coordinates to world space (x, y, z) coordinates.
 // World space coordinates are defined
 // so that the anchor of each tile is the center of its top face.
-public class MapToWorldMapper
+public interface IMapToWorldMapper
+{
+    // Get world position of a tile
+    // that is located at map position (mapX, mapY).
+    Vector3 GetWorldPosition(uint mapX, uint mapY, MapTile tile);
+
+    // Get world size of a map with size (mapWidth, mapHeight).
+    Vector3 GetWorldSize(uint mapWidth, uint mapHeight);
+}
+
+// IMapToWorldMapper implementation for maps built on a hexagonal grid.
+public class MapToWorldMapper : IMapToWorldMapper
 {
     // Configure mapper.
     public MapToWorldMapper(
@@ -29,8 +40,6 @@ public class MapToWorldMapper
 
     private float TileOuterRadius;
 
-    // Get world position of a tile
-    // that is located at map position (mapX, mapY).
     public Vector3 GetWorldPosition(uint mapX, uint mapY, MapTile tile)
     {
         // map Y axis -> world X axis
@@ -51,7 +60,6 @@ public class MapToWorldMapper
         return worldPos;
     }
 
-    // Get world size of a map with size (mapWidth, mapHeight).
     public Vector3 GetWorldSize(uint mapWidth, uint mapHeight)
     {
         float evenRowHeight = TileOuterRadius * 2.0f;
