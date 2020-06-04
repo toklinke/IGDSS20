@@ -96,10 +96,18 @@ public class GameManager : MonoBehaviour
                 $"at map pos {tileManagerSender.MapX}, " +
                 $"{tileManagerSender.MapY}"
             );
+
+            var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
+            var buildingCategory = (
+                buildingPrefab.GetComponent<BuildingCategory>()
+            );
+            var buildingCategoryParams = buildingCategory.GetParams();
+
             PlaceBuildingOnTile(
                 tile: tileManagerSender.Tile,
                 mapX: tileManagerSender.MapX,
                 mapY: tileManagerSender.MapY,
+                buildingCategoryParams: buildingCategoryParams,
                 spawnBuilding: buildingWorldPos => {
                     SpawnBuilding(
                         buildingPrefabIndex: SelectedBuildingPrefabIndex,
@@ -146,15 +154,15 @@ public class GameManager : MonoBehaviour
 
     // try to place a building at a certain map position.
     private void PlaceBuildingOnTile(
-        MapTile tile, uint mapX, uint mapY, BuildingSpawner spawnBuilding
+        MapTile tile,
+        uint mapX,
+        uint mapY,
+        BuildingCategoryParams buildingCategoryParams,
+        BuildingSpawner spawnBuilding
     )
     {
         if (tile.Building != null)
             return;
-
-        var prefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
-        var buildingCategory = prefab.GetComponent<BuildingCategory>();
-        var buildingCategoryParams = buildingCategory.GetParams();
 
         if(!buildingCategoryParams.IsCompatibleTileType(tile.Type))
             return;
