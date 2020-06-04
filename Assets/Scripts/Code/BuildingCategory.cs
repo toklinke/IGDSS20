@@ -50,4 +50,70 @@ public class BuildingCategory : MonoBehaviour
         var isCompatible = index > -1 ? true : false;
         return isCompatible;
     }
+
+    // Get bundled parameters.
+    public BuildingCategoryParams GetParams()
+    {
+        var categoryParams = new BuildingCategoryParams(
+            upkeepCost: UpkeepCost,
+            buildCostMoney: BuildCostMoney,
+            buildCostPlanks: BuildCostPlanks,
+            compatibleTileTypes: CompatibleTileTypes,
+            resourceGenerationInterval: ResourceGenerationInterval,
+            outputCount: OutputCount,
+            efficiencyScaleTileType: EfficiencyScaleTileType,
+            efficiencyScaleMinNeighbors: EfficiencyScaleMinNeighbors,
+            efficiencyScaleMaxNeighbors: EfficiencyScaleMaxNeighbors,
+            inputResources: InputResources,
+            outputResource: OutputResource
+        );
+        return categoryParams;
+    }
+}
+
+// Bundles all parameters of a building category.
+public readonly struct BuildingCategoryParams
+{
+    public BuildingCategoryParams(
+        int upkeepCost,
+        int buildCostMoney,
+        int buildCostPlanks,
+        MapTileType[] compatibleTileTypes,
+        float resourceGenerationInterval,
+        int outputCount,
+        MapTileType? efficiencyScaleTileType,
+        int efficiencyScaleMinNeighbors,
+        int efficiencyScaleMaxNeighbors,
+        List<ResourceType> inputResources,
+        ResourceType outputResource
+    )
+    {
+        UpkeepCost = upkeepCost;
+        BuildCostMoney = buildCostMoney;
+        BuildCostPlanks = buildCostPlanks;
+        CompatibleTileTypes = compatibleTileTypes;
+        ResourceGenerationInterval = resourceGenerationInterval;
+        OutputCount = outputCount;
+        EfficiencyScaleTileType = efficiencyScaleTileType;
+        EfficiencyScaleMinNeighbors = efficiencyScaleMinNeighbors;
+        EfficiencyScaleMaxNeighbors = efficiencyScaleMaxNeighbors;
+        InputResources = inputResources;
+        OutputResource = outputResource;
+    }
+
+    public int UpkeepCost { get; }
+    public int BuildCostMoney { get; }
+    public int BuildCostPlanks { get; }
+
+    public MapTileType[] CompatibleTileTypes { get; }
+
+    public float ResourceGenerationInterval { get; }
+    public int OutputCount { get; }
+
+    public MapTileType? EfficiencyScaleTileType { get; }
+    public int EfficiencyScaleMinNeighbors { get; }
+    public int EfficiencyScaleMaxNeighbors { get; }
+
+    public List<ResourceType> InputResources { get; }
+    public ResourceType OutputResource { get; }
 }
