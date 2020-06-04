@@ -18,14 +18,13 @@ public class GameManager : MonoBehaviour
     public float MapMaxY;
     public float MapTileRadius; // must match actual tile prefab size
 
-    private MapToWorldMapper MapToWorldMapper;
-    private Map Map;
+    private Game Game;
     private int SelectedBuildingPrefabIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.MapToWorldMapper = new MapToWorldMapper(
+        var mapToWorldMapper = new MapToWorldMapper(
             minWorldY: MapMinY,
             maxWorldY: MapMaxY,
             tileRadius: MapTileRadius
@@ -35,39 +34,18 @@ public class GameManager : MonoBehaviour
             width: (uint)HeightMap.width,
             height: (uint)HeightMap.height
         );
-        this.Map = SpawnMap(heightMap);
-        var worldSize = this.MapToWorldMapper.GetWorldSize(
-            mapWidth: Map.Width,
-            mapHeight: Map.Height
+        this.Game = new Game(
+            heightMap: heightMap,
+            spawnMapTile: SpawnMapTile,
+            mapToWorldMapper: mapToWorldMapper
         );
-        SetCameraLimits(worldSize);
+        SetCameraLimits(this.Game.WorldSize);
     }
 
     // Update is called once per frame
     void Update()
     {
         HandleKeyboardInput();
-    }
-
-    private Map SpawnMap(HeightMap heightMap)
-    {
-        var mapGenerator = new MapGenerator();
-        var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
-        map.ForEachTile((x, y, tile) => {
-            var pos = this.MapToWorldMapper.GetWorldPosition(
-                mapX: x,
-                mapY: y,
-                tile: tile
-            );
-            SpawnMapTile(
-                tile: tile,
-                mapX: x,
-                mapY: y,
-                worldPos: pos
-            );
-        });
-
-        return map;
     }
 
     // Spawn a map tile.
@@ -96,7 +74,7 @@ public class GameManager : MonoBehaviour
             );
             var buildingCategoryParams = buildingCategory.GetParams();
 
-            PlaceBuildingOnTile(
+            this.Game.PlaceBuildingOnTile(
                 tile: tileManagerSender.Tile,
                 mapX: tileManagerSender.MapX,
                 mapY: tileManagerSender.MapY,
@@ -152,35 +130,6 @@ public class GameManager : MonoBehaviour
         mouseManager.CameraMaxX = worldSize.x;
         mouseManager.CameraMinZ = 0.0f;
         mouseManager.CameraMaxZ = worldSize.z;
-    }
-
-    // A function that spawns a building at a certain position.
-    private delegate void BuildingSpawner(Vector3 worldPos);
-
-    // try to place a building at a certain map position.
-    private void PlaceBuildingOnTile(
-        MapTile tile,
-        uint mapX,
-        uint mapY,
-        BuildingCategoryParams buildingCategoryParams,
-        BuildingSpawner spawnBuilding
-    )
-    {
-        if (tile.Building != null)
-            return;
-
-        if(!buildingCategoryParams.IsCompatibleTileType(tile.Type))
-            return;
-
-        var pos = this.MapToWorldMapper.GetWorldPosition(
-            mapX: mapX,
-            mapY: mapY,
-            tile: tile
-        );
-        spawnBuilding(pos);
-
-        var building = new Building(); // TODO: params
-        tile.Building = building;
     }
 
     // Spawn a building using a certain prefab.
