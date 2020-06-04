@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
             tileRadius: MapTileRadius
         );
         this.Map = SpawnMap();
+        var worldSize = this.MapToWorldMapper.GetWorldSize(
+            mapWidth: Map.Width,
+            mapHeight: Map.Height
+        );
+        SetCameraLimits(worldSize);
     }
 
     // Update is called once per frame
@@ -60,19 +65,6 @@ public class GameManager : MonoBehaviour
                 worldPos: pos
             );
         });
-
-        var worldSize = this.MapToWorldMapper.GetWorldSize(
-            mapWidth: map.Width,
-            mapHeight: map.Height
-        );
-
-        // TODO: is there a better method for communication between scripts?
-        var mouseManagerObj = GameObject.Find("/Rendering/Main Camera");
-        var mouseManager = mouseManagerObj.GetComponent<MouseManager>();
-        mouseManager.CameraMinX = 0.0f;
-        mouseManager.CameraMaxX = worldSize.x;
-        mouseManager.CameraMinZ = 0.0f;
-        mouseManager.CameraMaxZ = worldSize.z;
 
         return map;
     }
@@ -147,6 +139,18 @@ public class GameManager : MonoBehaviour
                 );
         }
         return prefab;
+    }
+
+    // Set camera limits based on world size.
+    private void SetCameraLimits(Vector3 worldSize)
+    {
+        // TODO: is there a better method for communication between scripts?
+        var mouseManagerObj = GameObject.Find("/Rendering/Main Camera");
+        var mouseManager = mouseManagerObj.GetComponent<MouseManager>();
+        mouseManager.CameraMinX = 0.0f;
+        mouseManager.CameraMaxX = worldSize.x;
+        mouseManager.CameraMinZ = 0.0f;
+        mouseManager.CameraMaxZ = worldSize.z;
     }
 
     // A function that spawns a building at a certain position.
