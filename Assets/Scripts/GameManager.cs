@@ -14,24 +14,22 @@ public class GameManager : MonoBehaviour
     public GameObject PrefabStoneTile;
     public GameObject PrefabMountainTile;
     public GameObject[] BuildingPrefabs;
+    public float MapMinY;
+    public float MapMaxY;
+    public float MapTileRadius; // must match actual tile prefab size
 
-    private const float MapMinY = 0.0f;
-    private const float MapMaxY = 25.0f;
-    // must match actual tile prefab size
-    private const float MapTileRadius = 5.0f;
-
-    private MapToWorldMapper MapToWorldMapper = new MapToWorldMapper(
-        minWorldY: MapMinY,
-        maxWorldY: MapMaxY,
-        tileRadius: MapTileRadius
-    );
-
+    private MapToWorldMapper MapToWorldMapper;
     private Map Map;
     private int SelectedBuildingPrefabIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.MapToWorldMapper = new MapToWorldMapper(
+            minWorldY: MapMinY,
+            maxWorldY: MapMaxY,
+            tileRadius: MapTileRadius
+        );
         this.Map = SpawnMap();
     }
 
