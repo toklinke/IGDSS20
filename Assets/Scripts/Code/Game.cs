@@ -13,7 +13,6 @@ public class Game
     public Map Map { get; }
     public Vector3 WorldSize { get; }
 
-    private MapTileSpawner SpawnMapTile;
     private MapToWorldMapper MapToWorldMapper;
 
     public Game(
@@ -22,10 +21,12 @@ public class Game
         MapToWorldMapper mapToWorldMapper
     )
     {
-        SpawnMapTile = spawnMapTile;
         MapToWorldMapper = mapToWorldMapper;
 
-        this.Map = SpawnMap(heightMap);
+        this.Map = SpawnMap(
+            heightMap: heightMap,
+            spawnMapTile: spawnMapTile
+        );
         WorldSize = this.MapToWorldMapper.GetWorldSize(
             mapWidth: this.Map.Width,
             mapHeight: this.Map.Height
@@ -58,7 +59,7 @@ public class Game
         tile.Building = building;
     }
 
-    private Map SpawnMap(HeightMap heightMap)
+    private Map SpawnMap(HeightMap heightMap, MapTileSpawner spawnMapTile)
     {
         var mapGenerator = new MapGenerator();
         var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
@@ -68,7 +69,7 @@ public class Game
                 mapY: y,
                 tile: tile
             );
-            SpawnMapTile(
+            spawnMapTile(
                 tile: tile,
                 mapX: x,
                 mapY: y,
