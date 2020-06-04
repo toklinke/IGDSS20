@@ -53,26 +53,12 @@ public class GameManager : MonoBehaviour
                 mapY: y,
                 tile: tile
             );
-            var prefab = GetTilePrefab(tile.Type);
-            var tileObject = Instantiate(prefab, pos, Quaternion.identity);
-
-            var tileManager = tileObject.GetComponent<TileManager>();
-            tileManager.Tile = tile;
-            tileManager.MapX = x;
-            tileManager.MapY = y;
-            tileManager.TileClicked += (sender, args) => {
-                var tileManagerSender = (TileManager)sender;
-                Debug.Log(
-                    $"Clicked on tile: {tileManagerSender.Tile.Type} " +
-                    $"at map pos {tileManagerSender.MapX}, " +
-                    $"{tileManagerSender.MapY}"
-                );
-                PlaceBuildingOnTile(
-                    tile: tileManagerSender.Tile,
-                    mapX: tileManagerSender.MapX,
-                    mapY: tileManagerSender.MapY
-                );
-            };
+            SpawnMapTile(
+                tile: tile,
+                mapX: x,
+                mapY: y,
+                worldPos: pos
+            );
         });
 
         var worldSize = this.MapToWorldMapper.GetWorldSize(
@@ -89,6 +75,33 @@ public class GameManager : MonoBehaviour
         mouseManager.CameraMaxZ = worldSize.z;
 
         return map;
+    }
+
+    // Spawn a map tile.
+    public void SpawnMapTile(
+        MapTile tile, uint mapX, uint mapY, Vector3 worldPos
+    )
+    {
+        var prefab = GetTilePrefab(tile.Type);
+        var tileObject = Instantiate(prefab, worldPos, Quaternion.identity);
+
+        var tileManager = tileObject.GetComponent<TileManager>();
+        tileManager.Tile = tile;
+        tileManager.MapX = mapX;
+        tileManager.MapY = mapY;
+        tileManager.TileClicked += (sender, args) => {
+            var tileManagerSender = (TileManager)sender;
+            Debug.Log(
+                $"Clicked on tile: {tileManagerSender.Tile.Type} " +
+                $"at map pos {tileManagerSender.MapX}, " +
+                $"{tileManagerSender.MapY}"
+            );
+            PlaceBuildingOnTile(
+                tile: tileManagerSender.Tile,
+                mapX: tileManagerSender.MapX,
+                mapY: tileManagerSender.MapY
+            );
+        };
     }
 
     private GameObject GetTilePrefab(MapTileType type)
