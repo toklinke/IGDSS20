@@ -34,7 +34,10 @@ public class MapTile
         var equals = (
             Height == otherTile.Height &&
             Type == otherTile.Type &&
-            Building == otherTile.Building
+            (
+                Building == otherTile.Building ||
+                Building.Equals(otherTile.Building)
+            )
         );
         return equals;
     }
