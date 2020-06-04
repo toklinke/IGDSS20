@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject PrefabForestTile;
     public GameObject PrefabStoneTile;
     public GameObject PrefabMountainTile;
-    public GameObject LumberjackBuilding;
+    public GameObject[] BuildingPrefabs;
 
     private const float MapMinY = 0.0f;
     private const float MapMaxY = 25.0f;
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
             return;
 
         // TODO: Use selected building type prefab
-        var prefab = LumberjackBuilding;
+        var prefab = BuildingPrefabs[0];
 
         var buildingCategory = prefab.GetComponent<BuildingCategory>();
 

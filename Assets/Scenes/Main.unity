@@ -488,8 +488,8 @@ MonoBehaviour:
     type: 3}
   PrefabMountainTile: {fileID: 9154993657079601320, guid: 35b64c97ffd7b7e4caf04c0e621aec7b,
     type: 3}
-  LumberjackBuilding: {fileID: 5657576265433554849, guid: 31a446b130bd9a2b8aadde04df9e069c,
-    type: 3}
+  BuildingPrefabs:
+  - {fileID: 5657576265433554849, guid: 31a446b130bd9a2b8aadde04df9e069c, type: 3}
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0
