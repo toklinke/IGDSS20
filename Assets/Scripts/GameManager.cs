@@ -60,33 +60,7 @@ public class GameManager : MonoBehaviour
         tileManager.Tile = tile;
         tileManager.MapX = mapX;
         tileManager.MapY = mapY;
-        tileManager.TileClicked += (sender, args) => {
-            var tileManagerSender = (TileManager)sender;
-            Debug.Log(
-                $"Clicked on tile: {tileManagerSender.Tile.Type} " +
-                $"at map pos {tileManagerSender.MapX}, " +
-                $"{tileManagerSender.MapY}"
-            );
-
-            var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
-            var buildingCategory = (
-                buildingPrefab.GetComponent<BuildingCategory>()
-            );
-            var buildingCategoryParams = buildingCategory.GetParams();
-
-            this.Game.PlaceBuildingOnTile(
-                tile: tileManagerSender.Tile,
-                mapX: tileManagerSender.MapX,
-                mapY: tileManagerSender.MapY,
-                buildingCategoryParams: buildingCategoryParams,
-                spawnBuilding: buildingWorldPos => {
-                    SpawnBuilding(
-                        buildingPrefabIndex: SelectedBuildingPrefabIndex,
-                        worldPos: buildingWorldPos
-                    );
-                }
-            );
-        };
+        tileManager.TileClicked += HandleTileClicked;
     }
 
     private GameObject GetTilePrefab(MapTileType type)
@@ -137,6 +111,36 @@ public class GameManager : MonoBehaviour
     {
         var prefab = BuildingPrefabs[buildingPrefabIndex];
         Instantiate(prefab, worldPos, Quaternion.identity);
+    }
+
+    // Control placement of buildings when a tile has been clicked.
+    private void HandleTileClicked(object sender, EventArgs args)
+    {
+        var tileManagerSender = (TileManager)sender;
+        Debug.Log(
+            $"Clicked on tile: {tileManagerSender.Tile.Type} " +
+            $"at map pos {tileManagerSender.MapX}, " +
+            $"{tileManagerSender.MapY}"
+        );
+
+        var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
+        var buildingCategory = (
+            buildingPrefab.GetComponent<BuildingCategory>()
+        );
+        var buildingCategoryParams = buildingCategory.GetParams();
+
+        this.Game.PlaceBuildingOnTile(
+            tile: tileManagerSender.Tile,
+            mapX: tileManagerSender.MapX,
+            mapY: tileManagerSender.MapY,
+            buildingCategoryParams: buildingCategoryParams,
+            spawnBuilding: buildingWorldPos => {
+                SpawnBuilding(
+                    buildingPrefabIndex: SelectedBuildingPrefabIndex,
+                    worldPos: buildingWorldPos
+                );
+            }
+        );
     }
 
     // Sets the index for the currently selected building prefab
