@@ -494,6 +494,7 @@ MonoBehaviour:
   MapMinY: 0
   MapMaxY: 25
   MapTileRadius: 5
+  InitialMoney: 1000
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0

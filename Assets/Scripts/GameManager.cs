@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public float MapMinY;
     public float MapMaxY;
     public float MapTileRadius; // must match actual tile prefab size
+    public int InitialMoney;
 
     private Game Game;
     private int SelectedBuildingPrefabIndex;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
             heightMap: heightMap,
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,
-            initialMoney: 1000
+            initialMoney: InitialMoney
         );
         SetCameraLimits(this.Game.WorldSize);
     }
