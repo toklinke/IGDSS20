@@ -29,5 +29,19 @@ public class Map
         }
     }
 
+    public void getNeighboursOfTile()
+    {
+
+        UnityEngine.Debug.Log("Hello");
+        UnityEngine.Debug.Log(_tiles.Length);
+        UnityEngine.Debug.Log(_tiles[42].Height);
+        UnityEngine.Debug.Log(_tiles[42].Type);
+
+    }
+
+
+
+
+
     private MapTile[] _tiles;
 }

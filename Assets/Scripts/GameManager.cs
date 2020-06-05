@@ -123,6 +123,11 @@ public class GameManager : MonoBehaviour
             $"{tileManagerSender.MapY}"
         );
 
+        // Works without the right  =(tileManagerSender.MapY / 16)  + tileManagerSender.MapX;
+
+        uint calculatedIndex =(tileManagerSender.MapY * 16)  + tileManagerSender.MapX;
+        Debug.Log($"Calculated Index: {calculatedIndex}");
+
         var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
         var buildingCategory = (
             buildingPrefab.GetComponent<BuildingCategory>()
