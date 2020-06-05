@@ -12,13 +12,16 @@ public class Game
 
     public Map Map { get; }
     public Vector3 WorldSize { get; }
+    public int AvailableMoney { get { return Economy.AvailableMoney; }}
 
     private IMapToWorldMapper MapToWorldMapper;
+    private EconomySimulation Economy;
 
     public Game(
         HeightMap heightMap,
         MapTileSpawner spawnMapTile,
-        IMapToWorldMapper mapToWorldMapper
+        IMapToWorldMapper mapToWorldMapper,
+        int initialMoney
     )
     {
         this.Map = SpawnMap(
@@ -31,6 +34,12 @@ public class Game
         WorldSize = mapToWorldMapper.GetWorldSize(
             mapWidth: this.Map.Width,
             mapHeight: this.Map.Height
+        );
+
+        Economy = new EconomySimulation(
+            initialMoney: initialMoney,
+            getIncome: null, // TODO: pass correct func
+            getUpkeepCosts: null // TODO: pass correct func
         );
     }
 
@@ -48,6 +57,11 @@ public class Game
 
         if(!buildingCategoryParams.IsCompatibleTileType(tile.Type))
             return;
+
+        if(!Economy.CanAfford(buildingCategoryParams.BuildCostMoney))
+            return;
+
+        Economy.SpendMoney(buildingCategoryParams.BuildCostMoney);
 
         var pos = this.MapToWorldMapper.GetWorldPosition(
             mapX: mapX,

@@ -37,7 +37,8 @@ public class GameManager : MonoBehaviour
         this.Game = new Game(
             heightMap: heightMap,
             spawnMapTile: SpawnMapTile,
-            mapToWorldMapper: mapToWorldMapper
+            mapToWorldMapper: mapToWorldMapper,
+            initialMoney: 1000
         );
         SetCameraLimits(this.Game.WorldSize);
     }

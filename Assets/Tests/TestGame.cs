@@ -14,8 +14,10 @@ namespace Tests
                 uint mapX,
                 uint mapY,
                 BuildingCategoryParams buildingCategoryParams,
-                MapTile expectedMapTile,
-                Vector3? expectedSpawnPos
+                MapTile expectedMapTile = null,
+                Vector3? expectedSpawnPos = null,
+                int initialMoney = 0,
+                int? expectedAvailableMoney = null
             )
             {
                 Description = description;
@@ -25,6 +27,8 @@ namespace Tests
                 BuildingCategoryParams = buildingCategoryParams;
                 ExpectedMapTile = expectedMapTile;
                 ExpectedSpawnPos = expectedSpawnPos;
+                InitialMoney = initialMoney;
+                ExpectedAvailableMoney = expectedAvailableMoney;
             }
 
             public string Description { get; }
@@ -44,6 +48,14 @@ namespace Tests
 
             // The expected spawn position of the new building.
             public Vector3? ExpectedSpawnPos { get; }
+
+            // The initially available money.
+            public int InitialMoney { get; }
+
+            // If not null,
+            // check that the given amount of money is available
+            // after placing the building.
+            public int? ExpectedAvailableMoney { get; }
 
             public override string ToString()
             {
@@ -147,6 +159,62 @@ namespace Tests
                     ),
                     expectedSpawnPos: new Vector3(1.0f, 0.5f, 0.0f)
                 ),
+                new PlaceBuildingOnTileTestCase(
+                    description: "Test that money is spent for building",
+                    tile: new MapTile(
+                        height: 0.0f,
+                        type: MapTileType.Grass
+                    ),
+                    mapX: 0,
+                    mapY: 0,
+                    buildingCategoryParams: new BuildingCategoryParams(
+                        compatibleTileTypes: new MapTileType[] {
+                            MapTileType.Grass
+                        },
+                        buildCostMoney: 100,
+                        // don't care follows
+                        upkeepCost: 0,
+                        buildCostPlanks: 0,
+                        resourceGenerationInterval: 0,
+                        outputCount: 0,
+                        efficiencyScaleTileType: MapTileType.Grass,
+                        efficiencyScaleMinNeighbors: 0,
+                        efficiencyScaleMaxNeighbors: 0,
+                        inputResources: null,
+                        outputResource: ResourceType.Wood
+                    ),
+                    initialMoney: 1000,
+                    expectedAvailableMoney: 900,
+                    expectedSpawnPos: new Vector3(0.0f, 0.0f, 0.0f)
+                ),
+                new PlaceBuildingOnTileTestCase(
+                    description: "Test cannot afford to build",
+                    tile: new MapTile(
+                        height: 0.0f,
+                        type: MapTileType.Grass
+                    ),
+                    mapX: 0,
+                    mapY: 0,
+                    buildingCategoryParams: new BuildingCategoryParams(
+                        compatibleTileTypes: new MapTileType[] {
+                            MapTileType.Grass
+                        },
+                        buildCostMoney: 100,
+                        // don't care follows
+                        upkeepCost: 0,
+                        buildCostPlanks: 0,
+                        resourceGenerationInterval: 0,
+                        outputCount: 0,
+                        efficiencyScaleTileType: MapTileType.Grass,
+                        efficiencyScaleMinNeighbors: 0,
+                        efficiencyScaleMaxNeighbors: 0,
+                        inputResources: null,
+                        outputResource: ResourceType.Wood
+                    ),
+                    initialMoney: 50,
+                    expectedAvailableMoney: 50,
+                    expectedSpawnPos: null
+                ),
             }
         );
 
@@ -168,7 +236,8 @@ namespace Tests
             var game = new Game(
                 heightMap: heightMap,
                 spawnMapTile: (tileToSpawn, mapX, mapY, worldPos) => {},
-                mapToWorldMapper: dummyMapToWorldMapper
+                mapToWorldMapper: dummyMapToWorldMapper,
+                initialMoney: testCase.InitialMoney
             );
 
             var spawnPositions = new List<Vector3>();
@@ -184,10 +253,11 @@ namespace Tests
                 }
             );
 
-            Assert.That(
-                tile,
-                Is.EqualTo(testCase.ExpectedMapTile)
-            );
+            if (testCase.ExpectedMapTile != null)
+                Assert.That(
+                    tile,
+                    Is.EqualTo(testCase.ExpectedMapTile)
+                );
 
             if (testCase.ExpectedSpawnPos == null)
                 Assert.That(spawnPositions.Count, Is.EqualTo(0));
@@ -199,6 +269,12 @@ namespace Tests
                     Is.EqualTo(testCase.ExpectedSpawnPos)
                 );
             }
+
+            if (testCase.ExpectedAvailableMoney != null)
+                Assert.That(
+                    game.AvailableMoney,
+                    Is.EqualTo(testCase.ExpectedAvailableMoney)
+                );
         }
 
         // get grayscale color with R=G=B and A=1.0f
