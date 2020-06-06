@@ -130,7 +130,7 @@ namespace Tests
             }
         );
 
-        // Test that GenerateMapFromHeightMap() generates
+        // Test that GenerateMap() generates
         // the correct map
         [Test, TestCaseSource("GenerateMapFromHeightMapTestCases")]
         public void TestGenerateMapFromHeightMap(
@@ -145,7 +145,7 @@ namespace Tests
                 width: testCase.HeightMapWidth,
                 height: testCase.HeightMapHeight
             );
-            Map map = mapGenerator.GenerateMapFromHeightMap(heightMap);
+            Map map = mapGenerator.GenerateMap(heightMap);
 
             if (testCase.ExpectedWidth.HasValue)
                 Assert.That(map.Width, Is.EqualTo(testCase.ExpectedWidth));
