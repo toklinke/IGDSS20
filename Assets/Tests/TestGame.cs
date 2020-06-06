@@ -232,7 +232,7 @@ namespace Tests
                 height: 2
             );
             var dummyMapToWorldMapper = new DummyMapToWorldMapper();
-            var mapGenerator = new MapGenerator();
+            var mapGenerator = new MapGenerator(heightMap);
 
             var game = new Game(
                 heightMap: heightMap,

@@ -85,7 +85,7 @@ public class Game
         IMapToWorldMapper mapToWorldMapper
     )
     {
-        var map = mapGenerator.GenerateMap(heightMap);
+        var map = mapGenerator.GenerateMap();
         map.ForEachTile((x, y, tile) => {
             var pos = mapToWorldMapper.GetWorldPosition(
                 mapX: x,

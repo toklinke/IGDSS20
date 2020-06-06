@@ -23,30 +23,37 @@ public readonly struct HeightMap
 // Generates a map from a heightmap.
 public interface IMapGenerator
 {
-    Map GenerateMap(HeightMap heightMap);
+    Map GenerateMap();
 }
 
 // Generates a map from a heightmap.
 public class MapGenerator : IMapGenerator
 {
-    public Map GenerateMap(HeightMap heightMap)
-    {
-        MapTile[] tiles = new MapTile[heightMap.Width * heightMap.Height];
+    private HeightMap HeightMap;
 
-        for(uint y = 0; y < heightMap.Height; ++y)
+    public MapGenerator(HeightMap heightMap)
+    {
+        this.HeightMap = heightMap;
+    }
+
+    public Map GenerateMap()
+    {
+        MapTile[] tiles = new MapTile[HeightMap.Width * HeightMap.Height];
+
+        for(uint y = 0; y < HeightMap.Height; ++y)
         {
-            for(uint x = 0; x < heightMap.Width; ++x)
+            for(uint x = 0; x < HeightMap.Width; ++x)
             {
-                uint i = y * heightMap.Width + x;
-                Color color = heightMap.Colors[i];
+                uint i = y * HeightMap.Width + x;
+                Color color = HeightMap.Colors[i];
                 tiles[i] = GetMapTile(color);
             }
         }
 
         Map map = new Map(
             tiles: tiles,
-            width: heightMap.Width,
-            height: heightMap.Height
+            width: HeightMap.Width,
+            height: HeightMap.Height
         );
         return map;
     }
