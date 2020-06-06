@@ -232,9 +232,11 @@ namespace Tests
                 height: 2
             );
             var dummyMapToWorldMapper = new DummyMapToWorldMapper();
+            var mapGenerator = new MapGenerator();
 
             var game = new Game(
                 heightMap: heightMap,
+                mapGenerator: mapGenerator,
                 spawnMapTile: (tileToSpawn, mapX, mapY, worldPos) => {},
                 mapToWorldMapper: dummyMapToWorldMapper,
                 initialMoney: testCase.InitialMoney
