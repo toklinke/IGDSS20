@@ -21,7 +21,13 @@ public readonly struct HeightMap
 }
 
 // Generates a map from a heightmap.
-public class MapGenerator
+public interface IMapGenerator
+{
+    Map GenerateMapFromHeightMap(HeightMap heightMap);
+}
+
+// Generates a map from a heightmap.
+public class MapGenerator : IMapGenerator
 {
     public Map GenerateMapFromHeightMap(HeightMap heightMap)
     {
