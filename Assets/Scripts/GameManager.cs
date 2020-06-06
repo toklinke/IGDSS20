@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public float MapTileRadius; // must match actual tile prefab size
     public int InitialMoney;
 
+    // debug variables for displaying in Unity
+    [SerializeField]
+    private int AvailableMoney;
+
     private Game Game;
     private int SelectedBuildingPrefabIndex;
 
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         HandleKeyboardInput();
+        UpdateDebugUi();
     }
 
     // Spawn a map tile.
@@ -190,5 +195,11 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    // Update debug variables for displaying in Unity.
+    private void UpdateDebugUi()
+    {
+        AvailableMoney = Game.AvailableMoney;
     }
 }
