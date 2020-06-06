@@ -125,9 +125,9 @@ public class GameManager : MonoBehaviour
             $"{tileManagerSender.MapY}"
         );
 
-        // Works without the right  =(tileManagerSender.MapY / 16)  + tileManagerSender.MapX;
-
+        returnListOfNeighbors(tileManagerSender.MapX, tileManagerSender.MapY, 16);
         uint calculatedIndex =(tileManagerSender.MapY * 16)  + tileManagerSender.MapX;
+
         Debug.Log($"Calculated Index: {calculatedIndex}");
 
         var buildingPrefab = BuildingPrefabs[SelectedBuildingPrefabIndex];
@@ -149,6 +149,141 @@ public class GameManager : MonoBehaviour
             }
         );
     }
+
+    private uint CalcArrayIndex(uint xPos, uint yPos, uint xDimension)
+    {
+        return (yPos * xDimension) + xPos;
+    }
+    private void returnListOfNeighbors(uint xPos, uint yPos, uint xDimension)
+    {
+        uint calculatedIndex = CalcArrayIndex(xPos, yPos, xDimension);
+
+        List<uint> neighborList = new List<uint>();
+
+        bool LowestRow = false;
+        bool HighestRow = false;
+        bool leftmostColum = false;
+        bool rightMostColumn = false;
+
+       if (yPos == 0)
+        {
+            LowestRow = true;
+        }
+        else if(yPos == (xDimension-1) )
+        {
+            HighestRow = true;
+        }
+
+        if(xPos == 0)
+        {
+            leftmostColum = true;
+        }
+        if(xPos == (xDimension -1))
+        {
+            rightMostColumn = true;
+        }
+
+
+        Debug.Log($"LowestRow Index: {LowestRow} HighestRow {HighestRow} leftmostColum {leftmostColum} rightMostColumn {rightMostColumn} ");
+
+
+
+        if ((yPos + 1) % 2 == 0) // Number is even +1 due to Indices starting at 0
+        {
+            Debug.Log("Even Row");
+            if (!leftmostColum)
+            {
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, xDimension));
+            }
+            if (!rightMostColumn)
+            {
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, xDimension));
+            }
+
+
+            if (!LowestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos, yPos - 1, xDimension));
+            }
+
+            if (!rightMostColumn && !LowestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos - 1, xDimension));
+            }
+
+            if (!rightMostColumn && !HighestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, xDimension));
+            }
+
+            if (!HighestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, xDimension));
+            }
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        else // Number is odd
+        {
+            Debug.Log("Uneven Row");
+
+            if (!leftmostColum)
+            {
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, xDimension));
+            }
+            if (!rightMostColumn)
+            {
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, xDimension));
+            }
+
+            if (!LowestRow && !leftmostColum)
+            {
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos - 1, xDimension));
+            }
+
+            if (!LowestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos, yPos - 1 , xDimension));
+            }
+
+            if(!HighestRow && !leftmostColum)
+            {
+                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, xDimension));
+            }
+
+            if(!HighestRow)
+            {
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, xDimension));
+            }
+
+        }
+
+        Debug.Log($"Calculated Number of neighbors: {neighborList.Count}");
+
+
+
+    } 
+
 
     // Sets the index for the currently selected building prefab
     // by checking key presses on the numbers 1 to 0
