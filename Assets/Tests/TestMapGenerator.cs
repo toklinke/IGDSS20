@@ -144,7 +144,6 @@ namespace Tests
             );
             MapGenerator mapGenerator = new MapGenerator(heightMap);
 
-            Color[] colors = new Color[6];
             Map map = mapGenerator.GenerateMap();
 
             if (testCase.ExpectedWidth.HasValue)
