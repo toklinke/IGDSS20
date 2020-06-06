@@ -223,16 +223,20 @@ namespace Tests
             PlaceBuildingOnTileTestCase testCase
         )
         {
-            var heightMap = new HeightMap(
-                colors: new Color[] {
-                    GetGrayColor(0.0f), GetGrayColor(0.0f),
-                    GetGrayColor(0.0f), GetGrayColor(0.0f)
+            var mapTile = new MapTile(
+                type: MapTileType.Water,
+                height: 0.0f
+            );
+            var map = new Map(
+                tiles: new MapTile[] {
+                    mapTile.Clone(), mapTile.Clone(),
+                    mapTile.Clone(), mapTile.Clone()
                 },
                 width: 2,
                 height: 2
             );
             var dummyMapToWorldMapper = new DummyMapToWorldMapper();
-            var mapGenerator = new MapGenerator(heightMap);
+            var mapGenerator = new DummyMapGenerator(map);
 
             var game = new Game(
                 mapGenerator: mapGenerator,
@@ -283,6 +287,23 @@ namespace Tests
         {
             Color color = new Color(rgb, rgb, rgb, a: 1.0f);
             return color;
+        }
+
+
+        // Map generator that returns a given map.
+        private class DummyMapGenerator : IMapGenerator
+        {
+            private Map ResultMap;
+
+            public DummyMapGenerator(Map resultMap)
+            {
+                ResultMap = resultMap;
+            }
+
+            public Map GenerateMap()
+            {
+                return ResultMap;
+            }
         }
 
         // Maps map pos (x, y) => world pos (x, tile.Height, y)
