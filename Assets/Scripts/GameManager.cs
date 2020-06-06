@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
         );
         var mapGenerator = new MapGenerator(heightMap);
         this.Game = new Game(
-            heightMap: heightMap,
             mapGenerator: mapGenerator,
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,

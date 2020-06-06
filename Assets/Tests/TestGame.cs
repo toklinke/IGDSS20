@@ -235,7 +235,6 @@ namespace Tests
             var mapGenerator = new MapGenerator(heightMap);
 
             var game = new Game(
-                heightMap: heightMap,
                 mapGenerator: mapGenerator,
                 spawnMapTile: (tileToSpawn, mapX, mapY, worldPos) => {},
                 mapToWorldMapper: dummyMapToWorldMapper,
