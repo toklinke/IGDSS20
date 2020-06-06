@@ -18,7 +18,6 @@ public class Game
     private EconomySimulation Economy;
 
     public Game(
-        HeightMap heightMap,
         IMapGenerator mapGenerator,
         MapTileSpawner spawnMapTile,
         IMapToWorldMapper mapToWorldMapper,
@@ -26,7 +25,6 @@ public class Game
     )
     {
         this.Map = SpawnMap(
-            heightMap: heightMap,
             mapGenerator: mapGenerator,
             spawnMapTile: spawnMapTile,
             mapToWorldMapper: mapToWorldMapper
@@ -79,7 +77,6 @@ public class Game
     }
 
     private Map SpawnMap(
-        HeightMap heightMap,
         IMapGenerator mapGenerator,
         MapTileSpawner spawnMapTile,
         IMapToWorldMapper mapToWorldMapper
