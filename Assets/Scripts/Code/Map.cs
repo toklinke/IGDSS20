@@ -42,7 +42,6 @@ public class Map
 
         int arrayIndex = (int)CalcArrayIndex(x, y, Height);
         return _neighborList[arrayIndex];
-
     }
 
 
@@ -84,7 +83,7 @@ public class Map
 
         if ((yPos + 1) % 2 == 0) // Number is even +1 due to Indices starting at 0
         {
-            UnityEngine.Debug.Log("Even Row");
+            //UnityEngine.Debug.Log("Even Row");
             if (!leftmostColum)
             {
                 neighborList.Add(CalcArrayIndex(xPos - 1, yPos, xDimension));
@@ -119,7 +118,7 @@ public class Map
         }
         else // Number is odd
         {
-            UnityEngine.Debug.Log("Uneven Row");
+            //UnityEngine.Debug.Log("Uneven Row");
 
             if (!leftmostColum)
             {
@@ -151,28 +150,10 @@ public class Map
             }
 
         }
-        UnityEngine.Debug.Log($"Calculated Number of neighbors: {neighborList.Count}");
+        //UnityEngine.Debug.Log($"Calculated Number of neighbors: {neighborList.Count}");
 
         return neighborList;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

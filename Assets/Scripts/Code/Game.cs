@@ -41,6 +41,8 @@ public class Game
             getIncome: null, // TODO: pass correct func
             getUpkeepCosts: null // TODO: pass correct func
         );
+
+        Debug.Log(Map.getNeighboursOfTile(0, 0)[1]);
     }
 
     // Try to place a building at a certain map tile
