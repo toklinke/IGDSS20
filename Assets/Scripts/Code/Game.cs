@@ -73,6 +73,13 @@ public class Game
             Economy.Tick();
             TicksUntilEconomyTick = EconomyTickInterval;
         }
+
+        this.Map.ForEachTile((x, y, tile) => {
+            if (tile.Building != null)
+            {
+                tile.Building.GameTimeTick();
+            }
+        });
     }
 
     // Try to place a building at a certain map tile
@@ -111,6 +118,13 @@ public class Game
             outputResource: buildingCategoryParams.OutputResource,
             outputCount: buildingCategoryParams.OutputCount
         );
+        building.ResourcesProduced += (sender, args) => {
+            var senderBuilding = (Building)sender;
+            this.Warehouse.Store(
+                type: senderBuilding.OutputResource,
+                amount: senderBuilding.OutputCount
+            );
+        };
         tile.Building = building;
     }
 

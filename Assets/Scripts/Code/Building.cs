@@ -9,7 +9,10 @@ public class Building
     public int OutputCount { get; }
 
     // some resource have been produced by this building.
-    //public event EventHandler<ResourcesProducedEventArgs> ResourcesProduced;
+    public event EventHandler<EventArgs> ResourcesProduced;
+
+    private float ProductionCycleProgress;
+    private bool ProductionCycleActive;
 
     public Building(
         int upkeepCost,
@@ -22,6 +25,38 @@ public class Building
         ResourceGenerationInterval = resourceGenerationInterval;
         OutputResource = outputResource;
         OutputCount = outputCount;
+        ProductionCycleActive = false;
+    }
+
+    // Advance game time by one tick.
+    public void GameTimeTick()
+    {
+        float progress = 1.0f;
+        if (ProductionCycleActive)
+        {
+            ProductionCycleProgress += progress;
+            if (ProductionCycleProgress >= (float)ResourceGenerationInterval)
+            {
+                // production cycle finished
+                OnResourcesProduced();
+                ProductionCycleProgress -= (float)ResourceGenerationInterval;
+            }
+        }
+        else
+        {
+            // start first production cycle
+            ProductionCycleActive = true;
+            ProductionCycleProgress = progress;
+        }
+    }
+
+    private void OnResourcesProduced()
+    {
+        EventHandler<EventArgs> handler = ResourcesProduced;
+        if (handler != null)
+        {
+            handler(this, EventArgs.Empty);
+        }
     }
 
     public override bool Equals(object other)
