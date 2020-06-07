@@ -495,6 +495,8 @@ MonoBehaviour:
   MapMaxY: 25
   MapTileRadius: 5
   InitialMoney: 1000
+  IncomePerEconomyTick: 100
+  EconomyTickInterval: 60
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0

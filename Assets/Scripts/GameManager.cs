@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public float MapMaxY;
     public float MapTileRadius; // must match actual tile prefab size
     public int InitialMoney;
+    public int IncomePerEconomyTick;
+    public int EconomyTickInterval;
 
     // debug variables for displaying in Unity
     [SerializeField]
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private Game Game;
     private int SelectedBuildingPrefabIndex;
+    private Timer GameTimeTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -44,15 +47,22 @@ public class GameManager : MonoBehaviour
             mapGenerator: mapGenerator,
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,
-            initialMoney: InitialMoney
+            initialMoney: InitialMoney,
+            incomePerEconomyTick: IncomePerEconomyTick,
+            economyTickInterval: EconomyTickInterval
         );
         SetCameraLimits(this.Game.WorldSize);
+
+        GameTimeTimer = new Timer(tickInterval: 1.0f); // tick each second
+        GameTimeTimer.TimerTicked += (sender, args) => Game.GameTimeTick();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float elapsed = Time.deltaTime;
         HandleKeyboardInput();
+        GameTimeTimer.Update(elapsed);
         UpdateDebugUi();
     }
 

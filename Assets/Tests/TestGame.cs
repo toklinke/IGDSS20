@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -242,7 +243,9 @@ namespace Tests
                 mapGenerator: mapGenerator,
                 spawnMapTile: (tileToSpawn, mapX, mapY, worldPos) => {},
                 mapToWorldMapper: dummyMapToWorldMapper,
-                initialMoney: testCase.InitialMoney
+                initialMoney: testCase.InitialMoney,
+                incomePerEconomyTick: 0, // don't care
+                economyTickInterval: 0 // don't care
             );
 
             var spawnPositions = new List<Vector3>();
@@ -280,6 +283,127 @@ namespace Tests
                     game.AvailableMoney,
                     Is.EqualTo(testCase.ExpectedAvailableMoney)
                 );
+        }
+
+
+        public readonly struct GameTimeTickTestCase
+        {
+            public GameTimeTickTestCase(
+                string description,
+                int initialMoney,
+                int incomePerEconomyTick,
+                int economyTickInterval,
+                Action<Game> setupGame,
+                Action<Game>[] checksAfterTick
+            )
+            {
+                Description = description;
+                InitialMoney = initialMoney;
+                IncomePerEconomyTick = incomePerEconomyTick;
+                EconomyTickInterval = economyTickInterval;
+                SetupGame = setupGame;
+                ChecksAfterTick = checksAfterTick;
+            }
+
+            public string Description { get; }
+
+            // The initially available money.
+            public int InitialMoney { get; }
+
+            // The income per economy tick.
+            public int IncomePerEconomyTick { get; }
+
+            // The economy tick interval of the game.
+            public int EconomyTickInterval { get; }
+
+            // Setup game before calling the tick.
+            public Action<Game> SetupGame { get; }
+
+            // A number of checks that should be performed after the tick.
+            public Action<Game>[] ChecksAfterTick { get; }
+
+            public override string ToString()
+            {
+                return Description;
+            }
+        };
+
+        private static GameTimeTickTestCase[] GameTimeTickTestCases = (
+            new GameTimeTickTestCase[] {
+                new GameTimeTickTestCase(
+                    description: (
+                        "check that income is added in economy tick"
+                    ),
+                    initialMoney: 1000,
+                    incomePerEconomyTick: 100,
+                    economyTickInterval: 3,
+                    setupGame: game => {
+                        game.GameTimeTick();
+                        game.GameTimeTick();
+                    },
+                    checksAfterTick: new Action<Game>[] {
+                        game => checkAvailableMoney(game, 1100)
+                    }
+                ),
+                new GameTimeTickTestCase(
+                    description: "check multiple economy ticks",
+                    initialMoney: 1000,
+                    incomePerEconomyTick: 100,
+                    economyTickInterval: 3,
+                    setupGame: game => {
+                        game.GameTimeTick();
+                        game.GameTimeTick();
+                        game.GameTimeTick();
+
+                        game.GameTimeTick();
+                        game.GameTimeTick();
+                    },
+                    checksAfterTick: new Action<Game>[] {
+                        game => checkAvailableMoney(game, 1200)
+                    }
+                )
+            }
+        );
+
+        [Test, TestCaseSource("GameTimeTickTestCases")]
+        public void TestGameTimeTick(GameTimeTickTestCase testCase)
+        {
+            var map = new Map(
+                tiles: new MapTile[] {
+                    new MapTile(height: 0.0f, type: MapTileType.Water)
+                },
+                width: 1,
+                height: 1
+            );
+            var mapGenerator = new DummyMapGenerator(map);
+            var mapToWorldMapper = new DummyMapToWorldMapper();
+            var game = new Game(
+                mapGenerator: mapGenerator,
+                spawnMapTile: (tile, mapX, mapY, worldPos) => {},
+                mapToWorldMapper: mapToWorldMapper,
+                initialMoney: testCase.InitialMoney,
+                incomePerEconomyTick: testCase.IncomePerEconomyTick,
+                economyTickInterval: testCase.EconomyTickInterval
+            );
+
+            testCase.SetupGame(game);
+
+            game.GameTimeTick();
+
+            foreach (var check in testCase.ChecksAfterTick)
+            {
+                check(game);
+            }
+        }
+
+        private static void checkAvailableMoney(
+            Game game, int expectedAvailableMoney
+        )
+        {
+            Assert.That(
+                game.AvailableMoney,
+                Is.EqualTo(expectedAvailableMoney)
+            );
         }
 
         // Map generator that returns a given map.
