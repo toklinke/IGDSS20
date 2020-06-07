@@ -30,4 +30,10 @@ public class Building
         var hashCode = properties.GetHashCode();
         return hashCode;
     }
+
+    public override string ToString()
+    {
+        var result = $"Building(upkeepCost: {UpkeepCost})";
+        return result;
+    }
 }
