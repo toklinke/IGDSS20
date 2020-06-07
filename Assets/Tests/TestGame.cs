@@ -294,7 +294,8 @@ namespace Tests
                 int incomePerEconomyTick,
                 int economyTickInterval,
                 Action<Game> setupGame,
-                Action<Game>[] checksAfterTick
+                Action<Game>[] checksAfterTick,
+                Map map = null
             )
             {
                 Description = description;
@@ -303,6 +304,7 @@ namespace Tests
                 EconomyTickInterval = economyTickInterval;
                 SetupGame = setupGame;
                 ChecksAfterTick = checksAfterTick;
+                this.Map = map;
             }
 
             public string Description { get; }
@@ -321,6 +323,10 @@ namespace Tests
 
             // A number of checks that should be performed after the tick.
             public Action<Game>[] ChecksAfterTick { get; }
+
+            // The map to be used for the test.
+            // If null, a default map consisting of a single tile is used.
+            public Map Map { get; }
 
             public override string ToString()
             {
@@ -368,7 +374,7 @@ namespace Tests
         [Test, TestCaseSource("GameTimeTickTestCases")]
         public void TestGameTimeTick(GameTimeTickTestCase testCase)
         {
-            var map = new Map(
+            var map = testCase.Map ?? new Map(
                 tiles: new MapTile[] {
                     new MapTile(height: 0.0f, type: MapTileType.Water)
                 },
