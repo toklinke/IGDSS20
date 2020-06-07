@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Controls the complete state of the game independent from Unity.
@@ -51,7 +52,7 @@ public class Game
         Economy = new EconomySimulation(
             initialMoney: initialMoney,
             getIncome: () => incomePerEconomyTick,
-            getUpkeepCosts: null // TODO: pass correct func
+            getUpkeepCosts: GetUpkeepCosts
         );
         EconomyTickInterval = economyTickInterval;
         TicksUntilEconomyTick = economyTickInterval;
@@ -125,5 +126,19 @@ public class Game
         });
 
         return map;
+    }
+
+    // Get upkeep costs for all buildings.
+    private List<int> GetUpkeepCosts()
+    {
+        var upkeepCosts = new List<int>();
+        Map.ForEachTile((x, y, tile) => {
+            var building = tile.Building;
+            if (building != null)
+            {
+                upkeepCosts.Add(building.UpkeepCost);
+            }
+        });
+        return upkeepCosts;
     }
 }
