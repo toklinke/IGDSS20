@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 // A game map consisting of a rectangular grid of hexagonal tiles.
@@ -17,8 +18,16 @@ public class Map
         _tiles = tiles;
         Width = width;
         Height = height;
-    }
 
+        for (uint y = 0; y < Height; ++y)
+        {
+            for (uint x = 0; x < Width; ++x)
+            {
+                //UnityEngine.Debug.Log(returnListOfNeighbors(x, y, Width).Count);
+                _neighborList.Add(returnListOfNeighbors(x, y, Width));
+            }
+        }
+    }
     public uint Width { get; }
     public uint Height { get; }
 
@@ -31,7 +40,6 @@ public class Map
             for (uint x = 0; x < Width; ++x)
             {
                 MapTile tile = _tiles[y * Width + x];
-                _neighborList.Add(returnListOfNeighbors(x, y, Width));
                 action(x, y, tile);
             }
         }
@@ -44,21 +52,30 @@ public class Map
         return tile;
     }
 
-    public List<uint> getNeighboursOfTile(uint x, uint y)
+    public List<MapTile> getNeighboursOfTile(uint x, uint y)
     {
 
-        int arrayIndex = (int)CalcArrayIndex(x, y, Height);
-        return _neighborList[arrayIndex];
+        int arrayIndex = (int)CalcArrayIndex(x, y, Width);
+
+        List<uint> tileNumberList = _neighborList[arrayIndex];
+        List<MapTile> tileObjectList = new List<MapTile>();
+
+        foreach (uint tileNumber in tileNumberList)
+        {
+            tileObjectList.Add(_tiles[(int)tileNumber]);
+        }
+
+        return tileObjectList;
     }
 
 
-    private uint CalcArrayIndex(uint xPos, uint yPos, uint xDimension)
+    private uint CalcArrayIndex(uint xPos, uint yPos, uint width)
     {
-        return (yPos * xDimension) + xPos;
+        return (yPos * width) + xPos;
     }
-    private List<uint> returnListOfNeighbors(uint xPos, uint yPos, uint xDimension)
+    private List<uint> returnListOfNeighbors(uint xPos, uint yPos, uint width)
     {
-        uint calculatedIndex = CalcArrayIndex(xPos, yPos, xDimension);
+        uint calculatedIndex = CalcArrayIndex(xPos, yPos, width);
 
         List<uint> neighborList = new List<uint>();
 
@@ -71,7 +88,7 @@ public class Map
         {
             LowestRow = true;
         }
-        else if (yPos == (xDimension - 1))
+        else if (yPos == (width - 1))
         {
             HighestRow = true;
         }
@@ -80,7 +97,7 @@ public class Map
         {
             leftmostColum = true;
         }
-        if (xPos == (xDimension - 1))
+        if (xPos == (width - 1))
         {
             rightMostColumn = true;
         }
@@ -93,32 +110,32 @@ public class Map
             //UnityEngine.Debug.Log("Even Row");
             if (!leftmostColum)
             {
-                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, width));
             }
             if (!rightMostColumn)
             {
-                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, width));
             }
 
 
             if (!LowestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos, yPos - 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos, yPos - 1, width));
             }
 
             if (!rightMostColumn && !LowestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos + 1, yPos - 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos - 1, width));
             }
 
             if (!rightMostColumn && !HighestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, width));
             }
 
             if (!HighestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, width));
             }
 
 
@@ -129,31 +146,31 @@ public class Map
 
             if (!leftmostColum)
             {
-                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos, width));
             }
             if (!rightMostColumn)
             {
-                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos, width));
             }
 
             if (!LowestRow && !leftmostColum)
             {
-                neighborList.Add(CalcArrayIndex(xPos - 1, yPos - 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos - 1, yPos - 1, width));
             }
 
             if (!LowestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos, yPos - 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos, yPos - 1, width));
             }
 
             if (!HighestRow && !leftmostColum)
             {
-                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos, yPos + 1, width));
             }
 
             if (!HighestRow)
             {
-                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, xDimension));
+                neighborList.Add(CalcArrayIndex(xPos + 1, yPos + 1, width));
             }
 
         }
