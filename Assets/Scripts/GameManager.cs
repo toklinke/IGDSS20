@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public float MapMaxY;
     public float MapTileRadius; // must match actual tile prefab size
     public int InitialMoney;
+    public int IncomePerEconomyTick;
+    public int EconomyTickInterval;
 
     // debug variables for displaying in Unity
     [SerializeField]
@@ -46,8 +48,8 @@ public class GameManager : MonoBehaviour
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,
             initialMoney: InitialMoney,
-            incomePerEconomyTick: 100,
-            economyTickInterval: 60
+            incomePerEconomyTick: IncomePerEconomyTick,
+            economyTickInterval: EconomyTickInterval
         );
         SetCameraLimits(this.Game.WorldSize);
 
