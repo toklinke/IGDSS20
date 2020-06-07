@@ -107,7 +107,9 @@ namespace Tests
                             upkeepCost: 0,
                             resourceGenerationInterval: 0,
                             outputResource: ResourceType.Wood,
-                            outputCount: 0
+                            outputCount: 0,
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     mapX: 0,
@@ -135,7 +137,9 @@ namespace Tests
                             upkeepCost: 0,
                             resourceGenerationInterval: 0,
                             outputResource: ResourceType.Wood,
-                            outputCount: 0
+                            outputCount: 0,
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     expectedSpawnPos: null
@@ -171,7 +175,10 @@ namespace Tests
                             upkeepCost: 10,
                             resourceGenerationInterval: 30,
                             outputResource: ResourceType.Wood,
-                            outputCount: 1
+                            outputCount: 1,
+                            // don't care follows
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     expectedSpawnPos: new Vector3(1.0f, 0.5f, 0.0f)

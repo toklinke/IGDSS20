@@ -11,6 +11,9 @@ public class Building
     // some resource have been produced by this building.
     public event EventHandler<EventArgs> ResourcesProduced;
 
+    private Func<ResourceType, int, bool> AreResourcesAvailable;
+    private Action<ResourceType, int> PickResources;
+
     private float ProductionCycleProgress;
     private bool ProductionCycleActive;
 
@@ -18,13 +21,17 @@ public class Building
         int upkeepCost,
         int resourceGenerationInterval, // in game time ticks
         ResourceType outputResource,
-        int outputCount
+        int outputCount,
+        Func<ResourceType, int, bool> areResourcesAvailable,
+        Action<ResourceType, int> pickResources
     )
     {
         UpkeepCost = upkeepCost;
         ResourceGenerationInterval = resourceGenerationInterval;
         OutputResource = outputResource;
         OutputCount = outputCount;
+        AreResourcesAvailable = areResourcesAvailable;
+        PickResources = pickResources;
         ProductionCycleActive = false;
     }
 
@@ -40,11 +47,12 @@ public class Building
                 // production cycle finished
                 OnResourcesProduced();
                 ProductionCycleProgress -= (float)ResourceGenerationInterval;
+                ProductionCycleActive = false;
             }
         }
         else
         {
-            // start first production cycle
+            // start production cycle
             ProductionCycleActive = true;
             ProductionCycleProgress = progress;
         }

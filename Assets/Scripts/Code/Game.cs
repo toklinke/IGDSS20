@@ -116,7 +116,9 @@ public class Game
                 (int)buildingCategoryParams.ResourceGenerationInterval
             ),
             outputResource: buildingCategoryParams.OutputResource,
-            outputCount: buildingCategoryParams.OutputCount
+            outputCount: buildingCategoryParams.OutputCount,
+            areResourcesAvailable: this.Warehouse.IsAvailable,
+            pickResources: this.Warehouse.Pick
         );
         building.ResourcesProduced += (sender, args) => {
             var senderBuilding = (Building)sender;
