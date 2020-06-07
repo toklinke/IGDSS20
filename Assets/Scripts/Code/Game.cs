@@ -129,6 +129,19 @@ public class Game
             outputResource: buildingCategoryParams.OutputResource,
             outputCount: buildingCategoryParams.OutputCount,
             inputResources: buildingCategoryParams.InputResources,
+            efficiency: GetBuildingEfficiency(
+                mapX: mapX,
+                mapY: mapY,
+                scaleTileType: (
+                    buildingCategoryParams.EfficiencyScaleTileType
+                ),
+                scaleMinNeighbors: (
+                    buildingCategoryParams.EfficiencyScaleMinNeighbors
+                ),
+                scaleMaxNeighbors: (
+                    buildingCategoryParams.EfficiencyScaleMaxNeighbors
+                )
+            ),
             areResourcesAvailable: this.Warehouse.IsAvailable,
             pickResources: this.Warehouse.Pick
         );
@@ -185,5 +198,51 @@ public class Game
             }
         });
         return upkeepCosts;
+    }
+
+    // Get efficiency for a building based on sorrounding tiles.
+    private float GetBuildingEfficiency(
+        uint mapX,
+        uint mapY,
+        MapTileType? scaleTileType,
+        int scaleMinNeighbors,
+        int scaleMaxNeighbors
+    )
+    {
+        float efficiency;
+        if (scaleTileType == null)
+        {
+            // do not scale based on neighbors
+            efficiency = 1.0f;
+        }
+        else
+        {
+            var neighbors = this.Map.getNeighboursOfTile(mapX, mapY);
+            int suitableNeighborsCount = 0;
+            foreach (var neighbor in neighbors)
+            {
+                var isEmpty = neighbor.Building == null;
+                var isSuitableType = neighbor.Type == scaleTileType;
+                if (isEmpty && isSuitableType)
+                    ++suitableNeighborsCount;
+            }
+
+            if (suitableNeighborsCount < scaleMinNeighbors)
+            {
+                efficiency = 0.0f;
+            }
+            else if (suitableNeighborsCount > scaleMaxNeighbors)
+            {
+                efficiency = 1.0f;
+            }
+            else
+            {
+                efficiency = (
+                    ((float)suitableNeighborsCount) /
+                    ((float)scaleMaxNeighbors)
+                );
+            }
+        }
+        return efficiency;
     }
 }

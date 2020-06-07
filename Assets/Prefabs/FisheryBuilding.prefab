@@ -19,6 +19,8 @@ MonoBehaviour:
   CompatibleTileTypes: 01000000
   ResourceGenerationInterval: 30
   OutputCount: 1
+  EfficiencyScalesWithNeighbors: 1
+  EfficiencyScaleTileType: 0
   EfficiencyScaleMinNeighbors: 1
   EfficiencyScaleMaxNeighbors: 3
   InputResources: 

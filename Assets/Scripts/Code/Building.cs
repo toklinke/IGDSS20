@@ -9,7 +9,8 @@ public class Building
     public int ResourceGenerationInterval { get; }
     public ResourceType OutputResource { get; }
     public int OutputCount { get; }
-    public List<ResourceType> InputResources;
+    public List<ResourceType> InputResources { get; }
+    public float Efficiency { get; }
 
     // some resource have been produced by this building.
     public event EventHandler<EventArgs> ResourcesProduced;
@@ -26,6 +27,7 @@ public class Building
         ResourceType outputResource,
         int outputCount,
         List<ResourceType> inputResources,
+        float efficiency,
         Func<ResourceType, int, bool> areResourcesAvailable,
         Action<ResourceType, int> pickResources
     )
@@ -35,6 +37,7 @@ public class Building
         OutputResource = outputResource;
         OutputCount = outputCount;
         InputResources = inputResources;
+        Efficiency = efficiency;
         AreResourcesAvailable = areResourcesAvailable;
         PickResources = pickResources;
         ProductionCycleActive = false;
@@ -43,7 +46,7 @@ public class Building
     // Advance game time by one tick.
     public void GameTimeTick()
     {
-        float progress = 1.0f;
+        float progress = Efficiency;
         if (ProductionCycleActive)
         {
             ProductionCycleProgress += progress;
@@ -101,7 +104,8 @@ public class Building
             ) &&
             OutputResource == otherBuilding.OutputResource &&
             OutputCount == otherBuilding.OutputCount &&
-            InputResources.SequenceEqual(otherBuilding.InputResources)
+            InputResources.SequenceEqual(otherBuilding.InputResources) &&
+            Efficiency == otherBuilding.Efficiency
         );
         return equals;
     }
@@ -113,7 +117,8 @@ public class Building
             ResourceGenerationInterval,
             OutputResource,
             OutputCount,
-            InputResources
+            InputResources,
+            Efficiency
         );
         var hashCode = properties.GetHashCode();
         return hashCode;

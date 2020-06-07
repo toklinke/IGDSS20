@@ -25,10 +25,11 @@ public class BuildingCategory : MonoBehaviour
     // number of ouput resources per production cycle.
     public int OutputCount;
 
-    // If non-null,
+    // If EfficiencyScalesWithNeighbors is true,
     // the efficiency of a building of the category scales
     // with the number of free tiles of the given type.
-    public MapTileType? EfficiencyScaleTileType;
+    public bool EfficiencyScalesWithNeighbors;
+    public MapTileType EfficiencyScaleTileType;
     // Minimum number of neighbors
     // that must be present for reaching efficiency > 0.
     public int EfficiencyScaleMinNeighbors;
@@ -52,7 +53,11 @@ public class BuildingCategory : MonoBehaviour
             compatibleTileTypes: CompatibleTileTypes,
             resourceGenerationInterval: ResourceGenerationInterval,
             outputCount: OutputCount,
-            efficiencyScaleTileType: EfficiencyScaleTileType,
+            efficiencyScaleTileType: (
+                EfficiencyScalesWithNeighbors ?
+                (MapTileType?)EfficiencyScaleTileType :
+                null
+            ),
             efficiencyScaleMinNeighbors: EfficiencyScaleMinNeighbors,
             efficiencyScaleMaxNeighbors: EfficiencyScaleMaxNeighbors,
             inputResources: InputResources,

@@ -109,6 +109,7 @@ namespace Tests
                             outputResource: ResourceType.Wood,
                             outputCount: 0,
                             inputResources: new List<ResourceType>(),
+                            efficiency: 0.0f,
                             areResourcesAvailable: null,
                             pickResources: null
                         )
@@ -140,6 +141,7 @@ namespace Tests
                             outputResource: ResourceType.Wood,
                             outputCount: 0,
                             inputResources: new List<ResourceType>(),
+                            efficiency: 0.0f,
                             areResourcesAvailable: null,
                             pickResources: null
                         )
@@ -165,10 +167,10 @@ namespace Tests
                         inputResources: new List<ResourceType>() {
                             ResourceType.Fish
                         },
+                        efficiencyScaleTileType: null,
                         // don't care follows
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
-                        efficiencyScaleTileType: MapTileType.Grass,
                         efficiencyScaleMinNeighbors: 0,
                         efficiencyScaleMaxNeighbors: 0
                     ),
@@ -183,6 +185,7 @@ namespace Tests
                             inputResources: new List<ResourceType>() {
                                 ResourceType.Fish
                             },
+                            efficiency: 1.0f,
                             // don't care follows
                             areResourcesAvailable: null,
                             pickResources: null
