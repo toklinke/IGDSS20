@@ -15,13 +15,25 @@ public class Game
     public int AvailableMoney { get { return Economy.AvailableMoney; }}
 
     private IMapToWorldMapper MapToWorldMapper;
-    private EconomySimulation Economy;
 
+    private EconomySimulation Economy;
+    private int EconomyTickInterval;
+    // The number of ticks left until the economy ticks again
+    private int TicksUntilEconomyTick;
+
+    // Setup game.
+    // initialMoney: The initially available money.
+    // economyTickInterval:
+    //  The number of game ticks that elapse between economy ticks.
+    // incomePerEconomyTick:
+    //  Amount of Money that is added for each economy tick.
     public Game(
         IMapGenerator mapGenerator,
         MapTileSpawner spawnMapTile,
         IMapToWorldMapper mapToWorldMapper,
-        int initialMoney
+        int initialMoney,
+        int incomePerEconomyTick,
+        int economyTickInterval
     )
     {
         this.Map = SpawnMap(
@@ -38,11 +50,24 @@ public class Game
 
         Economy = new EconomySimulation(
             initialMoney: initialMoney,
-            getIncome: null, // TODO: pass correct func
+            getIncome: () => incomePerEconomyTick,
             getUpkeepCosts: null // TODO: pass correct func
         );
+        EconomyTickInterval = economyTickInterval;
+        TicksUntilEconomyTick = economyTickInterval;
 
-        Debug.Log(Map.getNeighboursOfTile(0, 0)[1]);
+        //Debug.Log(Map.getNeighboursOfTile(0, 0)[1]);
+    }
+
+    // Advance game time by one tick.
+    public void GameTimeTick()
+    {
+        --TicksUntilEconomyTick;
+        if (TicksUntilEconomyTick == 0)
+        {
+            Economy.Tick();
+            TicksUntilEconomyTick = EconomyTickInterval;
+        }
     }
 
     // Try to place a building at a certain map tile

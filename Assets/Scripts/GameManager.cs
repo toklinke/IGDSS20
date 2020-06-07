@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
             mapGenerator: mapGenerator,
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,
-            initialMoney: InitialMoney
+            initialMoney: InitialMoney,
+            incomePerEconomyTick: 100,
+            economyTickInterval: 60
         );
         SetCameraLimits(this.Game.WorldSize);
     }
