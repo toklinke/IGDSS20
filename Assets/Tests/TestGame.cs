@@ -103,7 +103,14 @@ namespace Tests
                         height: 42.0f,
                         type: MapTileType.Grass,
                         building: new Building(
-                            upkeepCost: 0 // don't care
+                            // don't care follows
+                            upkeepCost: 0,
+                            resourceGenerationInterval: 0,
+                            outputResource: ResourceType.Wood,
+                            outputCount: 0,
+                            inputResources: new List<ResourceType>(),
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     mapX: 0,
@@ -128,7 +135,13 @@ namespace Tests
                         height: 42.0f,
                         type: MapTileType.Grass,
                         building: new Building(
-                            upkeepCost: 0 // don't care
+                            upkeepCost: 0,
+                            resourceGenerationInterval: 0,
+                            outputResource: ResourceType.Wood,
+                            outputCount: 0,
+                            inputResources: new List<ResourceType>(),
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     expectedSpawnPos: null
@@ -146,22 +159,33 @@ namespace Tests
                             MapTileType.Grass
                         },
                         upkeepCost: 10,
+                        resourceGenerationInterval: 30.0f,
+                        outputResource: ResourceType.Wood,
+                        outputCount: 1,
+                        inputResources: new List<ResourceType>() {
+                            ResourceType.Fish
+                        },
                         // don't care follows
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
-                        resourceGenerationInterval: 0,
-                        outputCount: 0,
                         efficiencyScaleTileType: MapTileType.Grass,
                         efficiencyScaleMinNeighbors: 0,
-                        efficiencyScaleMaxNeighbors: 0,
-                        inputResources: null,
-                        outputResource: ResourceType.Wood
+                        efficiencyScaleMaxNeighbors: 0
                     ),
                     expectedMapTile: new MapTile(
                         height: 0.5f,
                         type: MapTileType.Grass,
                         building: new Building(
-                            upkeepCost: 10
+                            upkeepCost: 10,
+                            resourceGenerationInterval: 30,
+                            outputResource: ResourceType.Wood,
+                            outputCount: 1,
+                            inputResources: new List<ResourceType>() {
+                                ResourceType.Fish
+                            },
+                            // don't care follows
+                            areResourcesAvailable: null,
+                            pickResources: null
                         )
                     ),
                     expectedSpawnPos: new Vector3(1.0f, 0.5f, 0.0f)

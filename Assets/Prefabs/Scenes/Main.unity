@@ -491,6 +491,7 @@ MonoBehaviour:
   BuildingPrefabs:
   - {fileID: 5657576265433554849, guid: 31a446b130bd9a2b8aadde04df9e069c, type: 3}
   - {fileID: 4203752218570917651, guid: d61b712e1c86828c3aafc1bc554e4e1a, type: 3}
+  - {fileID: 124692, guid: d4d4c233788d2dd48b21ac853bb73351, type: 3}
   MapMinY: 0
   MapMaxY: 25
   MapTileRadius: 5
@@ -498,6 +499,13 @@ MonoBehaviour:
   IncomePerEconomyTick: 100
   EconomyTickInterval: 60
   AvailableMoney: 0
+  ResourcesInWarehouseWood: 0
+  ResourcesInWarehousePlank: 0
+  ResourcesInWarehouseWool: 0
+  ResourcesInWarehouseClothes: 0
+  ResourcesInWarehousePotato: 0
+  ResourcesInWarehouseSchnapps: 0
+  ResourcesInWarehouseFish: 0
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0

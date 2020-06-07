@@ -22,6 +22,8 @@ public class Game
     // The number of ticks left until the economy ticks again
     private int TicksUntilEconomyTick;
 
+    private Warehouse Warehouse;
+
     // Setup game.
     // initialMoney: The initially available money.
     // economyTickInterval:
@@ -57,6 +59,8 @@ public class Game
         EconomyTickInterval = economyTickInterval;
         TicksUntilEconomyTick = economyTickInterval;
 
+        this.Warehouse = new Warehouse();
+
         //Debug.Log(Map.getNeighboursOfTile(0, 0)[1]);
     }
 
@@ -69,6 +73,13 @@ public class Game
             Economy.Tick();
             TicksUntilEconomyTick = EconomyTickInterval;
         }
+
+        this.Map.ForEachTile((x, y, tile) => {
+            if (tile.Building != null)
+            {
+                tile.Building.GameTimeTick();
+            }
+        });
     }
 
     // Try to place a building at a certain map tile
@@ -99,9 +110,32 @@ public class Game
         spawnBuilding(pos);
 
         var building = new Building(
-            upkeepCost: buildingCategoryParams.UpkeepCost
+            upkeepCost: buildingCategoryParams.UpkeepCost,
+            resourceGenerationInterval: (
+                // TODO: this assumes one tick == one second
+                (int)buildingCategoryParams.ResourceGenerationInterval
+            ),
+            outputResource: buildingCategoryParams.OutputResource,
+            outputCount: buildingCategoryParams.OutputCount,
+            inputResources: buildingCategoryParams.InputResources,
+            areResourcesAvailable: this.Warehouse.IsAvailable,
+            pickResources: this.Warehouse.Pick
         );
+        building.ResourcesProduced += (sender, args) => {
+            var senderBuilding = (Building)sender;
+            this.Warehouse.Store(
+                type: senderBuilding.OutputResource,
+                amount: senderBuilding.OutputCount
+            );
+        };
         tile.Building = building;
+    }
+
+    // Get available amount of a certain resource.
+    public int GetAvailableResources(ResourceType type)
+    {
+        int availableAmount = this.Warehouse.GetAvailableAmount(type);
+        return availableAmount;
     }
 
     private Map SpawnMap(
