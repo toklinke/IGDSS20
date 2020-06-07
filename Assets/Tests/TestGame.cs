@@ -282,14 +282,6 @@ namespace Tests
                 );
         }
 
-        // get grayscale color with R=G=B and A=1.0f
-        private static Color GetGrayColor(float rgb)
-        {
-            Color color = new Color(rgb, rgb, rgb, a: 1.0f);
-            return color;
-        }
-
-
         // Map generator that returns a given map.
         private class DummyMapGenerator : IMapGenerator
         {
