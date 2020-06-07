@@ -99,7 +99,13 @@ public class Game
         spawnBuilding(pos);
 
         var building = new Building(
-            upkeepCost: buildingCategoryParams.UpkeepCost
+            upkeepCost: buildingCategoryParams.UpkeepCost,
+            resourceGenerationInterval: (
+                // TODO: this assumes one tick == one second
+                (int)buildingCategoryParams.ResourceGenerationInterval
+            ),
+            outputResource: buildingCategoryParams.OutputResource,
+            outputCount: buildingCategoryParams.OutputCount
         );
         tile.Building = building;
     }
