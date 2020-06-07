@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private Game Game;
     private int SelectedBuildingPrefabIndex;
+    private Timer GameTimeTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +50,17 @@ public class GameManager : MonoBehaviour
             economyTickInterval: 60
         );
         SetCameraLimits(this.Game.WorldSize);
+
+        GameTimeTimer = new Timer(tickInterval: 1.0f); // tick each second
+        GameTimeTimer.TimerTicked += (sender, args) => Game.GameTimeTick();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float elapsed = Time.deltaTime;
         HandleKeyboardInput();
+        GameTimeTimer.Update(elapsed);
         UpdateDebugUi();
     }
 
