@@ -42,5 +42,32 @@ namespace Tests
 
             Assert.That(actionCalls, Is.EqualTo(expectedCalls));
         }
+
+        // Test that GetTile() return the correct tile.
+        [Test]
+        public void TestGetTile()
+        {
+            MapTile[] mapTiles = new MapTile[] {
+                // first row
+                new MapTile(height: 0.0f, type: MapTileType.Water),
+                new MapTile(height: 1.0f, type: MapTileType.Sand),
+                new MapTile(height: 2.0f, type: MapTileType.Grass),
+                // second row
+                new MapTile(height: 3.0f, type: MapTileType.Forest),
+                new MapTile(height: 4.0f, type: MapTileType.Stone),
+                new MapTile(height: 5.0f, type: MapTileType.Mountain),
+            };
+
+            Map map = new Map(
+                tiles: mapTiles, width: 3, height: 2
+            );
+
+            var expectedTile = new MapTile(
+                height: 5.0f, type: MapTileType.Mountain
+            );
+            var tile = map.GetTile(x: 2, y: 1);
+
+            Assert.That(tile, Is.EqualTo(expectedTile));
+        }
     }
 }

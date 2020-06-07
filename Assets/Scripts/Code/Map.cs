@@ -37,6 +37,13 @@ public class Map
         }
     }
 
+    public MapTile GetTile(uint x, uint y)
+    {
+        uint index = CalcArrayIndex(x, y, Width);
+        var tile = _tiles[index];
+        return tile;
+    }
+
     public List<uint> getNeighboursOfTile(uint x, uint y)
     {
 
