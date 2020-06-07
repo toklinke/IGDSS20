@@ -24,6 +24,20 @@ public class GameManager : MonoBehaviour
     // debug variables for displaying in Unity
     [SerializeField]
     private int AvailableMoney;
+    [SerializeField]
+    private int ResourcesInWarehouseWood;
+    [SerializeField]
+    private int ResourcesInWarehousePlank;
+    [SerializeField]
+    private int ResourcesInWarehouseWool;
+    [SerializeField]
+    private int ResourcesInWarehouseClothes;
+    [SerializeField]
+    private int ResourcesInWarehousePotato;
+    [SerializeField]
+    private int ResourcesInWarehouseSchnapps;
+    [SerializeField]
+    private int ResourcesInWarehouseFish;
 
     private Game Game;
     private int SelectedBuildingPrefabIndex;
@@ -212,5 +226,26 @@ public class GameManager : MonoBehaviour
     private void UpdateDebugUi()
     {
         AvailableMoney = Game.AvailableMoney;
+        ResourcesInWarehouseWood = Game.GetAvailableResources(
+            ResourceType.Wood
+        );
+        ResourcesInWarehousePlank = Game.GetAvailableResources(
+            ResourceType.Plank
+        );
+        ResourcesInWarehouseFish = Game.GetAvailableResources(
+            ResourceType.Fish
+        );
+        ResourcesInWarehouseWool = Game.GetAvailableResources(
+            ResourceType.Wool
+        );
+        ResourcesInWarehouseClothes = Game.GetAvailableResources(
+            ResourceType.Clothes
+        );
+        ResourcesInWarehousePotato = Game.GetAvailableResources(
+            ResourceType.Potato
+        );
+        ResourcesInWarehouseSchnapps = Game.GetAvailableResources(
+            ResourceType.Schnapps
+        );
     }
 }

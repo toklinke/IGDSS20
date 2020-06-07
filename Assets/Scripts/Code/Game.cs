@@ -22,6 +22,8 @@ public class Game
     // The number of ticks left until the economy ticks again
     private int TicksUntilEconomyTick;
 
+    private Warehouse Warehouse;
+
     // Setup game.
     // initialMoney: The initially available money.
     // economyTickInterval:
@@ -56,6 +58,8 @@ public class Game
         );
         EconomyTickInterval = economyTickInterval;
         TicksUntilEconomyTick = economyTickInterval;
+
+        this.Warehouse = new Warehouse();
 
         //Debug.Log(Map.getNeighboursOfTile(0, 0)[1]);
     }
@@ -108,6 +112,13 @@ public class Game
             outputCount: buildingCategoryParams.OutputCount
         );
         tile.Building = building;
+    }
+
+    // Get available amount of a certain resource.
+    public int GetAvailableResources(ResourceType type)
+    {
+        int availableAmount = this.Warehouse.GetAvailableAmount(type);
+        return availableAmount;
     }
 
     private Map SpawnMap(
