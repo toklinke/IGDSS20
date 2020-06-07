@@ -100,7 +100,18 @@ public class Game
         if(!Economy.CanAfford(buildingCategoryParams.BuildCostMoney))
             return;
 
+        var enoughPlanksAvailable = this.Warehouse.IsAvailable(
+            type: ResourceType.Plank,
+            amount: buildingCategoryParams.BuildCostPlanks
+        );
+        if (!enoughPlanksAvailable)
+            return;
+
         Economy.SpendMoney(buildingCategoryParams.BuildCostMoney);
+        this.Warehouse.Pick(
+            type: ResourceType.Plank,
+            amount: buildingCategoryParams.BuildCostPlanks
+        );
 
         var pos = this.MapToWorldMapper.GetWorldPosition(
             mapX: mapX,
