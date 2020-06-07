@@ -57,9 +57,24 @@ public class Building
         }
         else
         {
-            // start production cycle
-            ProductionCycleActive = true;
-            ProductionCycleProgress = progress;
+            // start production cycle, if all input resources available
+            bool allResourcesAvailable = true;
+            foreach (var inputResource in InputResources)
+            {
+                allResourcesAvailable = (
+                    allResourcesAvailable &&
+                    AreResourcesAvailable(inputResource, 1)
+                );
+            }
+            if (allResourcesAvailable)
+            {
+                foreach (var inputResource in InputResources)
+                {
+                    PickResources(inputResource, 1);
+                }
+                ProductionCycleActive = true;
+                ProductionCycleProgress = progress;
+            }
         }
     }
 
