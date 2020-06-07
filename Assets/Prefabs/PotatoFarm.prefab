@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1141835377323601821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532459665724332971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ddeb8ef2bef6d387c985802804467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Potato Farm
+  UpkeepCost: 20
+  BuildCostMoney: 100
+  BuildCostPlanks: 2
+  CompatibleTileTypes: 02000000
+  ResourceGenerationInterval: 30
+  OutputCount: 1
+  EfficiencyScalesWithNeighbors: 1
+  EfficiencyScaleTileType: 2
+  EfficiencyScaleMinNeighbors: 1
+  EfficiencyScaleMaxNeighbors: 4
+  InputResources: 
+  OutputResource: 5
 --- !u!1001 &532459665724366091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +34,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e128593380150d9428df407c09bac59d, type: 3}
       propertyPath: m_Name
-      value: Potato Farm
+      value: PotatoFarm
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e128593380150d9428df407c09bac59d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +89,12 @@ PrefabInstance:
 --- !u!4 &532459665724753803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e128593380150d9428df407c09bac59d,
+    type: 3}
+  m_PrefabInstance: {fileID: 532459665724366091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &532459665724332971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e128593380150d9428df407c09bac59d,
     type: 3}
   m_PrefabInstance: {fileID: 532459665724366091}
   m_PrefabAsset: {fileID: 0}

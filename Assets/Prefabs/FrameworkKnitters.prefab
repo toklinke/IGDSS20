@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7820279567511702077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3323401443299971537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ddeb8ef2bef6d387c985802804467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Framework Knitters
+  UpkeepCost: 50
+  BuildCostMoney: 400
+  BuildCostPlanks: 2
+  CompatibleTileTypes: 020000000300000004000000
+  ResourceGenerationInterval: 30
+  OutputCount: 1
+  EfficiencyScaleMinNeighbors: 0
+  EfficiencyScaleMaxNeighbors: 0
+  InputResources: 03000000
+  OutputResource: 4
 --- !u!1001 &3205455939528936782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +137,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a16735a8eacd8b48933ccdf6dfffe45, type: 3}
+--- !u!1 &3323401443299971537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 118106, guid: 9a16735a8eacd8b48933ccdf6dfffe45,
+    type: 3}
+  m_PrefabInstance: {fileID: 3323401443300056203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3323401443300151405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 429286, guid: 9a16735a8eacd8b48933ccdf6dfffe45,

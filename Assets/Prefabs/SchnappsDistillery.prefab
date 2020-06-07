@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1771530788745551626}
   - component: {fileID: 1761789378714101810}
   - component: {fileID: 1760912997509507292}
+  - component: {fileID: 6271937361585274339}
   m_Layer: 0
-  m_Name: SM_Bld_House_Room_04
+  m_Name: SchnappsDistillery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +113,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43124424779558838, guid: 3acec3220b39d8a4c92c31c892efc698, type: 2}
+--- !u!114 &6271937361585274339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771530788747943686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ddeb8ef2bef6d387c985802804467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Schnapps Distillery
+  UpkeepCost: 40
+  BuildCostMoney: 100
+  BuildCostPlanks: 2
+  CompatibleTileTypes: 020000000300000004000000
+  ResourceGenerationInterval: 30
+  OutputCount: 1
+  EfficiencyScalesWithNeighbors: 0
+  EfficiencyScaleTileType: 0
+  EfficiencyScaleMinNeighbors: 0
+  EfficiencyScaleMaxNeighbors: 0
+  InputResources: 05000000
+  OutputResource: 6
 --- !u!1 &4422124103233244364
 GameObject:
   m_ObjectHideFlags: 0

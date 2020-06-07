@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 64203271268370550}
   - component: {fileID: 64717441835277512}
   - component: {fileID: 64473840547429310}
+  - component: {fileID: 2964171841944622193}
   m_Layer: 0
   m_Name: SheepFarm
   m_TagString: Untagged
@@ -138,6 +139,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43068062279616988, guid: 20f83c0375b49a2438652e38704e8616, type: 2}
+--- !u!114 &2964171841944622193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ddeb8ef2bef6d387c985802804467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Sheep Farm
+  UpkeepCost: 20
+  BuildCostMoney: 100
+  BuildCostPlanks: 2
+  CompatibleTileTypes: 02000000
+  ResourceGenerationInterval: 30
+  OutputCount: 1
+  EfficiencyScalesWithNeighbors: 1
+  EfficiencyScaleTileType: 2
+  EfficiencyScaleMinNeighbors: 1
+  EfficiencyScaleMaxNeighbors: 4
+  InputResources: 
+  OutputResource: 3
 --- !u!1 &3014790819182841394
 GameObject:
   m_ObjectHideFlags: 0
