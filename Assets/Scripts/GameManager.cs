@@ -39,8 +39,9 @@ public class GameManager : MonoBehaviour
             width: (uint)HeightMap.width,
             height: (uint)HeightMap.height
         );
+        var mapGenerator = new MapGenerator(heightMap);
         this.Game = new Game(
-            heightMap: heightMap,
+            mapGenerator: mapGenerator,
             spawnMapTile: SpawnMapTile,
             mapToWorldMapper: mapToWorldMapper,
             initialMoney: InitialMoney

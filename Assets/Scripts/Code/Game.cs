@@ -18,14 +18,14 @@ public class Game
     private EconomySimulation Economy;
 
     public Game(
-        HeightMap heightMap,
+        IMapGenerator mapGenerator,
         MapTileSpawner spawnMapTile,
         IMapToWorldMapper mapToWorldMapper,
         int initialMoney
     )
     {
         this.Map = SpawnMap(
-            heightMap: heightMap,
+            mapGenerator: mapGenerator,
             spawnMapTile: spawnMapTile,
             mapToWorldMapper: mapToWorldMapper
         );
@@ -77,13 +77,12 @@ public class Game
     }
 
     private Map SpawnMap(
-        HeightMap heightMap,
+        IMapGenerator mapGenerator,
         MapTileSpawner spawnMapTile,
         IMapToWorldMapper mapToWorldMapper
     )
     {
-        var mapGenerator = new MapGenerator();
-        var map = mapGenerator.GenerateMapFromHeightMap(heightMap);
+        var map = mapGenerator.GenerateMap();
         map.ForEachTile((x, y, tile) => {
             var pos = mapToWorldMapper.GetWorldPosition(
                 mapX: x,
