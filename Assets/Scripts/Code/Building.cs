@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 // A building that can be placed on a map.
 public class Building
@@ -7,6 +9,7 @@ public class Building
     public int ResourceGenerationInterval { get; }
     public ResourceType OutputResource { get; }
     public int OutputCount { get; }
+    public List<ResourceType> InputResources;
 
     // some resource have been produced by this building.
     public event EventHandler<EventArgs> ResourcesProduced;
@@ -22,6 +25,7 @@ public class Building
         int resourceGenerationInterval, // in game time ticks
         ResourceType outputResource,
         int outputCount,
+        List<ResourceType> inputResources,
         Func<ResourceType, int, bool> areResourcesAvailable,
         Action<ResourceType, int> pickResources
     )
@@ -30,6 +34,7 @@ public class Building
         ResourceGenerationInterval = resourceGenerationInterval;
         OutputResource = outputResource;
         OutputCount = outputCount;
+        InputResources = inputResources;
         AreResourcesAvailable = areResourcesAvailable;
         PickResources = pickResources;
         ProductionCycleActive = false;
@@ -80,7 +85,8 @@ public class Building
                 otherBuilding.ResourceGenerationInterval
             ) &&
             OutputResource == otherBuilding.OutputResource &&
-            OutputCount == otherBuilding.OutputCount
+            OutputCount == otherBuilding.OutputCount &&
+            InputResources.SequenceEqual(otherBuilding.InputResources)
         );
         return equals;
     }
@@ -91,7 +97,8 @@ public class Building
             UpkeepCost,
             ResourceGenerationInterval,
             OutputResource,
-            OutputCount
+            OutputCount,
+            InputResources
         );
         var hashCode = properties.GetHashCode();
         return hashCode;
@@ -99,12 +106,14 @@ public class Building
 
     public override string ToString()
     {
+        var inputResources = String.Join(", ", InputResources);
         var result = (
             $"Building(" +
             $"upkeepCost: {UpkeepCost}, " +
             $"resourceGenerationInterval: {ResourceGenerationInterval}, " +
             $"outputResource: {OutputResource}, " +
-            $"outputCount: {OutputCount}" +
+            $"outputCount: {OutputCount}, " +
+            $"inputResources: {inputResources}" +
             $")"
         );
         return result;

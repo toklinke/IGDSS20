@@ -117,6 +117,7 @@ public class Game
             ),
             outputResource: buildingCategoryParams.OutputResource,
             outputCount: buildingCategoryParams.OutputCount,
+            inputResources: buildingCategoryParams.InputResources,
             areResourcesAvailable: this.Warehouse.IsAvailable,
             pickResources: this.Warehouse.Pick
         );

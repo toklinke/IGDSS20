@@ -108,6 +108,7 @@ namespace Tests
                             resourceGenerationInterval: 0,
                             outputResource: ResourceType.Wood,
                             outputCount: 0,
+                            inputResources: new List<ResourceType>(),
                             areResourcesAvailable: null,
                             pickResources: null
                         )
@@ -138,6 +139,7 @@ namespace Tests
                             resourceGenerationInterval: 0,
                             outputResource: ResourceType.Wood,
                             outputCount: 0,
+                            inputResources: new List<ResourceType>(),
                             areResourcesAvailable: null,
                             pickResources: null
                         )
@@ -160,13 +162,15 @@ namespace Tests
                         resourceGenerationInterval: 30.0f,
                         outputResource: ResourceType.Wood,
                         outputCount: 1,
+                        inputResources: new List<ResourceType>() {
+                            ResourceType.Fish
+                        },
                         // don't care follows
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
                         efficiencyScaleTileType: MapTileType.Grass,
                         efficiencyScaleMinNeighbors: 0,
-                        efficiencyScaleMaxNeighbors: 0,
-                        inputResources: null
+                        efficiencyScaleMaxNeighbors: 0
                     ),
                     expectedMapTile: new MapTile(
                         height: 0.5f,
@@ -176,6 +180,9 @@ namespace Tests
                             resourceGenerationInterval: 30,
                             outputResource: ResourceType.Wood,
                             outputCount: 1,
+                            inputResources: new List<ResourceType>() {
+                                ResourceType.Fish
+                            },
                             // don't care follows
                             areResourcesAvailable: null,
                             pickResources: null
