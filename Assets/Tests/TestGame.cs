@@ -102,7 +102,9 @@ namespace Tests
                     tile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 0 // don't care
+                        )
                     ),
                     mapX: 0,
                     mapY: 0,
@@ -125,7 +127,9 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 0 // don't care
+                        )
                     ),
                     expectedSpawnPos: null
                 ),
@@ -141,8 +145,8 @@ namespace Tests
                         compatibleTileTypes: new MapTileType[] {
                             MapTileType.Grass
                         },
+                        upkeepCost: 10,
                         // don't care follows
-                        upkeepCost: 0,
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
                         resourceGenerationInterval: 0,
@@ -156,7 +160,9 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 0.5f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 10
+                        )
                     ),
                     expectedSpawnPos: new Vector3(1.0f, 0.5f, 0.0f)
                 ),

@@ -97,7 +97,9 @@ public class Game
         );
         spawnBuilding(pos);
 
-        var building = new Building(); // TODO: params
+        var building = new Building(
+            upkeepCost: buildingCategoryParams.UpkeepCost
+        );
         tile.Building = building;
     }
 
