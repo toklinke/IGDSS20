@@ -102,7 +102,9 @@ namespace Tests
                     tile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 0 // don't care
+                        )
                     ),
                     mapX: 0,
                     mapY: 0,
@@ -125,7 +127,9 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 0 // don't care
+                        )
                     ),
                     expectedSpawnPos: null
                 ),
@@ -141,8 +145,8 @@ namespace Tests
                         compatibleTileTypes: new MapTileType[] {
                             MapTileType.Grass
                         },
+                        upkeepCost: 10,
                         // don't care follows
-                        upkeepCost: 0,
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
                         resourceGenerationInterval: 0,
@@ -156,7 +160,9 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 0.5f,
                         type: MapTileType.Grass,
-                        building: new Building()
+                        building: new Building(
+                            upkeepCost: 10
+                        )
                     ),
                     expectedSpawnPos: new Vector3(1.0f, 0.5f, 0.0f)
                 ),
@@ -349,6 +355,87 @@ namespace Tests
                     },
                     checksAfterTick: new Action<Game>[] {
                         game => checkAvailableMoney(game, 1100)
+                    }
+                ),
+                new GameTimeTickTestCase(
+                    description: (
+                        "upkeep costs are subtracted in economy tick"
+                    ),
+                    initialMoney: 1000,
+                    incomePerEconomyTick: 0,
+                    economyTickInterval: 3,
+                    map: new Map(
+                        tiles: new MapTile[] {
+                            new MapTile(
+                                height: 0.0f, type: MapTileType.Water
+                            ),
+                            new MapTile(
+                                height: 0.0f, type: MapTileType.Water
+                            ),
+                            new MapTile(
+                                height: 0.0f, type: MapTileType.Water
+                            ),
+                        },
+                        width: 3,
+                        height: 1
+                    ),
+                    setupGame: game => {
+                        game.PlaceBuildingOnTile(
+                            tile: game.Map.GetTile(x: 0, y: 0),
+                            mapX: 0,
+                            mapY: 0,
+                            buildingCategoryParams: (
+                                new BuildingCategoryParams(
+                                    compatibleTileTypes: new MapTileType[]
+                                    {
+                                        MapTileType.Water
+                                    },
+                                    upkeepCost: 100,
+                                    buildCostMoney: 0,
+                                    // don't care follows
+                                    buildCostPlanks: 0,
+                                    resourceGenerationInterval: 0,
+                                    outputCount: 0,
+                                    efficiencyScaleTileType: MapTileType.Grass,
+                                    efficiencyScaleMinNeighbors: 0,
+                                    efficiencyScaleMaxNeighbors: 0,
+                                    inputResources: null,
+                                    outputResource: ResourceType.Wood
+                                )
+                            ),
+                            spawnBuilding: worldPos => {}
+                        );
+                        game.PlaceBuildingOnTile(
+                            tile: game.Map.GetTile(x: 2, y: 0),
+                            mapX: 2,
+                            mapY: 0,
+                            buildingCategoryParams: (
+                                new BuildingCategoryParams(
+                                    compatibleTileTypes: new MapTileType[]
+                                    {
+                                        MapTileType.Water
+                                    },
+                                    upkeepCost: 50,
+                                    buildCostMoney: 0,
+                                    // don't care follows
+                                    buildCostPlanks: 0,
+                                    resourceGenerationInterval: 0,
+                                    outputCount: 0,
+                                    efficiencyScaleTileType: MapTileType.Grass,
+                                    efficiencyScaleMinNeighbors: 0,
+                                    efficiencyScaleMaxNeighbors: 0,
+                                    inputResources: null,
+                                    outputResource: ResourceType.Wood
+                                )
+                            ),
+                            spawnBuilding: worldPos => {}
+                        );
+
+                        game.GameTimeTick();
+                        game.GameTimeTick();
+                    },
+                    checksAfterTick: new Action<Game>[] {
+                        game => checkAvailableMoney(game, 850)
                     }
                 ),
                 new GameTimeTickTestCase(
