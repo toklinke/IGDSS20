@@ -102,7 +102,7 @@ namespace Tests
                     tile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building(
+                        building: new ProductionBuilding(
                             // don't care follows
                             upkeepCost: 0,
                             resourceGenerationInterval: 0,
@@ -135,7 +135,7 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 42.0f,
                         type: MapTileType.Grass,
-                        building: new Building(
+                        building: new ProductionBuilding(
                             upkeepCost: 0,
                             resourceGenerationInterval: 0,
                             outputResource: ResourceType.Wood,
@@ -177,7 +177,7 @@ namespace Tests
                     expectedMapTile: new MapTile(
                         height: 0.5f,
                         type: MapTileType.Grass,
-                        building: new Building(
+                        building: new ProductionBuilding(
                             upkeepCost: 10,
                             resourceGenerationInterval: 30,
                             outputResource: ResourceType.Wood,

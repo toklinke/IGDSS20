@@ -120,7 +120,7 @@ public class Game
         );
         spawnBuilding(pos);
 
-        var building = new Building(
+        var building = new ProductionBuilding(
             upkeepCost: buildingCategoryParams.UpkeepCost,
             resourceGenerationInterval: (
                 // TODO: this assumes one tick == one second
@@ -146,7 +146,7 @@ public class Game
             pickResources: this.Warehouse.Pick
         );
         building.ResourcesProduced += (sender, args) => {
-            var senderBuilding = (Building)sender;
+            var senderBuilding = (ProductionBuilding)sender;
             this.Warehouse.Store(
                 type: senderBuilding.OutputResource,
                 amount: senderBuilding.OutputCount

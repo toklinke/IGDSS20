@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 // A building that can be placed on a map.
-public class Building
+public class ProductionBuilding : Building
 {
-    public int UpkeepCost { get; }
     public int ResourceGenerationInterval { get; }
     public ResourceType OutputResource { get; }
     public int OutputCount { get; }
@@ -21,7 +20,7 @@ public class Building
     private float ProductionCycleProgress;
     private bool ProductionCycleActive;
 
-    public Building(
+    public ProductionBuilding(
         int upkeepCost,
         int resourceGenerationInterval, // in game time ticks
         ResourceType outputResource,
@@ -30,9 +29,8 @@ public class Building
         float efficiency,
         Func<ResourceType, int, bool> areResourcesAvailable,
         Action<ResourceType, int> pickResources
-    )
+    ) : base(upkeepCost)
     {
-        UpkeepCost = upkeepCost;
         ResourceGenerationInterval = resourceGenerationInterval;
         OutputResource = outputResource;
         OutputCount = outputCount;
@@ -92,7 +90,7 @@ public class Building
 
     public override bool Equals(object other)
     {
-        var otherBuilding = other as Building;
+        var otherBuilding = other as ProductionBuilding;
         if (otherBuilding == null)
             return false;
 
@@ -128,7 +126,7 @@ public class Building
     {
         var inputResources = String.Join(", ", InputResources);
         var result = (
-            $"Building(" +
+            $"ProductionBuilding(" +
             $"upkeepCost: {UpkeepCost}, " +
             $"resourceGenerationInterval: {ResourceGenerationInterval}, " +
             $"outputResource: {OutputResource}, " +
