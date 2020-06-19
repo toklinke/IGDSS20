@@ -88,7 +88,7 @@ public class Map
         {
             LowestRow = true;
         }
-        else if (yPos == (width - 1))
+        if (yPos == (Height - 1))
         {
             HighestRow = true;
         }
