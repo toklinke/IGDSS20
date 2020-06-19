@@ -14,7 +14,7 @@ public class Warehouse
         );
         foreach(ResourceType type in resourceTypes)
         {
-            Resources.Add(type, 0);
+            Resources.Add(type, 1000);
         }
     }
 

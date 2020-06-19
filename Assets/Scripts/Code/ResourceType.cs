@@ -6,5 +6,6 @@ public enum ResourceType
     Wool,
     Clothes,
     Potato,
-    Schnapps
+    Schnapps,
+    None
 }

@@ -12,6 +12,7 @@ public abstract class Building : MonoBehaviour
     //protected int UpkeepCost;
     public int UpkeepCost { get; }
 
+
     #region Workers
     public List<Worker> _workers; //List of all workers associated with this building, either for work or living
     #endregion
@@ -24,7 +25,6 @@ public abstract class Building : MonoBehaviour
     {
         UpkeepCost = upkeepCost;
     }
-
 
 
 

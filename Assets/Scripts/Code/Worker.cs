@@ -8,9 +8,8 @@ public class Worker : MonoBehaviour
     //JobManager _jobManager; //Reference to the JobManager
     GameManager _gameManager;//Reference to the GameManager
     #endregion
-
     public float _age; // The age of this worker
-    public float _happiness; // The happiness of this worker
+    public float _happiness { get; set; } // The happiness of this worker
 
     // Start is called before the first frame update
     void Start()
