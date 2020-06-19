@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour
+public abstract class Building
 {
     #region Manager References
     //JobManager _jobManager; //Reference to the JobManager
