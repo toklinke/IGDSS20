@@ -34,7 +34,7 @@ public class ProductionBuilding : Building
         ResourceGenerationInterval = resourceGenerationInterval;
         OutputResource = outputResource;
         OutputCount = outputCount;
-        InputResources = inputResources;
+        InputResources = (inputResources ?? new List<ResourceType>());
         Efficiency = efficiency;
         AreResourcesAvailable = areResourcesAvailable;
         PickResources = pickResources;
