@@ -9,16 +9,12 @@ public class HousingBuilding : Building
 
     public HousingBuilding(int upkeepCost) : base(upkeepCost)
     {
-
+        // Adding 2 New Workers on building
+        _workers.Add(new Worker());
+        _workers.Add(new Worker());
     }
 
-
-    void DoIt()
-    {
-
-    }
-
-    public void gameTick()
+    public override void gameTick()
     {
         // Spawn a new Worker after 30 Seconds/ Depneding on happiness 
         // Max Number of workers = 10
@@ -36,14 +32,13 @@ public class HousingBuilding : Building
         ProductionCycleProgress += avgHappines;
         if (ProductionCycleProgress >= (float)30)
         {
-            if (_workers.Count < 10)
+            if (_workers.Count < capacity)
             {
                 _workers.Add(new Worker());
             }
             ProductionCycleProgress -= 30;
         }
     }
-
 
 }
 

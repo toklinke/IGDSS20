@@ -77,7 +77,7 @@ public class Game
         this.Map.ForEachTile((x, y, tile) => {
             if (tile.Building != null)
             {
-                tile.Building.GameTimeTick();
+                tile.Building.gameTick();
             }
         });
     }

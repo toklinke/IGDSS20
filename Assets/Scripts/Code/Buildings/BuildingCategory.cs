@@ -120,8 +120,6 @@ public readonly struct BuildingCategoryParams
     {
         var index = Array.IndexOf(CompatibleTileTypes, tileType);
         var isCompatible = index > -1 ? true : false;
-        Debug.Log("isCompatible");
-        Debug.Log(isCompatible);
         return isCompatible;
     }
 }

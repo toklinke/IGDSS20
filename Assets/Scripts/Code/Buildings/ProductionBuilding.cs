@@ -42,7 +42,7 @@ public class ProductionBuilding : Building
     }
 
     // Advance game time by one tick.
-    public void GameTimeTick()
+    public override void gameTick()
     {
         float progress = Efficiency;
         if (ProductionCycleActive)

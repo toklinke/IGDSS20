@@ -26,6 +26,7 @@ public abstract class Building : MonoBehaviour
         UpkeepCost = upkeepCost;
     }
 
+    public abstract void gameTick();
 
 
     #region Methods   

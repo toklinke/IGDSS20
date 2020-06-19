@@ -10,6 +10,8 @@ public class Worker : MonoBehaviour
     #endregion
     public float _age; // The age of this worker
     public float _happiness { get; set; } // The happiness of this worker
+    bool _hasFood;
+    private float _agingTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,34 @@ public class Worker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Age();
+
+        _agingTimer += Time.deltaTime;
+        if(_agingTimer >= 15)
+        {
+            Age();
+            _agingTimer = 0.0f;
+            _hasFood = false;
+        }
+    }
+
+    public void consumeResources()
+    {
+        _hasFood = true;
+    }
+
+    private float calculateHappiness(bool hasJob)
+    {
+        _happiness = 0;
+        if (hasJob)
+        {
+            _happiness += 0.5f;
+        }
+        if (_hasFood)
+        {
+            _happiness += 0.5f;
+        }
+
+        return _happiness;
     }
 
 
