@@ -31,6 +31,11 @@ public class Worker : MonoBehaviour
         }
     }
 
+    public bool areRessourcesAvailable()
+    {
+        return true;
+    }
+
     public void consumeResources()
     {
         _hasFood = true;
