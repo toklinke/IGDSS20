@@ -2,7 +2,7 @@
 public class MapTile
 {
     public MapTile(
-        float height, MapTileType type, ProductionBuilding building = null
+        float height, MapTileType type, AbstractBuilding building = null
     )
     {
         Height = height;
@@ -14,7 +14,7 @@ public class MapTile
     public MapTileType Type { get; }
 
     // The building that is placed on this tile.
-    public ProductionBuilding Building { get; set; }
+    public AbstractBuilding Building { get; set; }
 
     public override string ToString()
     {

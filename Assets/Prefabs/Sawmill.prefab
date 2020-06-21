@@ -129,12 +129,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Sawmill
+  isProductionBuilding: 1
   UpkeepCost: 10
   BuildCostMoney: 100
   BuildCostPlanks: 0
   CompatibleTileTypes: 020000000300000004000000
   ResourceGenerationInterval: 15
   OutputCount: 2
+  EfficiencyScalesWithNeighbors: 0
+  EfficiencyScaleTileType: 0
   EfficiencyScaleMinNeighbors: 0
   EfficiencyScaleMaxNeighbors: 0
   InputResources: 01000000

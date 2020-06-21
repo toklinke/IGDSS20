@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Potato Farm
+  isProductionBuilding: 1
   UpkeepCost: 20
   BuildCostMoney: 100
   BuildCostPlanks: 2
@@ -86,15 +87,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c8ef49e902cecbc44a0a86cd6bb06065, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e128593380150d9428df407c09bac59d, type: 3}
---- !u!4 &532459665724753803 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: e128593380150d9428df407c09bac59d,
-    type: 3}
-  m_PrefabInstance: {fileID: 532459665724366091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &532459665724332971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e128593380150d9428df407c09bac59d,
+    type: 3}
+  m_PrefabInstance: {fileID: 532459665724366091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &532459665724753803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: e128593380150d9428df407c09bac59d,
     type: 3}
   m_PrefabInstance: {fileID: 532459665724366091}
   m_PrefabAsset: {fileID: 0}

@@ -13,7 +13,7 @@ public class Game
 
     public Map Map { get; }
     public Vector3 WorldSize { get; }
-    public int AvailableMoney { get { return Economy.AvailableMoney; }}
+    public int AvailableMoney { get { return Economy.AvailableMoney; } }
 
     private IMapToWorldMapper MapToWorldMapper;
 
@@ -74,7 +74,8 @@ public class Game
             TicksUntilEconomyTick = EconomyTickInterval;
         }
 
-        this.Map.ForEachTile((x, y, tile) => {
+        this.Map.ForEachTile((x, y, tile) =>
+        {
             if (tile.Building != null)
             {
                 tile.Building.gameTick();
@@ -94,10 +95,10 @@ public class Game
         if (tile.Building != null)
             return;
 
-        if(!buildingCategoryParams.IsCompatibleTileType(tile.Type))
+        if (!buildingCategoryParams.IsCompatibleTileType(tile.Type))
             return;
 
-        if(!Economy.CanAfford(buildingCategoryParams.BuildCostMoney))
+        if (!Economy.CanAfford(buildingCategoryParams.BuildCostMoney))
             return;
 
         var enoughPlanksAvailable = this.Warehouse.IsAvailable(
@@ -120,39 +121,51 @@ public class Game
         );
         spawnBuilding(pos);
 
-        var building = new ProductionBuilding(
-            upkeepCost: buildingCategoryParams.UpkeepCost,
-            resourceGenerationInterval: (
-                // TODO: this assumes one tick == one second
-                (int)buildingCategoryParams.ResourceGenerationInterval
-            ),
-            outputResource: buildingCategoryParams.OutputResource,
-            outputCount: buildingCategoryParams.OutputCount,
-            inputResources: buildingCategoryParams.InputResources,
-            efficiency: GetBuildingEfficiency(
-                mapX: mapX,
-                mapY: mapY,
-                scaleTileType: (
-                    buildingCategoryParams.EfficiencyScaleTileType
+        AbstractBuilding abstractBuilding;
+
+        if (buildingCategoryParams.isProductionBuilding)
+        {
+            abstractBuilding = new ProductionBuilding(
+                upkeepCost: buildingCategoryParams.UpkeepCost,
+                resourceGenerationInterval: (
+                    // TODO: this assumes one tick == one second
+                    (int)buildingCategoryParams.ResourceGenerationInterval
                 ),
-                scaleMinNeighbors: (
-                    buildingCategoryParams.EfficiencyScaleMinNeighbors
+                outputResource: buildingCategoryParams.OutputResource,
+                outputCount: buildingCategoryParams.OutputCount,
+                inputResources: buildingCategoryParams.InputResources,
+                efficiency: GetBuildingEfficiency(
+                    mapX: mapX,
+                    mapY: mapY,
+                    scaleTileType: (
+                        buildingCategoryParams.EfficiencyScaleTileType
+                    ),
+                    scaleMinNeighbors: (
+                        buildingCategoryParams.EfficiencyScaleMinNeighbors
+                    ),
+                    scaleMaxNeighbors: (
+                        buildingCategoryParams.EfficiencyScaleMaxNeighbors
+                    )
                 ),
-                scaleMaxNeighbors: (
-                    buildingCategoryParams.EfficiencyScaleMaxNeighbors
-                )
-            ),
-            areResourcesAvailable: this.Warehouse.IsAvailable,
-            pickResources: this.Warehouse.Pick
-        );
-        building.ResourcesProduced += (sender, args) => {
-            var senderBuilding = (ProductionBuilding)sender;
-            this.Warehouse.Store(
-                type: senderBuilding.OutputResource,
-                amount: senderBuilding.OutputCount
+                areResourcesAvailable: this.Warehouse.IsAvailable,
+                pickResources: this.Warehouse.Pick
             );
-        };
-        tile.Building = building;
+            abstractBuilding.ResourcesProduced += (sender, args) =>
+            {
+                var senderBuilding = (ProductionBuilding)sender;
+                this.Warehouse.Store(
+                    type: senderBuilding.OutputResource,
+                    amount: senderBuilding.OutputCount
+                );
+            };
+
+        }
+        else
+        {
+            abstractBuilding = new HousingBuilding(0);
+        }
+
+        tile.Building = abstractBuilding;
     }
 
     // Get available amount of a certain resource.
@@ -169,7 +182,8 @@ public class Game
     )
     {
         var map = mapGenerator.GenerateMap();
-        map.ForEachTile((x, y, tile) => {
+        map.ForEachTile((x, y, tile) =>
+        {
             var pos = mapToWorldMapper.GetWorldPosition(
                 mapX: x,
                 mapY: y,
@@ -190,7 +204,8 @@ public class Game
     private List<int> GetUpkeepCosts()
     {
         var upkeepCosts = new List<int>();
-        Map.ForEachTile((x, y, tile) => {
+        Map.ForEachTile((x, y, tile) =>
+        {
             var building = tile.Building;
             if (building != null)
             {

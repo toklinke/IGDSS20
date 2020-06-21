@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Fishery
+  isProductionBuilding: 1
   UpkeepCost: 40
   BuildCostMoney: 100
   BuildCostPlanks: 2

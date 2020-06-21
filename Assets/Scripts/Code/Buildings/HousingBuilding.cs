@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class HousingBuilding : Building
+public class HousingBuilding : AbstractBuilding
 {
 
     float ProductionCycleProgress;

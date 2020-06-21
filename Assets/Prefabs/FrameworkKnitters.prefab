@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Framework Knitters
+  isProductionBuilding: 1
   UpkeepCost: 50
   BuildCostMoney: 400
   BuildCostPlanks: 2
   CompatibleTileTypes: 020000000300000004000000
   ResourceGenerationInterval: 30
   OutputCount: 1
+  EfficiencyScalesWithNeighbors: 0
+  EfficiencyScaleTileType: 0
   EfficiencyScaleMinNeighbors: 0
   EfficiencyScaleMaxNeighbors: 0
   InputResources: 03000000

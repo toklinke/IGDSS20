@@ -99,7 +99,8 @@ namespace Tests
                 efficiencyScaleMinNeighbors: 0,
                 efficiencyScaleMaxNeighbors: 0,
                 inputResources: null,
-                outputResource: ResourceType.Wood
+                outputResource: ResourceType.Wood,
+                isProdBuilding: true
             );
 
             var isCompatible = buildingCategoryParams.IsCompatibleTileType(

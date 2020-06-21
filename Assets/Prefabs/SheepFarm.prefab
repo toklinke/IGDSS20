@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Sheep Farm
+  isProductionBuilding: 1
   UpkeepCost: 20
   BuildCostMoney: 100
   BuildCostPlanks: 2

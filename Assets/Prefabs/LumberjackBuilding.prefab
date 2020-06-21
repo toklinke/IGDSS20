@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Lumberjack
+  isProductionBuilding: 0
   UpkeepCost: 10
   BuildCostMoney: 100
   BuildCostPlanks: 0
@@ -91,6 +92,11 @@ PrefabInstance:
     - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2964171841944622193, guid: bd10d173afce986489058a8e31f1be04,
+        type: 3}
+      propertyPath: isProductionBuilding
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd10d173afce986489058a8e31f1be04, type: 3}

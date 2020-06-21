@@ -9,6 +9,9 @@ public class BuildingCategory : MonoBehaviour
     // Human-readable name of the building of the category.
     public string Name;
 
+    // Checks whether a building is a production building or a building where workers live
+    public bool isProductionBuilding;
+
     // Upkeep costs for a building for each simulation cycle.
     public int UpkeepCost;
     // initial building costs
@@ -61,7 +64,8 @@ public class BuildingCategory : MonoBehaviour
             efficiencyScaleMinNeighbors: EfficiencyScaleMinNeighbors,
             efficiencyScaleMaxNeighbors: EfficiencyScaleMaxNeighbors,
             inputResources: InputResources,
-            outputResource: OutputResource
+            outputResource: OutputResource,
+            isProdBuilding: isProductionBuilding 
         );
         return categoryParams;
     }
@@ -81,7 +85,8 @@ public readonly struct BuildingCategoryParams
         int efficiencyScaleMinNeighbors,
         int efficiencyScaleMaxNeighbors,
         List<ResourceType> inputResources,
-        ResourceType outputResource
+        ResourceType outputResource,
+        bool isProdBuilding
     )
     {
         UpkeepCost = upkeepCost;
@@ -95,11 +100,14 @@ public readonly struct BuildingCategoryParams
         EfficiencyScaleMaxNeighbors = efficiencyScaleMaxNeighbors;
         InputResources = inputResources;
         OutputResource = outputResource;
+        isProductionBuilding = isProdBuilding;
     }
 
     public int UpkeepCost { get; }
     public int BuildCostMoney { get; }
     public int BuildCostPlanks { get; }
+
+    public bool isProductionBuilding { get; }
 
     public MapTileType[] CompatibleTileTypes { get; }
 

@@ -496,6 +496,7 @@ MonoBehaviour:
   - {fileID: 3323401443299971537, guid: 39c8689dc837ee044b8a344f39cd87a7, type: 3}
   - {fileID: 532459665724332971, guid: 6a00b54a61192dd4da4f3955f7ef4b29, type: 3}
   - {fileID: 1771530788747943686, guid: 2f9355a535af3434b8ec78a511510018, type: 3}
+  - {fileID: 1229954235944326517, guid: 31b241c1f34f0d14da32ef8f4157797e, type: 3}
   MapMinY: 0
   MapMaxY: 25
   MapTileRadius: 5

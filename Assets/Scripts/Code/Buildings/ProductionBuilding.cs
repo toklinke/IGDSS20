@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 // A building that can be placed on a map.
-public class ProductionBuilding : Building
+public class ProductionBuilding : AbstractBuilding
 {
     public int ResourceGenerationInterval { get; }
     public ResourceType OutputResource { get; }
     public int OutputCount { get; }
     public List<ResourceType> InputResources { get; }
     public float Efficiency { get; }
-
-    // some resource have been produced by this building.
-    public event EventHandler<EventArgs> ResourcesProduced;
 
     private Func<ResourceType, int, bool> AreResourcesAvailable;
     private Action<ResourceType, int> PickResources;
@@ -79,14 +76,6 @@ public class ProductionBuilding : Building
         }
     }
 
-    private void OnResourcesProduced()
-    {
-        EventHandler<EventArgs> handler = ResourcesProduced;
-        if (handler != null)
-        {
-            handler(this, EventArgs.Empty);
-        }
-    }
 
     public override bool Equals(object other)
     {

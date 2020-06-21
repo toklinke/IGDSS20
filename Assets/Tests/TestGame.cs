@@ -89,7 +89,8 @@ namespace Tests
                         efficiencyScaleMinNeighbors: 0,
                         efficiencyScaleMaxNeighbors: 0,
                         inputResources: null,
-                        outputResource: ResourceType.Wood
+                        outputResource: ResourceType.Wood,
+                        isProdBuilding: true
                     ),
                     expectedMapTile: new MapTile(
                         height: 42.0f,
@@ -130,7 +131,8 @@ namespace Tests
                         efficiencyScaleMinNeighbors: 0,
                         efficiencyScaleMaxNeighbors: 0,
                         inputResources: null,
-                        outputResource: ResourceType.Wood
+                        outputResource: ResourceType.Wood,
+                        isProdBuilding: true
                     ),
                     expectedMapTile: new MapTile(
                         height: 42.0f,
@@ -172,7 +174,8 @@ namespace Tests
                         buildCostMoney: 0,
                         buildCostPlanks: 0,
                         efficiencyScaleMinNeighbors: 0,
-                        efficiencyScaleMaxNeighbors: 0
+                        efficiencyScaleMaxNeighbors: 0,
+                        isProdBuilding: true
                     ),
                     expectedMapTile: new MapTile(
                         height: 0.5f,
@@ -215,7 +218,8 @@ namespace Tests
                         efficiencyScaleMinNeighbors: 0,
                         efficiencyScaleMaxNeighbors: 0,
                         inputResources: null,
-                        outputResource: ResourceType.Wood
+                        outputResource: ResourceType.Wood,
+                        isProdBuilding: true
                     ),
                     initialMoney: 1000,
                     expectedAvailableMoney: 900,
@@ -243,7 +247,8 @@ namespace Tests
                         efficiencyScaleMinNeighbors: 0,
                         efficiencyScaleMaxNeighbors: 0,
                         inputResources: null,
-                        outputResource: ResourceType.Wood
+                        outputResource: ResourceType.Wood,
+                        isProdBuilding: true
                     ),
                     initialMoney: 50,
                     expectedAvailableMoney: 50,
@@ -427,7 +432,8 @@ namespace Tests
                                     efficiencyScaleMinNeighbors: 0,
                                     efficiencyScaleMaxNeighbors: 0,
                                     inputResources: null,
-                                    outputResource: ResourceType.Wood
+                                    outputResource: ResourceType.Wood,
+                                    isProdBuilding: true
                                 )
                             ),
                             spawnBuilding: worldPos => {}
@@ -452,7 +458,8 @@ namespace Tests
                                     efficiencyScaleMinNeighbors: 0,
                                     efficiencyScaleMaxNeighbors: 0,
                                     inputResources: null,
-                                    outputResource: ResourceType.Wood
+                                    outputResource: ResourceType.Wood,
+                                    isProdBuilding: true
                                 )
                             ),
                             spawnBuilding: worldPos => {}
