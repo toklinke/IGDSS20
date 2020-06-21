@@ -74,13 +74,23 @@ public class Game
             TicksUntilEconomyTick = EconomyTickInterval;
         }
 
+        // Ja ich weiß furchtbares Design, aber Gründe ...
+        int workersIncome = 0;
         this.Map.ForEachTile((x, y, tile) =>
         {
             if (tile.Building != null)
             {
+                HousingBuilding testCast = tile.Building as HousingBuilding;
+                if(testCast != null)
+                {
+                    workersIncome += testCast.getNumberOfWorkers();
+                }
+
                 tile.Building.gameTick();
             }
         });
+
+        Economy.addIncome(workersIncome);
     }
 
     // Try to place a building at a certain map tile

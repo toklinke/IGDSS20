@@ -79,6 +79,13 @@ public class EconomySimulation
         }
     }
 
+    public void addIncome(int workersIncome)
+    {
+        AvailableMoney += workersIncome;
+    }
+
+
+
     // Handle upkeep costs in simulation cycle.
     private void handleUpkeepCosts()
     {

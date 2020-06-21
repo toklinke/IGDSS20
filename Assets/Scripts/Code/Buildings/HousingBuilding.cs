@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 public class HousingBuilding : AbstractBuilding
 {
@@ -10,8 +11,14 @@ public class HousingBuilding : AbstractBuilding
     public HousingBuilding(int upkeepCost) : base(upkeepCost)
     {
         // Adding 2 New Workers on building
+        _workers = new List<Worker>();
         _workers.Add(new Worker());
         _workers.Add(new Worker());
+    }
+
+    public int getNumberOfWorkers()
+    {
+        return _workers.Count;
     }
 
     public override void gameTick()

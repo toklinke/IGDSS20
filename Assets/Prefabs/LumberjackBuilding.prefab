@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Lumberjack
-  isProductionBuilding: 0
+  isProductionBuilding: 1
   UpkeepCost: 10
   BuildCostMoney: 100
   BuildCostPlanks: 0
