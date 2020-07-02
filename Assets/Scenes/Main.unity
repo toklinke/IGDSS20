@@ -603,7 +603,7 @@ MonoBehaviour:
   _buildings: []
   _money: 50000
   _population: 0
-  _workerPrefab: {fileID: 4409615396134790654, guid: c29b8b7e0e311074583de4eb9cae1cce,
+  _workerPrefab: {fileID: 8588184380007213439, guid: bacc48e6cc8d61adf994b41dd8a7b68f,
     type: 3}
   _workerParentObject: {fileID: 1665849752}
   _maximumResourceCountInWarehouse: 100
