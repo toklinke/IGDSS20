@@ -20,6 +20,28 @@ public class Worker : MonoBehaviour
     private bool _becameOfAge = false;
     private bool _retired = false;
 
+
+    private Vector3? _currentGoalPos;
+    private Vector3 _currentStartPos;
+    private float _currentMoveProgress; // 0.0 (start pos) to 1.0 (goal pos)
+    private float _currentMoveSpeed = 2.0f;
+    public Vector3? CurrentGoalPos
+    {
+        get { return _currentGoalPos; }
+        set
+        {
+            _currentGoalPos = value;
+            _currentStartPos = this.transform.position;
+            _currentMoveProgress = 0.0f;
+
+            if (_currentGoalPos == null) return;
+
+            var pathLength = (_currentGoalPos.Value - _currentStartPos).magnitude;
+            _currentMoveSpeed = (1.0f / pathLength) * _movementSpeed;
+        }
+    }
+    private readonly float _movementSpeed = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +52,8 @@ public class Worker : MonoBehaviour
     void Update()
     {
         Age();
+
+        MoveToGoal();
     }
 
     private void Age()
@@ -57,6 +81,19 @@ public class Worker : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void MoveToGoal()
+    {
+        if (CurrentGoalPos == null) return;
+
+        _currentMoveProgress += _currentMoveSpeed * Time.deltaTime;
+        if (_currentMoveProgress > 1.0f)
+            _currentMoveProgress = 1.0f;
+
+        var direction = CurrentGoalPos.Value - _currentStartPos;
+        var newPos = _currentStartPos + direction * _currentMoveProgress;
+        this.transform.position = newPos;
     }
 
     private void ConsumeResourcesAndCalculateHappiness()

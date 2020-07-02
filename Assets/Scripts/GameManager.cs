@@ -407,6 +407,7 @@ public class GameManager : MonoBehaviour
         Worker w = Instantiate(_workerPrefab, home._tile.transform.position, Quaternion.identity).GetComponent<Worker>();
         w.transform.SetParent(_workerParentObject);
         w.AssignToHome(home);
+        w.CurrentGoalPos = home._tile.transform.position + new Vector3(0.0f, 20.0f, 0.0f);
         _population++;
         return w;
     }
