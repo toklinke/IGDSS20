@@ -53,6 +53,7 @@ public class Worker : MonoBehaviour
     {
         Age();
 
+        UpdateGoal();
         MoveToGoal();
     }
 
@@ -80,6 +81,53 @@ public class Worker : MonoBehaviour
         if (_age > 100)
         {
             Die();
+        }
+    }
+
+
+    private enum CommuteState { AtHome, ToWork, AtWork, ToHome }
+    private CommuteState CurrentCommuteState = CommuteState.AtHome;
+    private float CommuteWaitTimeLeft = 0.0f;
+    private readonly float WaitTimeAtWork = 5.0f;
+    private readonly float WaitTimeAtHome = 3.0f;
+
+    private void UpdateGoal()
+    {
+        switch(CurrentCommuteState)
+        {
+            case CommuteState.AtHome:
+                CommuteWaitTimeLeft -= Time.deltaTime;
+                if (CommuteWaitTimeLeft <= 0.0f)
+                {
+                    if (_job != null)
+                    {
+                        CurrentCommuteState = CommuteState.ToWork;
+                        CurrentGoalPos = _job._building._tile.transform.position;
+                    }
+                }
+            break;
+            case CommuteState.ToWork:
+                if (_currentMoveProgress >= 1.0f)
+                {
+                    CurrentCommuteState = CommuteState.AtWork;
+                    CommuteWaitTimeLeft = WaitTimeAtWork;
+                }
+            break;
+            case CommuteState.AtWork:
+                CommuteWaitTimeLeft -= Time.deltaTime;
+                if (CommuteWaitTimeLeft <= 0.0f)
+                {
+                    CurrentCommuteState = CommuteState.ToHome;
+                    CurrentGoalPos = _home._tile.transform.position;
+                }
+            break;
+            case CommuteState.ToHome:
+                if (_currentMoveProgress >= 1.0f)
+                {
+                    CurrentCommuteState = CommuteState.AtHome;
+                    CommuteWaitTimeLeft = WaitTimeAtHome;
+                }
+            break;
         }
     }
 
