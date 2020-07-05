@@ -109,7 +109,7 @@ public class NavigationManager : MonoBehaviour
         else // Tile has been explored
         {
             // If new weight is lower then previously known, replace entry otherwise do nothing
-            uint newTilePathWeight = travelweightTable[previousTile] + currentTileWeight;
+            uint newTilePathWeight = travelweightTable[previousTile] + calcTraversalDifficulty(currentTile._type);
 
             if (travelweightTable[currentTile] > newTilePathWeight)
             {
