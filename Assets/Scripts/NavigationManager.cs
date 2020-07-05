@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-public class NavigationManager : MonoBehaviour
+public class NavigationManager
 {
 
     private static uint _traversalWeightWater = 30;
@@ -21,18 +21,6 @@ public class NavigationManager : MonoBehaviour
     {
         Debug.Log("Hello World from NavManager");
         _gameManager = gameManager;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     /**
