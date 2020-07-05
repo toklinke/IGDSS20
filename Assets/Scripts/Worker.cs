@@ -164,6 +164,15 @@ public class Worker : MonoBehaviour
 
         var direction = CurrentGoalPos.Value - _currentStartPos;
         var newPos = _currentStartPos + direction * _currentMoveProgress;
+        // set height to correct tile height
+        if (_currentMoveProgress < 0.5)
+        {
+            newPos.y = _currentStartPos.y;
+        }
+        else
+        {
+            newPos.y = CurrentGoalPos.Value.y;
+        }
         this.transform.position = newPos;
     }
 
