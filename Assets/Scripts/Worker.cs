@@ -174,6 +174,14 @@ public class Worker : MonoBehaviour
             newPos.y = CurrentGoalPos.Value.y;
         }
         this.transform.position = newPos;
+
+        // look into direction of goal but with current y position
+        var lookAtTarget = new Vector3(
+            x: CurrentGoalPos.Value.x,
+            y: this.transform.position.y,
+            z: CurrentGoalPos.Value.z
+        );
+        this.transform.LookAt(lookAtTarget);
     }
 
     private void ConsumeResourcesAndCalculateHappiness()
