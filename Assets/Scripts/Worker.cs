@@ -90,6 +90,7 @@ public class Worker : MonoBehaviour
     private float CommuteWaitTimeLeft = 0.0f;
     private readonly float WaitTimeAtWork = 5.0f;
     private readonly float WaitTimeAtHome = 3.0f;
+    private Tile CommuteNextTile = null;
 
     private void UpdateGoal()
     {
@@ -102,15 +103,26 @@ public class Worker : MonoBehaviour
                     if (_job != null)
                     {
                         CurrentCommuteState = CommuteState.ToWork;
-                        CurrentGoalPos = _job._building._tile.transform.position;
+                        CommuteNextTile = _job._building._predecessorHashmap[_home._tile];
+                        CurrentGoalPos = CommuteNextTile.transform.position;
                     }
                 }
             break;
             case CommuteState.ToWork:
                 if (_currentMoveProgress >= 1.0f)
                 {
-                    CurrentCommuteState = CommuteState.AtWork;
-                    CommuteWaitTimeLeft = WaitTimeAtWork;
+                    if (CommuteNextTile == _job._building._tile)
+                    {
+                        // arrived at work
+                        CurrentCommuteState = CommuteState.AtWork;
+                        CommuteWaitTimeLeft = WaitTimeAtWork;
+                    }
+                    else
+                    {
+                        // next tile on path to work
+                        CommuteNextTile = _job._building._predecessorHashmap[CommuteNextTile];
+                        CurrentGoalPos = CommuteNextTile.transform.position;
+                    }
                 }
             break;
             case CommuteState.AtWork:
@@ -118,14 +130,25 @@ public class Worker : MonoBehaviour
                 if (CommuteWaitTimeLeft <= 0.0f)
                 {
                     CurrentCommuteState = CommuteState.ToHome;
-                    CurrentGoalPos = _home._tile.transform.position;
+                    CommuteNextTile = _home._predecessorHashmap[_job._building._tile];
+                    CurrentGoalPos = CommuteNextTile.transform.position;
                 }
             break;
             case CommuteState.ToHome:
                 if (_currentMoveProgress >= 1.0f)
                 {
-                    CurrentCommuteState = CommuteState.AtHome;
-                    CommuteWaitTimeLeft = WaitTimeAtHome;
+                    if (CommuteNextTile == _home._tile)
+                    {
+                        // arrived at home
+                        CurrentCommuteState = CommuteState.AtHome;
+                        CommuteWaitTimeLeft = WaitTimeAtHome;
+                    }
+                    else
+                    {
+                        // next tile on path to work
+                        CommuteNextTile = _home._predecessorHashmap[CommuteNextTile];
+                        CurrentGoalPos = CommuteNextTile.transform.position;
+                    }
                 }
             break;
         }
