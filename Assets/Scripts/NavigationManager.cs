@@ -14,15 +14,6 @@ public class NavigationManager
     private static uint _traversalWeightStone = 1;
     private static uint _traversalWeightMountain = 3;
 
-
-    private GameManager _gameManager;
-
-    public NavigationManager(GameManager gameManager)
-    {
-        Debug.Log("Hello World from NavManager");
-        _gameManager = gameManager;
-    }
-
     /**
      * Method that creates a TravelWeight Hashmap and a predecessor Hashmap
      */

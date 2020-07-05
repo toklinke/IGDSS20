@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         GenerateMap();
         _mouseManager = MouseManager.Instance;
         _mouseManager.InitializeBounds(0, _heightMap.width * 10, 0, _heightMap.height * 8.66f);
-        _navigationManager = new NavigationManager(this);
+        _navigationManager = new NavigationManager();
 
         _buildings = new List<Building>();
         PopulateResourceDictionary();
