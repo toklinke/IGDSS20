@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2810648041492908100}
   - component: {fileID: 2624302835536061707}
   - component: {fileID: 1872838261434093955}
+  - component: {fileID: 7174079296362298228}
   m_Layer: 8
   m_Name: BaseTile
   m_TagString: Untagged
@@ -119,6 +120,24 @@ MonoBehaviour:
   _neighborTiles: []
   _coordinateHeight: 0
   _coordinateWidth: 0
+--- !u!114 &7174079296362298228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6769432150190558292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815bed34a57ec4e4c8e1b7208665f502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayEdgeUP: 0
+  displayEdgeUpperLeft: 0
+  displayEdgeUpperRight: 0
+  displayEdgeLowerLeft: 0
+  displayEdgeLowerRight: 0
+  displayEdgeDown: 0
 --- !u!1001 &1594297916208639699
 PrefabInstance:
   m_ObjectHideFlags: 0
