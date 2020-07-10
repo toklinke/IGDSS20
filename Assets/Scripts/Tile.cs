@@ -11,15 +11,14 @@ public class Tile : MonoBehaviour
     public int _coordinateHeight; //The coordinate on the y-axis on the tile grid (not world coordinates)
     public int _coordinateWidth; //The coordinate on the x-axis on the tile grid (not world coordinates)
 
-    public bool displayEdgeUP = false;
 
-    public bool displayEdgeUpperLeft = false;
-    public bool displayEdgeUpperRight = false;
+    [SerializeField] private GameObject UpperLeftEdge;
+    [SerializeField] private GameObject UpperRightEdge;
+    [SerializeField] private GameObject RightEdge;
+    [SerializeField] private GameObject LowerRightEdge;
+    [SerializeField] private GameObject LowerLeftEdge;
+    [SerializeField] private GameObject LeftEdge;
 
-    public bool displayEdgeLowerLeft = false;
-    public bool displayEdgeLowerRight = false;
-
-    public bool displayEdgeDown = false;
 
     #endregion
 
@@ -28,6 +27,14 @@ public class Tile : MonoBehaviour
     #endregion
 
     
+    //upperCenterEdge.gameObject.SetActive(false);
+    //TODO actually disable or enable edges according to the logic
+    public void setEdges()
+    {
+        this.UpperRightEdge.gameObject.SetActive(false);
+        this.LowerLeftEdge.gameObject.SetActive(false);
+
+    }
 
     //This class acts as a data container and has no functionality
 }

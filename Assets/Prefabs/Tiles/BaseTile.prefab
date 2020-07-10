@@ -119,12 +119,12 @@ MonoBehaviour:
   _neighborTiles: []
   _coordinateHeight: 0
   _coordinateWidth: 0
-  displayEdgeUP: 0
-  displayEdgeUpperLeft: 0
-  displayEdgeUpperRight: 0
-  displayEdgeLowerLeft: 0
-  displayEdgeLowerRight: 0
-  displayEdgeDown: 0
+  UpperLeftEdge: {fileID: 796583156465047067}
+  UpperRightEdge: {fileID: 7278371789222033370}
+  RightEdge: {fileID: 3628596502956794387}
+  LowerRightEdge: {fileID: 5856571013232894782}
+  LowerLeftEdge: {fileID: 5425926240278870179}
+  LeftEdge: {fileID: 3628596502956794387}
 --- !u!1001 &1594297916208639699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,10 +190,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge (4)
+      value: UpperRight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &7278371789222033370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594297916208639699}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6006290402995029449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,
@@ -265,10 +271,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge
+      value: LowerRight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &5856571013232894782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 2479043960423053879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7430342996506071341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,
@@ -345,10 +357,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge (1)
+      value: LowerLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &5425926240278870179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 4065956876490482090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9013843543895837360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,
@@ -420,10 +438,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge (2)
+      value: Left
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &3628596502956794387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 4718277474075130650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &288235408651718656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,
@@ -495,7 +519,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge (5)
+      value: Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
@@ -570,10 +594,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
         type: 3}
       propertyPath: m_Name
-      value: TileEdge (3)
+      value: UpperLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &796583156465047067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 8660392668899561234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4419528708700660744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,

@@ -231,6 +231,7 @@ public class GameManager : MonoBehaviour
                 t._coordinateHeight = h;
                 t._coordinateWidth = w;
                 _tileMap[h, w] = t;
+                
             }
         }
 
@@ -241,7 +242,7 @@ public class GameManager : MonoBehaviour
             {
                 Tile t = _tileMap[h, w];
                 t._neighborTiles = FindNeighborsOfTile(t);
-
+                t.setEdges();
             }
         }
     }
