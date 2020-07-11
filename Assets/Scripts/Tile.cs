@@ -26,13 +26,23 @@ public class Tile : MonoBehaviour
     public enum TileTypes { Empty, Water, Sand, Grass, Forest, Stone, Mountain }; //Enumeration of all available tile types. Can be addressed from other scripts by calling Tile.Tiletypes
     #endregion
 
-    
+
     //upperCenterEdge.gameObject.SetActive(false);
     //TODO actually disable or enable edges according to the logic
-    public void setEdges()
+    public void setEdges(bool[] edgeValue)
     {
-        this.UpperRightEdge.gameObject.SetActive(false);
-        this.LowerLeftEdge.gameObject.SetActive(false);
+        //edgeValue[0]
+
+        this.UpperLeftEdge.gameObject.SetActive(!edgeValue[0]);
+        this.UpperRightEdge.gameObject.SetActive(!edgeValue[1]);
+
+        this.RightEdge.gameObject.SetActive(!edgeValue[2]);
+
+
+        this.LowerRightEdge.gameObject.SetActive(!edgeValue[3]);
+        this.LowerLeftEdge.gameObject.SetActive(!edgeValue[4]);
+        this.LeftEdge.gameObject.SetActive(!edgeValue[5]);
+
 
     }
 

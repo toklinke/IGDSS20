@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -231,7 +232,7 @@ public class GameManager : MonoBehaviour
                 t._coordinateHeight = h;
                 t._coordinateWidth = w;
                 _tileMap[h, w] = t;
-                
+
             }
         }
 
@@ -241,41 +242,53 @@ public class GameManager : MonoBehaviour
             for (int w = 0; w < _tileMap.GetLength(1); w++)
             {
                 Tile t = _tileMap[h, w];
-                t._neighborTiles = FindNeighborsOfTile(t);
-                t.setEdges();
+                Tuple<List<Tile>, bool[]> data = FindNeighborsOfTile(t);
+                t._neighborTiles = data.Item1;
+
+                t.setEdges(data.Item2);
             }
         }
     }
 
     //Returns a list of all neighbors of a given tile
-    private List<Tile> FindNeighborsOfTile(Tile t)
+    private Tuple<List<Tile>, bool[]> FindNeighborsOfTile(Tile t)
     {
-        List<Tile> result = new List<Tile>();
+        // Assumes the bool default value is false.
+        bool[] edgeArr = new bool[6];
+
+        List<Tile> neighborList = new List<Tile>();
 
         int height = t._coordinateHeight;
         int width = t._coordinateWidth;
+
+        bool simpleTopValue = false;
+        bool simpleBottomValue = false;
 
         //top, top-left, left, right, bottom, bottom-left
         //Check edge cases
         //top
         if (height > 0)
         {
-            result.Add(_tileMap[height - 1, width]);
+            neighborList.Add(_tileMap[height - 1, width]);
+            simpleTopValue = checkForEqualTileType(_tileMap[height, width], _tileMap[height - 1, width]);
         }
         //bottom
         if (height < _heightMap.height - 1)
         {
-            result.Add(_tileMap[height + 1, width]);
+            neighborList.Add(_tileMap[height + 1, width]);
+            simpleBottomValue = checkForEqualTileType(_tileMap[height, width], _tileMap[height + 1, width]);
         }
         //left
         if (width > 0)
         {
-            result.Add(_tileMap[height, width - 1]);
+            neighborList.Add(_tileMap[height, width - 1]);
+            edgeArr[5] = checkForEqualTileType(_tileMap[height, width], _tileMap[height, width - 1]);
         }
         //right
         if (width < _heightMap.width - 1)
         {
-            result.Add(_tileMap[height, width + 1]);
+            neighborList.Add(_tileMap[height, width + 1]);
+            edgeArr[2] = checkForEqualTileType(_tileMap[height, width], _tileMap[height, width + 1]);
         }
 
         //if the column is even
@@ -284,12 +297,25 @@ public class GameManager : MonoBehaviour
         {
             if (height > 0 && width > 0)
             {
-                result.Add(_tileMap[height - 1, width - 1]);
+                neighborList.Add(_tileMap[height - 1, width - 1]);
+
+                edgeArr[0] = checkForEqualTileType(_tileMap[height, width], _tileMap[height - 1, width - 1]);
+
+                //Index 0
             }
             if (height < _heightMap.height - 1 && width > 0)
             {
-                result.Add(_tileMap[height + 1, width - 1]);
+                neighborList.Add(_tileMap[height + 1, width - 1]);
+
+                edgeArr[4] = checkForEqualTileType(_tileMap[height, width], _tileMap[height + 1, width - 1]);
+                //Index 4
             }
+
+            // Missing Indices -> 1,3
+            edgeArr[1] = simpleTopValue;
+            edgeArr[3] = simpleBottomValue;
+
+            
         }
         //if the column is uneven
         //top-right + bottom-right
@@ -297,16 +323,35 @@ public class GameManager : MonoBehaviour
         {
             if (height > 0 && width < _heightMap.width - 1)
             {
-                result.Add(_tileMap[height - 1, width + 1]);
+                neighborList.Add(_tileMap[height - 1, width + 1]);
+
+                edgeArr[1] = checkForEqualTileType(_tileMap[height, width], _tileMap[height - 1, width + 1]);
+                // Index 1
             }
             if (height < _heightMap.height - 1 && width < _heightMap.width - 1)
             {
-                result.Add(_tileMap[height + 1, width + 1]);
-            }
-        }
+                neighborList.Add(_tileMap[height + 1, width + 1]);
 
-        return result;
+                edgeArr[3] = checkForEqualTileType(_tileMap[height, width], _tileMap[height + 1, width + 1]);
+                // Index 3
+            }
+
+            // Missing Indices -> 0,4
+            edgeArr[0] = simpleTopValue;
+            edgeArr[4] = simpleBottomValue;
+
+            
+        }
+        return new Tuple<List<Tile>, bool[]>(neighborList, edgeArr);
     }
+
+    // Checks whether two tiles are of equal type
+    private bool checkForEqualTileType(Tile t1, Tile t2)
+    {
+        return t1._type.Equals(t2._type);
+
+    }
+
 
     //Calculates money income and upkeep when an economy cycle is completed
     private void TickEconomy()

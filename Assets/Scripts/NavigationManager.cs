@@ -46,8 +46,8 @@ public class NavigationManager
             exploreNeighbors(weightHashmap, predecessorHashmap, currentAndFutureTuple.Item2, currentAndFutureTuple.Item1, toBeExploredTiles);
         }
 
-        Debug.Log(weightHashmap.Count);
-        Debug.Log(predecessorHashmap.Count);
+        //Debug.Log(weightHashmap.Count);
+        //Debug.Log(predecessorHashmap.Count);
         // Check if explicit copy is needed here
         return new Tuple<Dictionary<Tile, Tile>, Dictionary<Tile, uint>>(predecessorHashmap, weightHashmap);
     }

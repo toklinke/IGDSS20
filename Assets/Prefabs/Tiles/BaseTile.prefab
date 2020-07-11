@@ -121,7 +121,7 @@ MonoBehaviour:
   _coordinateWidth: 0
   UpperLeftEdge: {fileID: 796583156465047067}
   UpperRightEdge: {fileID: 7278371789222033370}
-  RightEdge: {fileID: 3628596502956794387}
+  RightEdge: {fileID: 1674324860556597523}
   LowerRightEdge: {fileID: 5856571013232894782}
   LowerLeftEdge: {fileID: 5425926240278870179}
   LeftEdge: {fileID: 3628596502956794387}
@@ -523,6 +523,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbc99eddf6fbc449819d412ef25d968, type: 3}
+--- !u!1 &1674324860556597523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2cbc99eddf6fbc449819d412ef25d968,
+    type: 3}
+  m_PrefabInstance: {fileID: 7214072263972978714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2406958831952341760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2cbc99eddf6fbc449819d412ef25d968,
