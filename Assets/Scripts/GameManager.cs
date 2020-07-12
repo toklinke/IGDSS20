@@ -199,11 +199,12 @@ public class GameManager : MonoBehaviour
     // update UI elements
     private void UpdateUi()
     {
-        var moneyText = MoneyDisplay.GetComponent<Text>();
-        moneyText.text = _money.ToString();
-
-        var workerCountText = WorkerCountDisplay.GetComponent<Text>();
-        workerCountText.text = _population.ToString();
+        Action<GameObject, string> setText = (gameObject, newText) => {
+            var textComponent = gameObject.GetComponent<Text>();
+            textComponent.text = newText;
+        };
+        setText(MoneyDisplay, _money.ToString());
+        setText(WorkerCountDisplay, _population.ToString());
     }
 
     //Instantiates individual hexagonal tile prefabs
