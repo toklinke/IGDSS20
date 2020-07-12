@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseManager : MonoBehaviour
 {
@@ -54,6 +55,9 @@ public class MouseManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            // do not consider clicks on UI elements
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             int layerMask = LayerMask.GetMask("Tiles");
