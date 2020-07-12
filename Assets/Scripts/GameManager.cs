@@ -247,6 +247,20 @@ public class GameManager : MonoBehaviour
             _gameEnd = true;
             ShowUiElement(GameWinPopup);
         }
+
+        // stop game progress
+        if (_gameEnd)
+        {
+            foreach(var building in _buildings)
+            {
+                building.enabled = false;
+                foreach(var worker in building._workers)
+                {
+                    worker.enabled = false;
+                }
+            }
+            JobManager.Instance.enabled = false;
+        }
     }
 
     //Instantiates individual hexagonal tile prefabs
@@ -422,6 +436,8 @@ public class GameManager : MonoBehaviour
     //Calculates money income and upkeep when an economy cycle is completed
     private void TickEconomy()
     {
+        if (_gameEnd) return;
+
         //income
         float income = 0;
         income = _population * _IncomePerPerson;
@@ -451,6 +467,8 @@ public class GameManager : MonoBehaviour
     //Checks if the currently selected building type can be placed on the given tile and then instantiates an instance of the prefab
     private void PlaceBuildingOnTile(Tile t)
     {
+        if (_gameEnd) return;
+
         //if there is a selected building prefab
         if (_selectedBuildingPrefabIndex < _buildingPrefabs.Length)
         {
