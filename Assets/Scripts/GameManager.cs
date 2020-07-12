@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverPopup;
     #endregion
 
+    private bool _gameEnd = false;
+
     #region Enumerations
     public enum ResourceTypes { None, Fish, Wood, Planks, Wool, Clothes, Potato, Schnapps }; //Enumeration of all available resource types. Can be addressed from other scripts by calling GameManager.ResourceTypes
     #endregion
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
         HandleKeyboardInput();
         UpdateEconomyTimer();
         UpdateUi();
+        CheckGameEnd();
     }
     #endregion
 
@@ -201,18 +204,43 @@ public class GameManager : MonoBehaviour
         setText(SchnappsCountDisplay, _resourcesInWarehouse[ResourceTypes.Schnapps].ToString());
     }
 
-    private static void HideUiElement(GameObject uiElement)
+    private static void UiElementSetVisible(GameObject uiElement, bool visible)
     {
         var imageComponent = uiElement.GetComponent<Image>();
-        if (imageComponent != null) imageComponent.enabled = false;
+        if (imageComponent != null)
+        {
+            imageComponent.enabled = visible;
+        }
 
         var textComponent = uiElement.GetComponent<Text>();
-        if (textComponent != null) textComponent.enabled = false;
+        if (textComponent != null)
+        {
+            textComponent.enabled = visible;
+        }
 
-        // we have to hide also all child components
+        // we have to show/hide also all child components
         foreach(Transform childTransform in uiElement.transform)
         {
-            HideUiElement(childTransform.gameObject);
+            UiElementSetVisible(childTransform.gameObject, visible);
+        }
+    }
+    private static void HideUiElement(GameObject uiElement)
+    {
+        UiElementSetVisible(uiElement, visible: false);
+    }
+    private static void ShowUiElement(GameObject uiElement)
+    {
+        UiElementSetVisible(uiElement, visible: true);
+    }
+
+    private void CheckGameEnd()
+    {
+        if (_gameEnd) return; // game has already ended
+
+        if (_money <= 0)
+        {
+            _gameEnd = true;
+            ShowUiElement(GameOverPopup);
         }
     }
 
