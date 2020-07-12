@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     public GameObject ClothesCountDisplay;
     public GameObject PotatoCountDisplay;
     public GameObject SchnappsCountDisplay;
+
+    // popups to show when the game has finished
+    public GameObject GameWinPopup;
+    public GameObject GameOverPopup;
     #endregion
 
     #region Enumerations
@@ -91,6 +95,9 @@ public class GameManager : MonoBehaviour
 
         AddResourceToWarehouse(ResourceTypes.Fish, 20);
         AddResourceToWarehouse(ResourceTypes.Planks, 20);
+
+        HideUiElement(GameWinPopup);
+        HideUiElement(GameOverPopup);
     }
 
     // Update is called once per frame
@@ -192,6 +199,21 @@ public class GameManager : MonoBehaviour
         setText(ClothesCountDisplay, _resourcesInWarehouse[ResourceTypes.Clothes].ToString());
         setText(PotatoCountDisplay, _resourcesInWarehouse[ResourceTypes.Potato].ToString());
         setText(SchnappsCountDisplay, _resourcesInWarehouse[ResourceTypes.Schnapps].ToString());
+    }
+
+    private static void HideUiElement(GameObject uiElement)
+    {
+        var imageComponent = uiElement.GetComponent<Image>();
+        if (imageComponent != null) imageComponent.enabled = false;
+
+        var textComponent = uiElement.GetComponent<Text>();
+        if (textComponent != null) textComponent.enabled = false;
+
+        // we have to hide also all child components
+        foreach(Transform childTransform in uiElement.transform)
+        {
+            HideUiElement(childTransform.gameObject);
+        }
     }
 
     //Instantiates individual hexagonal tile prefabs
