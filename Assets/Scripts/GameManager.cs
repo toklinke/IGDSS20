@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
     private float _ResourcesInWarehouse_Schnapps;
     #endregion
 
+    #region UI
+    public GameObject MoneyDisplay; // displays currently available money
+    public GameObject WorkerCountDisplay; // displays current number of workers
+    #endregion
+
     #region Enumerations
     public enum ResourceTypes { None, Fish, Wood, Planks, Wool, Clothes, Potato, Schnapps }; //Enumeration of all available resource types. Can be addressed from other scripts by calling GameManager.ResourceTypes
     #endregion
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour
         HandleKeyboardInput();
         UpdateEconomyTimer();
         UpdateInspectorNumbersForResources();
+        UpdateUi();
     }
     #endregion
 
@@ -187,6 +194,16 @@ public class GameManager : MonoBehaviour
         _ResourcesInWarehouse_Clothes = _resourcesInWarehouse[ResourceTypes.Clothes];
         _ResourcesInWarehouse_Potato = _resourcesInWarehouse[ResourceTypes.Potato];
         _ResourcesInWarehouse_Schnapps = _resourcesInWarehouse[ResourceTypes.Schnapps];
+    }
+
+    // update UI elements
+    private void UpdateUi()
+    {
+        var moneyText = MoneyDisplay.GetComponent<Text>();
+        moneyText.text = _money.ToString();
+
+        var workerCountText = WorkerCountDisplay.GetComponent<Text>();
+        workerCountText.text = _population.ToString();
     }
 
     //Instantiates individual hexagonal tile prefabs

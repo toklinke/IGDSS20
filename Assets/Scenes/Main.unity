@@ -2805,6 +2805,8 @@ MonoBehaviour:
   _ResourcesInWarehouse_Clothes: 0
   _ResourcesInWarehouse_Potato: 0
   _ResourcesInWarehouse_Schnapps: 0
+  MoneyDisplay: {fileID: 434196918}
+  WorkerCountDisplay: {fileID: 1238131458}
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0
