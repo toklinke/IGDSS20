@@ -27,8 +27,6 @@ public class Tile : MonoBehaviour
     #endregion
 
 
-    //upperCenterEdge.gameObject.SetActive(false);
-    //TODO actually disable or enable edges according to the logic
     public void setEdges(bool[] edgeValue)
     {
         //edgeValue[0]
