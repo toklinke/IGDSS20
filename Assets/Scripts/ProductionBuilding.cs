@@ -75,7 +75,7 @@ public class ProductionBuilding : Building
         float workforceEfficiency = 0;
         if (_availableJobs != 0)
         {
-            workforceEfficiency = _occupiedJobs / _availableJobs;
+            workforceEfficiency = ((float)_occupiedJobs) / ((float)_availableJobs);
         }
 
         float happinessEfficiency = 0;
