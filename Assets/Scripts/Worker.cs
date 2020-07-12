@@ -111,7 +111,13 @@ public class Worker : MonoBehaviour
             case CommuteState.ToWork:
                 if (_currentMoveProgress >= 1.0f)
                 {
-                    if (CommuteNextTile == _job._building._tile)
+                    if (_job == null)
+                    {
+                        CurrentCommuteState = CommuteState.ToHome;
+                        CommuteNextTile = _home._predecessorHashmap[CommuteNextTile];
+                        CurrentGoalPos = CommuteNextTile.transform.position;
+                    }
+                    else if (CommuteNextTile == _job._building._tile)
                     {
                         // arrived at work
                         CurrentCommuteState = CommuteState.AtWork;
