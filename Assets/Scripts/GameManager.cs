@@ -44,23 +44,6 @@ public class GameManager : MonoBehaviour
     #region Resources
     public int _maximumResourceCountInWarehouse = 100; //How much of each resource can be stored in the global warehouse
     private Dictionary<ResourceTypes, float> _resourcesInWarehouse = new Dictionary<ResourceTypes, float>(); //Holds a number of stored resources for every ResourceType
-
-
-    //A representation of _resourcesInWarehouse, broken into individual floats. Only for display in inspector, will be removed and replaced with UI later
-    [SerializeField]
-    private float _ResourcesInWarehouse_Fish;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Wood;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Planks;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Wool;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Clothes;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Potato;
-    [SerializeField]
-    private float _ResourcesInWarehouse_Schnapps;
     #endregion
 
     #region UI
@@ -115,7 +98,6 @@ public class GameManager : MonoBehaviour
     {
         HandleKeyboardInput();
         UpdateEconomyTimer();
-        UpdateInspectorNumbersForResources();
         UpdateUi();
     }
     #endregion
@@ -191,18 +173,6 @@ public class GameManager : MonoBehaviour
     public void UiBuildingButtonClicked(int buildingPrefabIndex)
     {
         _selectedBuildingPrefabIndex = buildingPrefabIndex;
-    }
-
-    //Updates the visual representation of the resource dictionary in the inspector. Only for debugging
-    void UpdateInspectorNumbersForResources()
-    {
-        _ResourcesInWarehouse_Fish = _resourcesInWarehouse[ResourceTypes.Fish];
-        _ResourcesInWarehouse_Wood = _resourcesInWarehouse[ResourceTypes.Wood];
-        _ResourcesInWarehouse_Planks = _resourcesInWarehouse[ResourceTypes.Planks];
-        _ResourcesInWarehouse_Wool = _resourcesInWarehouse[ResourceTypes.Wool];
-        _ResourcesInWarehouse_Clothes = _resourcesInWarehouse[ResourceTypes.Clothes];
-        _ResourcesInWarehouse_Potato = _resourcesInWarehouse[ResourceTypes.Potato];
-        _ResourcesInWarehouse_Schnapps = _resourcesInWarehouse[ResourceTypes.Schnapps];
     }
 
     // update UI elements
