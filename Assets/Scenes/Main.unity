@@ -202,7 +202,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1408710}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1408710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +408,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 57454977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &57454977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +867,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 530180285}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &530180285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,7 +1296,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 981422367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &981422367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,7 +1645,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1311767016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1311767016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,7 +1926,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1380065217}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1380065217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,7 +2227,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1637613387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1637613387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2309,7 +2386,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1750074264}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768092941}
+        m_MethodName: UiBuildingButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1750074264
 MonoBehaviour:
   m_ObjectHideFlags: 0
