@@ -3176,6 +3176,13 @@ MonoBehaviour:
   _ResourcesInWarehouse_Schnapps: 0
   MoneyDisplay: {fileID: 434196918}
   WorkerCountDisplay: {fileID: 1238131458}
+  FishCountDisplay: {fileID: 1052068941}
+  WoodCountDisplay: {fileID: 1392694002}
+  PlankCountDisplay: {fileID: 2071517057}
+  WoolCountDisplay: {fileID: 1032829316}
+  ClothesCountDisplay: {fileID: 907746853}
+  PotatoCountDisplay: {fileID: 1397234588}
+  SchnappsCountDisplay: {fileID: 635117590}
 --- !u!4 &1768092942
 Transform:
   m_ObjectHideFlags: 0

@@ -66,6 +66,15 @@ public class GameManager : MonoBehaviour
     #region UI
     public GameObject MoneyDisplay; // displays currently available money
     public GameObject WorkerCountDisplay; // displays current number of workers
+
+    // resource displays
+    public GameObject FishCountDisplay;
+    public GameObject WoodCountDisplay;
+    public GameObject PlankCountDisplay;
+    public GameObject WoolCountDisplay;
+    public GameObject ClothesCountDisplay;
+    public GameObject PotatoCountDisplay;
+    public GameObject SchnappsCountDisplay;
     #endregion
 
     #region Enumerations
@@ -205,6 +214,14 @@ public class GameManager : MonoBehaviour
         };
         setText(MoneyDisplay, _money.ToString());
         setText(WorkerCountDisplay, _population.ToString());
+
+        setText(FishCountDisplay, _resourcesInWarehouse[ResourceTypes.Fish].ToString());
+        setText(WoodCountDisplay, _resourcesInWarehouse[ResourceTypes.Wood].ToString());
+        setText(PlankCountDisplay, _resourcesInWarehouse[ResourceTypes.Planks].ToString());
+        setText(WoolCountDisplay, _resourcesInWarehouse[ResourceTypes.Wool].ToString());
+        setText(ClothesCountDisplay, _resourcesInWarehouse[ResourceTypes.Clothes].ToString());
+        setText(PotatoCountDisplay, _resourcesInWarehouse[ResourceTypes.Potato].ToString());
+        setText(SchnappsCountDisplay, _resourcesInWarehouse[ResourceTypes.Schnapps].ToString());
     }
 
     //Instantiates individual hexagonal tile prefabs
