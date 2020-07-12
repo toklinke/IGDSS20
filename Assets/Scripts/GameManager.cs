@@ -242,6 +242,11 @@ public class GameManager : MonoBehaviour
             _gameEnd = true;
             ShowUiElement(GameOverPopup);
         }
+        else if(_money >= 1000000 || _population >= 1000)
+        {
+            _gameEnd = true;
+            ShowUiElement(GameWinPopup);
+        }
     }
 
     //Instantiates individual hexagonal tile prefabs
